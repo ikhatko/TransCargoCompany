@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="TransCargoCompany:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="cargo-core.war">
+      <element id="artifact" artifact-name="TransCargoCompany:war exploded" />
+    </root>
+  </artifact>
+</component>
