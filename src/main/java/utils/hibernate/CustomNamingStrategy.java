@@ -22,10 +22,4 @@ public class CustomNamingStrategy extends ImprovedNamingStrategy {
         String tableNameInSingularForm = super.classToTableName(className);
         return tableNameInSingularForm;
     }
-
-    /*private String transformToPluralForm(String tableNameInSingularForm) {
-        StringBuilder pluralForm = new StringBuilder();
-        pluralForm.append(tableNameInSingularForm);
-        return pluralForm.toString();
-    }*/
 }
