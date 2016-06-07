@@ -20,12 +20,12 @@ public class CustomNamingStrategy extends ImprovedNamingStrategy {
     @Override
     public String classToTableName(String className) {
         String tableNameInSingularForm = super.classToTableName(className);
-        return transformToPluralForm(tableNameInSingularForm);
+        return tableNameInSingularForm;
     }
 
-    private String transformToPluralForm(String tableNameInSingularForm) {
+    /*private String transformToPluralForm(String tableNameInSingularForm) {
         StringBuilder pluralForm = new StringBuilder();
         pluralForm.append(tableNameInSingularForm);
         return pluralForm.toString();
-    }
+    }*/
 }
