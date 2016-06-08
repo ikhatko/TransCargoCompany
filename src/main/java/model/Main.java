@@ -31,7 +31,7 @@ public class Main {
 //        System.out.println(wagon);
         transaction.commit();
 //        currentSession.close();
-        logger.info("CLOSED");
+//        logger.info("CLOSED");
 
 
     }
