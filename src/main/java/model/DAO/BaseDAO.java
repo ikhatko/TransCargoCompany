@@ -16,10 +16,18 @@ public abstract class BaseDAO<T> {
     public T getById(int id) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        T getEntity = (T) session.get(entityType, id);
+        T entity = (T) session.get(entityType, id);
         transaction.commit();
         session.close();
-        return getEntity;
+        return entity;
+    }
+
+    public void deleteById(int id) {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(getById(id));
+        transaction.commit();
+        session.close();
     }
 
     public void save(T entity) {
@@ -34,14 +42,6 @@ public abstract class BaseDAO<T> {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.update(entity);
-        transaction.commit();
-        session.close();
-    }
-
-    public void deleteById(int id) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        session.delete(getById(id));
         transaction.commit();
         session.close();
     }
