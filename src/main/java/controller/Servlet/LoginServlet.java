@@ -18,9 +18,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
-
         SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
-        sessionFactory.openSession();
+
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String errorMsg = null;

@@ -10,7 +10,7 @@
         <property name="connection.password">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
-        <!--<property name="hibernate.hbm2ddl.auto">create-drop</property>-->
+        <!--<property name="hibernate.hbm2ddl.auto">create</property>-->
         <property name="hibernate.show_sql">true</property>
 
         <mapping class="model.Entities.City"/>
@@ -19,6 +19,7 @@
         <mapping class="model.Entities.Cargo"/>
         <mapping class="model.Entities.Waypoint"/>
         <mapping class="model.Entities.Order"/>
+        <mapping class="model.Entities.User"/>
 
     </session-factory>
 </hibernate-configuration>

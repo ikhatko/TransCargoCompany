@@ -32,6 +32,14 @@ public class User {
     public User() {
     }
 
+    public User(String password, String email, String lastName, String firstName) {
+        this.password = password;
+        this.email = email;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        userRole = UserRole.PUBLIC;
+    }
+
     public int getUserId() {
         return userId;
     }
@@ -63,4 +71,5 @@ public class User {
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
     }
+
 }
