@@ -8,7 +8,7 @@ public abstract class BaseDAO<T> {
     private final Class<T> entityType;
     private final SessionFactory sessionFactory;
 
-    protected BaseDAO(Class<T> entityType, SessionFactory sessionFactory) {
+    public BaseDAO(Class<T> entityType, SessionFactory sessionFactory) {
         this.entityType = entityType;
         this.sessionFactory = sessionFactory;
     }
