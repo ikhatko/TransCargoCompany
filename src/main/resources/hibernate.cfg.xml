@@ -6,6 +6,8 @@
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/testbase</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
         <!--<property name="hibernate.hbm2ddl.auto">create-drop</property>-->
@@ -17,17 +19,6 @@
         <mapping class="model.Entities.Cargo"/>
         <mapping class="model.Entities.Waypoint"/>
         <mapping class="model.Entities.Order"/>
-        <mapping resource="main/CargoEntity.hbm.xml"/>
-        <mapping class="main.CargoEntity"/>
-        <mapping resource="main/CityEntity.hbm.xml"/>
-        <mapping class="main.CityEntity"/>
-        <mapping resource="main/DriverEntity.hbm.xml"/>
-        <mapping class="main.DriverEntity"/>
-        <mapping resource="main/OrdersEntity.hbm.xml"/>
-        <mapping class="main.OrdersEntity"/>
-        <mapping resource="main/WagonEntity.hbm.xml"/>
-        <mapping class="main.WagonEntity"/>
-        <mapping resource="main/WaypointEntity.hbm.xml"/>
-        <mapping class="main.WaypointEntity"/>
+
     </session-factory>
 </hibernate-configuration>

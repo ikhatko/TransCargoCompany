@@ -1,5 +1,7 @@
 package controller.Servlet;
 
+import org.hibernate.SessionFactory;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +19,8 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
 
+        SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
+        sessionFactory.openSession();
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String errorMsg = null;
