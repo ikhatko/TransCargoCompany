@@ -17,9 +17,11 @@ public class CustomNamingStrategy extends ImprovedNamingStrategy {
      * @param className
      * @return The constructed table name.
      */
+
     @Override
     public String classToTableName(String className) {
         String tableNameInSingularForm = super.classToTableName(className);
         return tableNameInSingularForm;
     }
+
 }

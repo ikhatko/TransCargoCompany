@@ -16,28 +16,37 @@ public class User {
     @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false)
+    @ManyToOne
     private UserRole userRole;
-
-    public enum UserRole {
-        PUBLIC,DRIVER,STAFF,ADMIN
-    }
 
     public User() {
     }
 
-    public User(String password, String email, String lastName, String firstName) {
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", userRole=" + userRole +
+                '}';
+    }
+
+    public User(String firstName, String lastName, String email, String password) {
         this.password = password;
         this.email = email;
         this.lastName = lastName;
         this.firstName = firstName;
-        userRole = UserRole.PUBLIC;
+        userRole = new UserRole();
+        userRole.setUserRoleId(4);
     }
 
     public int getUserId() {

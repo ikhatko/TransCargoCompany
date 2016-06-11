@@ -1,10 +1,8 @@
 package controller.Servlet;
 
-import model.DAO.Impl.UserDAOImpl;
 import model.Entities.User;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import services.CheckLogin;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,8 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 @WebServlet("/Login")
 public class LoginServlet extends HttpServlet {
@@ -21,37 +19,22 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
         SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        UserDAOImpl userDAO = new UserDAOImpl(User.class, session);
-        userDAO.create(new User("password","email","last","first"));
-        transaction.commit();
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        String errorMsg = null;
-        if (email == null || email.equals("")) {
-            errorMsg = "User email can't be empty";
-        }
-        if (password == null || password.equals("")) {
-            errorMsg = "User password can't be empty";
-        }
-
-        if (errorMsg != null) {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.html");
-            out.println("<font color=red>" + errorMsg + "</font>");
+        User user = CheckLogin.checkEmailAndPassword(email, password, sessionFactory);
+        if (user != null) {
+            HttpSession session = req.getSession();
+            session.setAttribute("user", new User());
+            resp.sendRedirect("success.html");
+        } else {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.jsp");
+            req.setAttribute("errorMsg", "<div class=\"alert alert-warning\">\n" +
+                    "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
+                    "  <strong>Warning!</strong> Wrong email or password.\n" +
+                    "</div>");
             requestDispatcher.include(req, resp);
-        }
-//        if  password check is true
-         /*TODO: check email & password -> connect to data base via hibernate
-         * Get user, initialize, add user to session
-         * */
 
-//        resp.sendRedirect("WEB-INF/startpage.jsp");
-////        if false
-//        out.println("<font color=\"red\">ERORR</font>");
-//        RequestDispatcher rd = req.getRequestDispatcher("login.html");
-//        rd.include(req, resp);
+        }
     }
 }

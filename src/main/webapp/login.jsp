@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page import="java.io.PrintWriter" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,15 +31,19 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form data-toggle="validator" id="login-form" action="/Login" method="post" role="form" style="display: block;">
+                            <form data-toggle="validator" id="login-form" action="/Login" method="post" role="form"
+                                  style="display: block;">
+                                ${errorMsg}
                                 <div class="form-group">
                                     <label for="email" class="control-label">Email</label>
-                                    <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" data-error="Email address is invalid" required>
+                                    <input type="email" name="email" id="email" tabindex="1" class="form-control"
+                                           placeholder="Email" data-error="Email address is invalid" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="password" class="control-label">Password</label>
-                                    <input type="password" data-minlength="6" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" required>
+                                    <input type="password" data-minlength="6" name="password" id="password" tabindex="2"
+                                           class="form-control" placeholder="Password" required>
                                     <div class="help-block">Minimum of 6 characters</div>
                                 </div>
                                 <div class="form-group text-center">
@@ -48,7 +53,8 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+                                            <input type="submit" name="login-submit" id="login-submit" tabindex="4"
+                                                   class="form-control btn btn-login" value="Log In">
                                         </div>
                                     </div>
                                 </div>
@@ -56,39 +62,50 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="text-center">
-                                                <a href="/ForgotPassword" tabindex="5" class="forgot-password">Forgot Password?</a>
+                                                <a href="/ForgotPassword" tabindex="5" class="forgot-password">Forgot
+                                                    Password?</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </form>
-                            <form data-toggle="validator" id="register-form" action="/Register" method="post" role="form" style="display: none;">
+                            <form data-toggle="validator" id="register-form" action="/Register" method="post"
+                                  role="form" style="display: none;">
+                                ${successRegister}
                                 <div class="form-group">
                                     <label for="firstName" class="control-label">First Name</label>
-                                    <input type="text" name="firstName" id="firstName" tabindex="1" class="form-control" placeholder="Username" pattern="^[_A-z0-9]{1,}$" maxlength="15"
+                                    <input type="text" name="firstName" id="firstName" tabindex="1" class="form-control"
+                                           placeholder="Username" pattern="^[_A-z0-9]{1,}$" maxlength="15"
                                            data-error="First name is invalid" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="lastName" class="control-label">Last Name</label>
-                                    <input type="text" name="lastName" id="lastName" tabindex="1" class="form-control" placeholder="Username" pattern="^[_A-z0-9]{1,}$" maxlength="15"
+                                    <input type="text" name="lastName" id="lastName" tabindex="1" class="form-control"
+                                           placeholder="Username" pattern="^[_A-z0-9]{1,}$" maxlength="15"
                                            data-error="Last name is invalid" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="emailReg" class="control-label">Email</label>
-                                    <input type="email" name="emailReg" id="emailReg" tabindex="1" class="form-control" placeholder="Email Address" data-error="Email address is invalid" maxlength="50" required>
+                                    <input type="email" name="emailReg" id="emailReg" tabindex="1" class="form-control"
+                                           placeholder="Email Address" data-error="Email address is invalid"
+                                           maxlength="50" required>
                                     <div class="help-block with-errors"></div>
                                 </div>
                                 <div class="form-group">
                                     <label for="passwordReg" class="control-label">Password</label>
-                                    <input type="password" name="passwordReg" id="passwordReg" tabindex="2" class="form-control" placeholder="Password" data-minlength="6" maxlength="15" required>
+                                    <input type="password" name="passwordReg" id="passwordReg" tabindex="2"
+                                           class="form-control" placeholder="Password" data-minlength="6" maxlength="15"
+                                           required>
                                     <div class="help-block">From 6 to 15 chars</div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+                                            <input type="submit" name="register-submit" id="register-submit"
+                                                   tabindex="4" class="form-control btn btn-register"
+                                                   value="Register Now">
                                         </div>
                                     </div>
                                 </div>

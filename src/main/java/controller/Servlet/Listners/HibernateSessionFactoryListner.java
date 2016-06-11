@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import utils.hibernate.CustomNamingStrategy;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -15,6 +16,7 @@ public class HibernateSessionFactoryListner implements ServletContextListener{
 
     public void contextInitialized(ServletContextEvent sce) {
         Configuration configuration = new Configuration();
+        configuration.setNamingStrategy(CustomNamingStrategy.INSTANCE);
         configuration.configure("hibernate.cfg.xml");
         logger.info("Hibernate Configuration created successfully");
 

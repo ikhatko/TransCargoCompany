@@ -12,8 +12,8 @@ public class Order {
     @GeneratedValue
     private int orderId;
 
-    @Column(nullable = false)
-    private boolean orderStatus;
+    @ManyToOne
+    private OrderStatus orderStatus;
 
     @OneToMany(mappedBy = "waypointOrder", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Waypoint> waypointList;
@@ -35,11 +35,11 @@ public class Order {
         this.orderId = orderId;
     }
 
-    public boolean isOrderStatus() {
+    public OrderStatus getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(boolean orderStatus) {
+    public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
 
