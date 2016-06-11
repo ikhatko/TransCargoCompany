@@ -1,22 +1,11 @@
 package model.DAO.Impl;
 
 import model.DAO.Interfaces.OrderDAO;
-import model.Entities.Order;
+import org.hibernate.Session;
 
-public class OrderDAOImpl implements OrderDAO {
-    public Order getOrderById(int orderId) {
-        return null;
-    }
+public class OrderDAOImpl extends GenericDAOImpl  implements OrderDAO {
 
-    public void createOrder(Order order) {
-
-    }
-
-    public void updateOrder(Order order) {
-
-    }
-
-    public void deleteOrderById(int orderId) {
-
+    public OrderDAOImpl(Class entityType, Session session) {
+        super(entityType, session);
     }
 }

@@ -1,9 +1,6 @@
 package model.Entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Cargo {
@@ -20,12 +17,8 @@ public class Cargo {
     @Column(nullable = false)
     private float volume;
 
-    @Column(nullable = false)
+    @ManyToOne
     private CargoStatus cargoStatus;
-
-    public enum CargoStatus {
-        READY,SHIPPED,DELIVERED
-    }
 
     public Cargo() {
     }

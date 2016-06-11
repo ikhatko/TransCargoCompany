@@ -1,22 +1,11 @@
 package model.DAO.Impl;
 
 import model.DAO.Interfaces.DriverDAO;
-import model.Entities.Driver;
+import org.hibernate.Session;
 
-public class DriverDAOImpl implements DriverDAO {
-    public Driver getDriverById(int driverId) {
-        return null;
-    }
+public class DriverDAOImpl extends GenericDAOImpl implements DriverDAO {
 
-    public void createDriver(Driver driver) {
-
-    }
-
-    public void updateDriver(Driver driver) {
-
-    }
-
-    public void deleteDriverById(int driverId) {
-
+    public DriverDAOImpl(Class entityType, Session session) {
+        super(entityType, session);
     }
 }

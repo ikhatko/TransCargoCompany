@@ -6,7 +6,6 @@ import javax.persistence.*;
 public class Driver {
     @Id
     @GeneratedValue
-    @Column(nullable = false)
     private int driverId;
 
     @Column(nullable = false)
@@ -17,7 +16,7 @@ public class Driver {
 
     private double thisMonthHours;
 
-    @Column(nullable = false)
+    @ManyToOne
     private DriverStatus driverStatus;
 
     @ManyToOne
@@ -29,10 +28,6 @@ public class Driver {
     @ManyToOne
     @JoinColumn(name = "orderId",nullable = false)
     private Order currentOrder;
-
-    public enum DriverStatus {
-        REST, DRIVE, RELAY
-    }
 
     public Driver() {
     }
@@ -69,14 +64,6 @@ public class Driver {
         this.thisMonthHours = thisMonthHours;
     }
 
-    public DriverStatus getDriverStatus() {
-        return driverStatus;
-    }
-
-    public void setDriverStatus(DriverStatus driverStatus) {
-        this.driverStatus = driverStatus;
-    }
-
     public City getCurrentCity() {
         return currentCity;
     }
@@ -91,5 +78,21 @@ public class Driver {
 
     public void setCurrentWagon(Wagon currentWagon) {
         this.currentWagon = currentWagon;
+    }
+
+    public DriverStatus getDriverStatus() {
+        return driverStatus;
+    }
+
+    public void setDriverStatus(DriverStatus driverStatus) {
+        this.driverStatus = driverStatus;
+    }
+
+    public Order getCurrentOrder() {
+        return currentOrder;
+    }
+
+    public void setCurrentOrder(Order currentOrder) {
+        this.currentOrder = currentOrder;
     }
 }

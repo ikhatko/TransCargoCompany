@@ -1,22 +1,11 @@
 package model.DAO.Impl;
 
 import model.DAO.Interfaces.WagonDAO;
-import model.Entities.Wagon;
+import org.hibernate.Session;
 
-public class WagonDAOImpl implements WagonDAO {
-    public Wagon getWagonById(int wagonId) {
-        return null;
-    }
+public class WagonDAOImpl extends GenericDAOImpl  implements WagonDAO {
 
-    public void createWagon(Wagon wagon) {
-
-    }
-
-    public void updateWagon(Wagon wagon) {
-
-    }
-
-    public void deleteWagonById(int wagonId) {
-
+    public WagonDAOImpl(Class entityType, Session session) {
+        super(entityType, session);
     }
 }

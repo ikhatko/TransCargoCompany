@@ -18,12 +18,8 @@ public class Waypoint {
     @JoinColumn(name = "orderId", nullable = false)
     private Order waypointOrder;
 
-    @Column(nullable = false)
+    @ManyToOne
     private WaypointType waypointType;
-
-    public enum WaypointType {
-        LOADING, UNLOADING
-    }
 
     public Waypoint() {
     }
@@ -50,6 +46,14 @@ public class Waypoint {
 
     public void setWaypointCargo(Cargo waypointCargo) {
         this.waypointCargo = waypointCargo;
+    }
+
+    public Order getWaypointOrder() {
+        return waypointOrder;
+    }
+
+    public void setWaypointOrder(Order waypointOrder) {
+        this.waypointOrder = waypointOrder;
     }
 
     public WaypointType getWaypointType() {

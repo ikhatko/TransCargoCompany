@@ -1,7 +1,6 @@
 package model;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.xml.DOMConfigurator;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -11,7 +10,6 @@ public class Main {
     private static Logger logger = Logger.getLogger(Main.class);
 
     public static void main(String[] args) {
-        DOMConfigurator.configure("src/Main/resources/log4j.xml");
         SessionFactory sessionFactory = new HibernateUtil().getSessionFactory();
         Session currentSession = sessionFactory.getCurrentSession();
         Transaction transaction = currentSession.beginTransaction();

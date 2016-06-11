@@ -1,6 +1,7 @@
 package model.DAO.Interfaces;
 
 public interface GenericDAO<T> {
+
     void create(T entity);
 
     T read(int id);

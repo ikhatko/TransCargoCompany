@@ -1,22 +1,11 @@
 package model.DAO.Impl;
 
 import model.DAO.Interfaces.CityDAO;
-import model.Entities.City;
+import org.hibernate.Session;
 
-public class CityDAOImpl implements CityDAO {
-    public City getCityById(int cityId) {
-        return null;
-    }
+public class CityDAOImpl extends GenericDAOImpl  implements CityDAO {
 
-    public void createCity(City city) {
-
-    }
-
-    public void updateCity(City city) {
-
-    }
-
-    public void deleteCityById(int cityId) {
-
+    public CityDAOImpl(Class entityType, Session session) {
+        super(entityType, session);
     }
 }

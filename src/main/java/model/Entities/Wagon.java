@@ -23,12 +23,8 @@ public class Wagon {
     @ManyToOne
     private City currentCity;
 
-    @Column(nullable = false)
+    @ManyToOne
     private WagonStatus wagonStatus;
-
-    public enum WagonStatus {
-        GOOD, BROKEN
-    }
 
     public Wagon() {
     }
@@ -88,5 +84,4 @@ public class Wagon {
     public void setWagonStatus(WagonStatus wagonStatus) {
         this.wagonStatus = wagonStatus;
     }
-
 }

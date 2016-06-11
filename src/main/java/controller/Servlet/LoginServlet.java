@@ -1,6 +1,10 @@
 package controller.Servlet;
 
+import model.DAO.Impl.UserDAOImpl;
+import model.Entities.User;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,7 +23,11 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
-
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        UserDAOImpl userDAO = new UserDAOImpl(User.class, session);
+        userDAO.create(new User("password","email","last","first"));
+        transaction.commit();
         String email = req.getParameter("email");
         String password = req.getParameter("password");
         String errorMsg = null;
