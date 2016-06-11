@@ -3,6 +3,8 @@ package model.DAO.Impl;
 import model.DAO.Interfaces.GenericDAO;
 import org.hibernate.Session;
 
+import java.util.List;
+
 public class GenericDAOImpl<T> implements GenericDAO<T> {
     private final Class<T> entityType;
     private Session session;
@@ -26,5 +28,9 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 
     public void delete(int id) {
         session.delete(read(id));
+    }
+
+    public List<T> getAll() {
+        return session.createCriteria(entityType).list();
     }
 }

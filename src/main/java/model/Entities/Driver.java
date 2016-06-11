@@ -26,8 +26,30 @@ public class Driver {
     private Wagon currentWagon;
 
     @ManyToOne
-    @JoinColumn(name = "orderId",nullable = false)
+    @JoinColumn(name = "orderId")
     private Order currentOrder;
+
+    public Driver(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        thisMonthHours = 0;
+        driverStatus = new DriverStatus();
+        driverStatus.setDriverStatusId(1);
+    }
+
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "driverId=" + driverId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", thisMonthHours=" + thisMonthHours +
+                ", driverStatus=" + driverStatus +
+                ", currentCity=" + currentCity +
+                ", currentWagon=" + currentWagon +
+                ", currentOrder=" + currentOrder +
+                '}';
+    }
 
     public Driver() {
     }

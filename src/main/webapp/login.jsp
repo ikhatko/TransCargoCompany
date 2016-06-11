@@ -1,4 +1,3 @@
-<%@ page import="java.io.PrintWriter" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -10,7 +9,7 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/validator.min.js"></script>
     <script src="js/login.js"></script>
-    <title></title>
+    <title>Welcome to Trans Cargo Company</title>
 </head>
 <body>
 <div class="container">
@@ -53,7 +52,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" name="login-submit" id="login-submit" tabindex="4"
+                                            <input type="submit" name="login" id="login" tabindex="4"
                                                    class="form-control btn btn-login" value="Log In">
                                         </div>
                                     </div>
@@ -71,7 +70,7 @@
                             </form>
                             <form data-toggle="validator" id="register-form" action="/Register" method="post"
                                   role="form" style="display: none;">
-                                ${successRegister}
+                                <script>$('#myForm').validator()</script>
                                 <div class="form-group">
                                     <label for="firstName" class="control-label">First Name</label>
                                     <input type="text" name="firstName" id="firstName" tabindex="1" class="form-control"
@@ -103,7 +102,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" name="register-submit" id="register-submit"
+                                            <input type="submit" name="register" id="register"
                                                    tabindex="4" class="form-control btn btn-register"
                                                    value="Register Now">
                                         </div>

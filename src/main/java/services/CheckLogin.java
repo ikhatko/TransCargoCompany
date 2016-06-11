@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.*;
 
 public class CheckLogin {
+
     private static Logger logger = Logger.getLogger(CheckLogin.class);
 
     public static User checkEmailAndPassword(String email, String password, SessionFactory sessionFactory) {
@@ -25,7 +26,7 @@ public class CheckLogin {
             session.close();
         }
         if (user != null) {
-            logger.info("Check completed successful");
+            logger.info("Checking email completed successfully");
         } else {
             logger.info("Wrong user");
         }

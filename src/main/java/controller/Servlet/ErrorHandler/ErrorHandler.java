@@ -52,7 +52,7 @@ public class ErrorHandler extends HttpServlet {
         }
 
         out.write("<br><br>");
-        out.write("<a href=\"login.html\">Login Page</a>");
+        out.write("<a href=\"/login.jsp\">Login Page</a>");
         out.write("</body></html>");
     }
 }

@@ -88,7 +88,6 @@
         <data-type>int(11)</data-type>
       </column>
       <column id="31" parent="4" name="order_id">
-        <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
       <column id="32" parent="4" name="current_wagon">
@@ -204,7 +203,7 @@
         <columns>user_role</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="58" parent="6" name="users_email_uindex">
+      <index id="58" parent="6" name="UK_6dotkott2kjsp8vw4d0m25fb7">
         <columns>email</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
@@ -213,9 +212,9 @@
         <columns>user_id</columns>
         <primary>1</primary>
       </key>
-      <key id="60" parent="6" name="users_email_uindex">
+      <key id="60" parent="6" name="UK_6dotkott2kjsp8vw4d0m25fb7">
         <columns>email</columns>
-        <underlying-index>users_email_uindex</underlying-index>
+        <underlying-index>UK_6dotkott2kjsp8vw4d0m25fb7</underlying-index>
       </key>
       <foreign-key id="61" parent="6" name="FK_lymayy5bxgau375u0hesc9h6v">
         <columns>user_role</columns>
