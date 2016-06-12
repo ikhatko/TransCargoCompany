@@ -55,20 +55,6 @@ public class Driver {
         this.currentOrder = currentOrder;
     }
 
-    @Override
-    public String toString() {
-        return "Driver{" +
-                "driverId=" + driverId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", thisMonthHours=" + thisMonthHours +
-                ", driverStatus=" + driverStatus +
-                ", currentCity=" + currentCity +
-                ", currentWagon=" + currentWagon +
-                ", currentOrder=" + currentOrder +
-                '}';
-    }
-
     public Driver() {
     }
 

@@ -1,7 +1,7 @@
-package services.Driver;
+package services.Wagon;
 
-import model.DAO.Impl.DriverDAOImpl;
-import model.Entities.Driver;
+import model.DAO.Impl.WagonDAOImpl;
+import model.Entities.Wagon;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -9,26 +9,26 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class GetAllDrivers {
+public class GetAllWagons {
 
-    private static Logger logger = Logger.getLogger(GetAllDrivers.class);
+    private static Logger logger = Logger.getLogger(GetAllWagons.class);
 
-    public static List getAllDrivers(SessionFactory sessionFactory) {
-        logger.info("Trying to get all drivers.");
+    public static List getAllWagons(SessionFactory sessionFactory) {
+        logger.info("Trying to get all wagons");
         Session session = null;
-        List<Driver> all = null;
+        List<Wagon> all = null;
         try {
             session = sessionFactory.openSession();
-            DriverDAOImpl driverDAO = new DriverDAOImpl(session);
+            WagonDAOImpl wagonDAO = new WagonDAOImpl(session);
 
             Transaction transaction = session.beginTransaction();
-            all = driverDAO.getAll();
+            all = wagonDAO.getAll();
             transaction.commit();
 
             if (!all.isEmpty()) {
-                logger.info("List of drivers successfully received");
+                logger.info("List of wagons successfully received");
             } else {
-                logger.info("Drivers list is empty.");
+                logger.info("Wagons list is empty");
             }
         } catch (Exception e) {
             e.printStackTrace();

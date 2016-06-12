@@ -1,6 +1,10 @@
 package model.Entities;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
 
 @Entity
 public class Wagon {
@@ -21,12 +25,30 @@ public class Wagon {
     private float maxVolume;
 
     @ManyToOne
+    @Cascade(CascadeType.PERSIST)
     private City currentCity;
 
     @ManyToOne
+    @Cascade(CascadeType.PERSIST)
     private WagonStatus wagonStatus;
 
     public Wagon() {
+    }
+
+    public Wagon(String licensePlate, int driversChange, float maxWeight, float maxVolume) {
+        this.licensePlate = licensePlate;
+        this.driversChange = driversChange;
+        this.maxWeight = maxWeight;
+        this.maxVolume = maxVolume;
+    }
+
+    public Wagon(String licensePlate, int driversChange, float maxWeight, float maxVolume, City currentCity, WagonStatus wagonStatus) {
+        this.licensePlate = licensePlate;
+        this.driversChange = driversChange;
+        this.maxWeight = maxWeight;
+        this.maxVolume = maxVolume;
+        this.currentCity = currentCity;
+        this.wagonStatus = wagonStatus;
     }
 
     public int getWagonId() {

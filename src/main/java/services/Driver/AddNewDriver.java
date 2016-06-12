@@ -26,6 +26,7 @@ public class AddNewDriver {
             result = true;
             logger.info("New driver added successfully");
         } catch (Throwable e) {
+            logger.info("New driver doesn't added");
             e.printStackTrace();
         } finally {
             session.close();

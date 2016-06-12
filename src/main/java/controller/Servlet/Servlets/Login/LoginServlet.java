@@ -1,4 +1,4 @@
-package controller.Servlet;
+package controller.Servlet.Servlets.Login;
 
 import model.Entities.User;
 import org.hibernate.SessionFactory;
@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
-            resp.sendRedirect("/index.html");
+            resp.sendRedirect("/index.jsp");
         } else {
             RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.jsp");
             req.setAttribute("errorMsg", "<div class=\"alert alert-warning\">\n" +

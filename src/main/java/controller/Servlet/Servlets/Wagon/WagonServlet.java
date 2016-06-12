@@ -1,10 +1,10 @@
-package controller.Servlet;
+package controller.Servlet.Servlets.Wagon;
 
-import model.Entities.Driver;
+import model.Entities.Wagon;
 import org.hibernate.SessionFactory;
-import services.Driver.GetAllDrivers;
-import services.Driver.RemoveDriver;
-import services.Driver.UpdateDriver;
+import services.Wagon.GetAllWagons;
+import services.Wagon.RemoveWagon;
+import services.Wagon.UpdateWagon;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,14 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/Driver")
-public class DriverServlet extends HttpServlet {
+@WebServlet("/Wagon")
+public class WagonServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
-        List<Driver> allDrivers = GetAllDrivers.getAllDrivers(sessionFactory);
-        req.setAttribute("resultList", allDrivers);
-        req.getRequestDispatcher("driver.jsp").include(req, resp);
+        List<Wagon> allWagons = GetAllWagons.getAllWagons(sessionFactory);
+        req.setAttribute("resultList", allWagons);
+        req.getRequestDispatcher("wagon.jsp").include(req, resp);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class DriverServlet extends HttpServlet {
         if (delete != null) {
             try {
                 int id = Integer.parseInt(delete);
-                RemoveDriver.removeDriver(id, sessionFactory);
+                RemoveWagon.removeWagon(id, sessionFactory);
                 doGet(req, resp);
             } catch (NumberFormatException e) {
                 req.setAttribute("errorMsg", "<div class=\"alert alert-warning\">\n" +
@@ -41,14 +41,14 @@ public class DriverServlet extends HttpServlet {
             }
         } else {
             String id = req.getParameter("id");
-            String firstName = req.getParameter("firstName");
-            String lastName = req.getParameter("lastName");
-            String hours = req.getParameter("hours");
-            String cityId = req.getParameter("city");
-            String driverStatusId = req.getParameter("driverStatus");
-            String wagonId = req.getParameter("wagon");
-            String orderId = req.getParameter("orderId");
-            UpdateDriver.updateDriver(Integer.parseInt(id), sessionFactory, firstName, lastName, hours, cityId, driverStatusId, wagonId, orderId);
+            String licensePlate = req.getParameter("licensePlate");
+            int driversChange = Integer.parseInt(req.getParameter("driversChange"));
+            float maxWeight = Float.parseFloat(req.getParameter("maxWeight"));
+            float maxVolume = Float.parseFloat(req.getParameter("maxVolume"));
+            String currentCity = req.getParameter("currentCity");
+            String wagonStatus = req.getParameter("wagonStatus");
+
+            UpdateWagon.updateWagon(Integer.parseInt(id), licensePlate, driversChange, maxWeight, maxVolume, currentCity, wagonStatus, sessionFactory);
             doGet(req, resp);
         }
     }

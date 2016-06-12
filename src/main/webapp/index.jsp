@@ -11,17 +11,7 @@
 
 <div class="container-fluid">
     <div class="row content">
-        <div class="col-sm-2 sidenav hidden-xs">
-            <h2>Menu</h2>
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="#">Overall</a></li>
-                <li><a href="driver.html">Driver</a></li>
-                <li><a href="wagon.html">Wagon</a></li>
-                <li><a href="#">Cargo</a></li>
-                <li><a href="#">Order</a></li>
-                <li><a href="#">Map</a></li>
-            </ul><br>
-        </div>
+        <%@include file="menu.html" %>
         <br>
         <div class="col-sm-10">
             <div class="well">
