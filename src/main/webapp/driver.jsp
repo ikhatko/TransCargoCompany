@@ -15,26 +15,15 @@
 
 <div class="container-fluid">
     <div class="row content">
-        <div class="col-sm-2 sidenav hidden-xs">
-            <h2>Menu</h2>
-            <ul class="nav nav-pills nav-stacked">
-                <li><a href="#">Overall</a></li>
-                <li class="active"><a href="/Driver">Driver</a></li>
-                <li><a href="wagon.html">Wagon</a></li>
-                <li><a href="#">Cargo</a></li>
-                <li><a href="#">Order</a></li>
-                <li><a href="#">Map</a></li>
-            </ul>
-            <br>
-        </div>
+        <%@include file="menu.html" %>
         <br>
         <div class="col-sm-10">
             <form action="/AddNewDriver" class="form-horizontal">
+                ${errorMsg}
                 <fieldset>
 
                     <!-- Form Name -->
                     <legend>Add new driver</legend>
-
                     <!-- Text input-->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="firstName">First Name</label>
@@ -96,6 +85,12 @@
                     <th>
                         Order id
                     </th>
+                    <th>
+                        Edit
+                    </th>
+                    <th>
+                        Delete
+                    </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -128,6 +123,116 @@
                     <td>
                         <%=driver.getCurrentOrder()%>
                     </td>
+                    <td>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Edit</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Edit driver</h4>
+                                    </div>
+                                    <br>
+                                    <form class="form-horizontal" method="post">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="firstName">Driver ID</label>
+                                                <div class="col-md-4">
+                                                    <input id="idmodal" value="<%=driver.getDriverId()%>" name="id" class="form-control input-md" type="text" readonly="readonly">
+                                                </div>
+                                            </div>
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="firstName">First Name</label>
+                                                <div class="col-md-4">
+                                                    <input id="modalFname" value="<%=driver.getFirstName()%>" name="firstName" class="form-control input-md" type="text">
+                                                </div>
+                                            </div>
+
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="lastName">Last Name</label>
+                                                <div class="col-md-4">
+                                                    <input id="modalLname" name="lastName" value="<%=driver.getLastName()%>" class="form-control input-md" type="text">
+                                                </div>
+                                            </div>
+
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="hours">This month hours</label>
+                                                <div class="col-md-4">
+                                                    <input id="hours" value="<%=driver.getThisMonthHours()%>" name="hours" placeholder="placeholder" class="form-control input-md" type="text">
+                                                </div>
+                                            </div>
+
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="city">Current city ID</label>
+                                                <div class="col-md-4">
+                                                    <input id="city" value="<%=driver.getCurrentCity()%>" name="city" class="form-control input-md" type="text">
+                                                </div>
+                                            </div>
+
+                                            <!-- Select Basic -->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="driverStatus">Driver status</label>
+                                                <div class="col-md-4">
+                                                    <select id="driverStatus" name="driverStatus" class="form-control">
+                                                        <option value="1">Rest</option>
+                                                        <option value="2">Drive</option>
+                                                        <option value="3">Relay</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="wagon">Current wagon ID</label>
+                                                <div class="col-md-4">
+                                                    <input id="wagon" value="<%=driver.getCurrentWagon()%>" name="wagon" class="form-control input-md" type="text">
+                                                </div>
+                                            </div>
+
+                                            <!-- Text input-->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="orderId">Order ID</label>
+                                                <div class="col-md-4">
+                                                    <input id="orderId" name="orderId" value="<%=driver.getCurrentOrder()%>" class="form-control input-md" type="text">
+
+                                                </div>
+                                            </div>
+
+                                            <!-- Button -->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="submit">Save changes</label>
+                                                <div class="col-md-4">
+                                                    <button id="submit-modal" type="submit" class="btn btn-primary">Save</button>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+                                    </form>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <form action="/Driver" method="post">
+                            <div class="form-group">
+                                <button type="submit" id="delete" name="delete" value="<%=driver.getDriverId()%>"
+                                        class="btn btn-danger">Delete
+                                </button>
+                            </div>
+                        </form>
+                    </td>
                 </tr>
                 <%}%>
                 </tbody>
@@ -135,9 +240,7 @@
         </div>
     </div>
 </div>
-<footer class="container-fluid text-center">
-    <p>Footer Text</p>
-</footer>
+<%@include file="footer.html" %>
 </body>
 </html>
 

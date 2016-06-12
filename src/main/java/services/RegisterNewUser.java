@@ -13,14 +13,15 @@ public class RegisterNewUser {
     private static Logger logger = Logger.getLogger(RegisterNewUser.class);
 
     public static boolean registerNewUser(String firstName, String lastName, String email, String password, SessionFactory sessionFactory) {
-        boolean result = false;
         logger.info(String.format("Trying to register new user:: %s , %s, %s", firstName, lastName, email));
+
+        boolean result = false;
         Session session = null;
         try {
             session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             User user = new User(firstName, lastName, email, password);
-            UserDAOImpl userDAO = new UserDAOImpl(User.class, session);
+            UserDAOImpl userDAO = new UserDAOImpl(session);
             userDAO.create(user);
             transaction.commit();
             result = true;

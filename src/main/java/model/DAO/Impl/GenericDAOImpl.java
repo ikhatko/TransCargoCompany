@@ -23,7 +23,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
     }
 
     public void update(T entity) {
-        session.update(entity);
+        session.saveOrUpdate(entity);
     }
 
     public void delete(int id) {
@@ -33,4 +33,6 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
     public List<T> getAll() {
         return session.createCriteria(entityType).list();
     }
+
+
 }

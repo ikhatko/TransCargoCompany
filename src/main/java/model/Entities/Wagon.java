@@ -84,4 +84,9 @@ public class Wagon {
     public void setWagonStatus(WagonStatus wagonStatus) {
         this.wagonStatus = wagonStatus;
     }
+
+    @Override
+    public String toString() {
+        return "" + wagonId;
+    }
 }

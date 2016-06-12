@@ -1,6 +1,10 @@
 package model.Entities;
 
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
 
 @Entity
 public class Driver {
@@ -17,16 +21,20 @@ public class Driver {
     private double thisMonthHours;
 
     @ManyToOne
+    @Cascade(CascadeType.PERSIST)
     private DriverStatus driverStatus;
 
     @ManyToOne
+    @Cascade(CascadeType.PERSIST)
     private City currentCity;
 
     @ManyToOne
+    @Cascade(CascadeType.PERSIST)
     private Wagon currentWagon;
 
     @ManyToOne
     @JoinColumn(name = "orderId")
+    @Cascade(CascadeType.PERSIST)
     private Order currentOrder;
 
     public Driver(String firstName, String lastName) {
@@ -35,6 +43,16 @@ public class Driver {
         thisMonthHours = 0;
         driverStatus = new DriverStatus();
         driverStatus.setDriverStatusId(1);
+    }
+
+    public Driver(String firstName, String lastName, double thisMonthHours, DriverStatus driverStatus, City currentCity, Wagon currentWagon, Order currentOrder) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.thisMonthHours = thisMonthHours;
+        this.driverStatus = driverStatus;
+        this.currentCity = currentCity;
+        this.currentWagon = currentWagon;
+        this.currentOrder = currentOrder;
     }
 
     @Override

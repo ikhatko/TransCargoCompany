@@ -1,10 +1,10 @@
-package services;
+package services.Driver;
 
 import model.DAO.Impl.DriverDAOImpl;
-import model.Entities.Driver;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -13,14 +13,22 @@ public class GetAllDrivers {
     private static Logger logger = Logger.getLogger(GetAllDrivers.class);
 
     public static List getAllDrivers(SessionFactory sessionFactory) {
-        logger.info("Trying to get all drivers");
+        logger.info("Trying to get all drivers.");
         Session session = null;
         List all = null;
         try {
             session = sessionFactory.openSession();
-            DriverDAOImpl driverDAO = new DriverDAOImpl(Driver.class, session);
+            DriverDAOImpl driverDAO = new DriverDAOImpl(session);
+
+            Transaction transaction = session.beginTransaction();
             all = driverDAO.getAll();
-            logger.info("All drivers get successfully");
+            transaction.commit();
+
+            if (!all.isEmpty()) {
+                logger.info("All drivers get successfully.");
+            } else {
+                logger.info("Drivers list is empty.");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -19,7 +19,7 @@ public class DriverStatus {
 
     @Override
     public String toString() {
-        return driverStatus.toUpperCase();
+        return driverStatus;
     }
 
     public int getDriverStatusId() {

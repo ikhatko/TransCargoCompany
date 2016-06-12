@@ -1,7 +1,7 @@
 package controller.Servlet;
 
 import org.hibernate.SessionFactory;
-import services.AddNewDriver;
+import services.Driver.AddNewDriver;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

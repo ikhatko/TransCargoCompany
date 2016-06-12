@@ -1,4 +1,4 @@
-package services;
+package services.Driver;
 
 import model.DAO.Impl.DriverDAOImpl;
 import model.Entities.Driver;
@@ -18,7 +18,7 @@ public class AddNewDriver {
         logger.info(String.format("Adding new driver: %s, %s", firstName, lastName));
         try {
             session = sessionFactory.openSession();
-            DriverDAOImpl driverDAO = new DriverDAOImpl(Driver.class, session);
+            DriverDAOImpl driverDAO = new DriverDAOImpl(session);
             driver = new Driver(firstName, lastName);
             Transaction transaction = session.beginTransaction();
             driverDAO.create(driver);
