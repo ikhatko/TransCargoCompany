@@ -1,7 +1,7 @@
 package controller.Servlet;
 
 import org.hibernate.SessionFactory;
-import services.RegisterNewUser;
+import services.User.RegisterNewUser;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

@@ -1,4 +1,4 @@
-package services;
+package services.User;
 
 import model.DAO.Impl.UserDAOImpl;
 import model.Entities.User;

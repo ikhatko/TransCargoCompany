@@ -2,7 +2,7 @@ package controller.Servlet;
 
 import model.Entities.User;
 import org.hibernate.SessionFactory;
-import services.CheckLogin;
+import services.User.CheckLogin;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

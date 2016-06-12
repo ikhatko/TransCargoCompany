@@ -1,4 +1,4 @@
-package services;
+package services.User;
 
 import model.Entities.User;
 import org.apache.log4j.Logger;
