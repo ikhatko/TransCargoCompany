@@ -1,8 +1,8 @@
 package model.DAO.Impl;
 
 import model.DAO.Interfaces.OrderDAO;
+import model.Entities.Order;
 import org.hibernate.Session;
-import org.hibernate.criterion.Order;
 
 public class OrderDAOImpl extends GenericDAOImpl  implements OrderDAO {
 

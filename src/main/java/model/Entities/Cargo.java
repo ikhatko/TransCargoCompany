@@ -27,6 +27,11 @@ public class Cargo {
     public Cargo() {
     }
 
+    @Override
+    public String toString() {
+        return "" + cargoId;
+    }
+
     public Cargo(String name, float weight, float volume) {
         this.name = name;
         this.weight = weight;

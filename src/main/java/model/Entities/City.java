@@ -10,7 +10,14 @@ public class City {
 
     private String cityName;
 
+    private long distance;
+
     public City() {
+    }
+
+    public City(String cityName, long distance) {
+        this.cityName = cityName;
+        this.distance = distance;
     }
 
     public int getCityId() {
@@ -29,8 +36,16 @@ public class City {
         this.cityName = cityName;
     }
 
+    public long getDistance() {
+        return distance;
+    }
+
+    public void setDistance(long distance) {
+        this.distance = distance;
+    }
+
     @Override
     public String toString() {
-        return "" + cityId;
+        return "" + cityName;
     }
 }

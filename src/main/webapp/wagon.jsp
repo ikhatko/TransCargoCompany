@@ -19,6 +19,7 @@
         <div class="col-sm-10">
             <form action="/AddNewWagon" method="post" class="form-horizontal">
                 ${errorMsg}
+                <%request.getSession().removeAttribute("errorMsg");%>
                 <fieldset>
 
                     <!-- Form Name -->
@@ -48,7 +49,8 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="maxWeight">Max Weight</label>
                         <div class="col-md-4">
-                            <input id="maxWeight" name="maxWeight" placeholder="Max Weight" class="form-control input-md"
+                            <input id="maxWeight" name="maxWeight" placeholder="Max Weight"
+                                   class="form-control input-md"
                                    required="" type="text">
                         </div>
                     </div>
@@ -57,7 +59,8 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="maxVolume">Max Volume</label>
                         <div class="col-md-4">
-                            <input id="maxVolume" name="maxVolume" placeholder="Max Volume" class="form-control input-md"
+                            <input id="maxVolume" name="maxVolume" placeholder="Max Volume"
+                                   class="form-control input-md"
                                    required="" type="text">
                         </div>
                     </div>
@@ -137,7 +140,9 @@
                         <%=wagon.getWagonStatus()%>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">Edit</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">
+                            Edit
+                        </button>
 
                         <!-- Modal -->
                         <div class="modal fade" id="myModal<%=id%>" role="dialog">
@@ -154,23 +159,30 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="idmodal">Wagon ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="idmodal" value="<%=wagon.getWagonId()%>" name="id" class="form-control input-md" type="text" readonly="readonly">
+                                                    <input id="idmodal" value="<%=wagon.getWagonId()%>" name="id"
+                                                           class="form-control input-md" type="text"
+                                                           readonly="readonly">
                                                 </div>
                                             </div>
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="licensePlateModal">License Plate</label>
+                                                <label class="col-md-4 control-label" for="licensePlateModal">License
+                                                    Plate</label>
                                                 <div class="col-md-4">
-                                                    <input id="licensePlateModal" value="<%=wagon.getLicensePlate()%>" name="licensePlate" class="form-control input-md" type="text">
+                                                    <input id="licensePlateModal" value="<%=wagon.getLicensePlate()%>"
+                                                           name="licensePlate" class="form-control input-md"
+                                                           type="text">
                                                 </div>
                                             </div>
 
                                             <!-- Text input-->
                                             <!-- Select Basic -->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="driversChangeModal">Drivers change</label>
+                                                <label class="col-md-4 control-label" for="driversChangeModal">Drivers
+                                                    change</label>
                                                 <div class="col-md-4">
-                                                    <select id="driversChangeModal" name="driversChange" class="form-control">
+                                                    <select id="driversChangeModal" name="driversChange"
+                                                            class="form-control">
                                                         <option selected disabled>Choose drivers change</option>
                                                         <option value="1">Single</option>
                                                         <option value="2">Double</option>
@@ -180,33 +192,41 @@
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="maxWeightModal">Max weight</label>
+                                                <label class="col-md-4 control-label" for="maxWeightModal">Max
+                                                    weight</label>
                                                 <div class="col-md-4">
-                                                    <input id="maxWeightModal" value="<%=wagon.getMaxWeight()%>" name="maxWeight" class="form-control input-md" type="text">
+                                                    <input id="maxWeightModal" value="<%=wagon.getMaxWeight()%>"
+                                                           name="maxWeight" class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="maxVolumeModal">Max volume</label>
+                                                <label class="col-md-4 control-label" for="maxVolumeModal">Max
+                                                    volume</label>
                                                 <div class="col-md-4">
-                                                    <input id="maxVolumeModal" value="<%=wagon.getMaxVolume()%>" name="maxVolume" class="form-control input-md" type="text">
+                                                    <input id="maxVolumeModal" value="<%=wagon.getMaxVolume()%>"
+                                                           name="maxVolume" class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="currentCityModal">Current city ID</label>
+                                                <label class="col-md-4 control-label" for="currentCityModal">Current
+                                                    city ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="currentCityModal" value="<%=wagon.getCurrentCity()%>" name="currentCity" class="form-control input-md" type="text">
+                                                    <input id="currentCityModal" value="<%=wagon.getCurrentCity()%>"
+                                                           name="currentCity" class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
                                             <!-- Select Basic -->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="wagonStatusModal">Wagon status</label>
+                                                <label class="col-md-4 control-label" for="wagonStatusModal">Wagon
+                                                    status</label>
                                                 <div class="col-md-4">
-                                                    <select id="wagonStatusModal" name="wagonStatus" class="form-control">
+                                                    <select id="wagonStatusModal" name="wagonStatus"
+                                                            class="form-control">
                                                         <option selected disabled>Choose status</option>
                                                         <option value="1">Ready</option>
                                                         <option value="2">Broken</option>
@@ -218,7 +238,9 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="submit">Save changes</label>
                                                 <div class="col-md-4">
-                                                    <button id="submit-modal" type="submit" class="btn btn-primary">Save</button>
+                                                    <button id="submit-modal" type="submit" class="btn btn-primary">
+                                                        Save
+                                                    </button>
                                                 </div>
                                             </div>
 
@@ -226,7 +248,8 @@
                                     </form>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
                                     </div>
                                 </div>
 

@@ -1,7 +1,7 @@
-package controller.Servlet.Servlets.User;
+package controller.Servlet.Servlets.City;
 
 import org.hibernate.SessionFactory;
-import services.User.AddNewUser;
+import services.City.AddNewCity;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,29 +11,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/AddNewUser")
-public class AddNewUserServlet extends HttpServlet {
+@WebServlet("/AddNewCity")
+public class AddNewCityServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
-        String firstName = req.getParameter("firstName");
-        String lastName = req.getParameter("lastName");
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
-        int userRoleId = Integer.parseInt(req.getParameter("userRole"));
-
-        if (AddNewUser.addNewUser(firstName, lastName, email, password, userRoleId, sessionFactory)) {
+        String cityName = req.getParameter("cityName");
+        String distance = req.getParameter("distance");
+        if (AddNewCity.addNewCity(cityName, distance, sessionFactory)) {
             req.getSession().setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
                     "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
-                    "  <strong>Success!</strong> New user added.\n" +
+                    "  <strong>Success!</strong> New city added.\n" +
                     "</div>");
-            resp.sendRedirect("/User");
-        } else {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/User");
+            resp.sendRedirect("/City");
+        }else {
+            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/City");
             req.setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
                     "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
-                    "  <strong>Error!</strong> New user not added.\n" +
+                    "  <strong>Error!</strong> New city not added.\n" +
                     "</div>");
             requestDispatcher.include(req, resp);
         }

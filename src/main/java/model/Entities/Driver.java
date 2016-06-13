@@ -35,6 +35,7 @@ public class Driver {
     @ManyToOne
     @JoinColumn(name = "orderId")
     @Cascade(CascadeType.PERSIST)
+    @Fetch (FetchMode.SELECT)
     private Order currentOrder;
 
     public Driver(String firstName, String lastName) {
@@ -44,6 +45,7 @@ public class Driver {
         driverStatus = new DriverStatus();
         driverStatus.setDriverStatusId(1);
     }
+
 
     public Driver(String firstName, String lastName, double thisMonthHours, DriverStatus driverStatus, City currentCity, Wagon currentWagon, Order currentOrder) {
         this.firstName = firstName;
@@ -56,6 +58,11 @@ public class Driver {
     }
 
     public Driver() {
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
     }
 
     public int getDriverId() {

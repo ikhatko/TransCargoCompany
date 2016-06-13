@@ -19,6 +19,7 @@
         <div class="col-sm-10">
             <form action="/AddNewDriver" method="post" class="form-horizontal">
                 ${errorMsg}
+                <%request.getSession().removeAttribute("errorMsg");%>
                 <fieldset>
 
                     <!-- Form Name -->
@@ -96,7 +97,6 @@
                 <%
                     List<Driver> resultList = (List) request.getAttribute("resultList");
                     for (Driver driver : resultList) {
-                        request.getSession().setAttribute("driver", driver);
                         int id = driver.getDriverId();
                 %>
                 <tr>
@@ -125,7 +125,9 @@
                         <%=driver.getCurrentOrder()%>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">Edit</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">
+                            Edit
+                        </button>
 
                         <!-- Modal -->
                         <div class="modal fade" id="myModal<%=id%>" role="dialog">
@@ -142,14 +144,17 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="firstName">Driver ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="idmodal" value="<%=id%>" name="id" class="form-control input-md" type="text" readonly="readonly">
+                                                    <input id="idmodal" value="<%=id%>" name="id"
+                                                           class="form-control input-md" type="text"
+                                                           readonly="readonly">
                                                 </div>
                                             </div>
                                             <!-- Text input-->
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="firstName">First Name</label>
                                                 <div class="col-md-4">
-                                                    <input id="modalFname" value="<%=driver.getFirstName()%>" name="firstName" class="form-control input-md" type="text">
+                                                    <input id="modalFname" value="<%=driver.getFirstName()%>"
+                                                           name="firstName" class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
@@ -157,15 +162,20 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="lastName">Last Name</label>
                                                 <div class="col-md-4">
-                                                    <input id="modalLname" name="lastName" value="<%=driver.getLastName()%>" class="form-control input-md" type="text">
+                                                    <input id="modalLname" name="lastName"
+                                                           value="<%=driver.getLastName()%>"
+                                                           class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="hours">This month hours</label>
+                                                <label class="col-md-4 control-label" for="hours">This month
+                                                    hours</label>
                                                 <div class="col-md-4">
-                                                    <input id="hours" value="<%=driver.getThisMonthHours()%>" name="hours" placeholder="placeholder" class="form-control input-md" type="text">
+                                                    <input id="hours" value="<%=driver.getThisMonthHours()%>"
+                                                           name="hours" placeholder="placeholder"
+                                                           class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
@@ -173,16 +183,18 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="city">Current city ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="city" value="<%=driver.getCurrentCity()%>" name="city" class="form-control input-md" type="text">
+                                                    <input id="city" value="<%=driver.getCurrentCity().getCityId()%>" name="city"
+                                                           class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
                                             <!-- Select Basic -->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="driverStatus">Driver status</label>
+                                                <label class="col-md-4 control-label" for="driverStatus">Driver
+                                                    status</label>
                                                 <div class="col-md-4">
-                                                    <select id="driverStatus" name="driverStatus" class="form-control" required>
-                                                        <option value="">Choose status</option>
+                                                    <select id="driverStatus" name="driverStatus" class="form-control">
+                                                        <option disabled selected>Choose status</option>
                                                         <option value="1">Rest</option>
                                                         <option value="2">Drive</option>
                                                         <option value="3">Relay</option>
@@ -192,9 +204,11 @@
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="wagon">Current wagon ID</label>
+                                                <label class="col-md-4 control-label" for="wagon">Current wagon
+                                                    ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="wagon" value="<%=driver.getCurrentWagon()%>" name="wagon" class="form-control input-md" type="text">
+                                                    <input id="wagon" value="<%=driver.getCurrentWagon()%>" name="wagon"
+                                                           class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
@@ -202,7 +216,9 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="orderId">Order ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="orderId" name="orderId" value="<%=driver.getCurrentOrder()%>" class="form-control input-md" type="text">
+                                                    <input id="orderId" name="orderId"
+                                                           value="<%=driver.getCurrentOrder()%>"
+                                                           class="form-control input-md" type="text">
 
                                                 </div>
                                             </div>
@@ -211,7 +227,9 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="submit">Save changes</label>
                                                 <div class="col-md-4">
-                                                    <button id="submit-modal" type="submit" class="btn btn-primary">Save</button>
+                                                    <button id="submit-modal" type="submit" class="btn btn-primary">
+                                                        Save
+                                                    </button>
                                                 </div>
                                             </div>
 
@@ -219,7 +237,8 @@
                                     </form>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
                                     </div>
                                 </div>
 
@@ -230,8 +249,7 @@
                         <form action="/Driver" method="post">
                             <div class="form-group">
                                 <button type="submit" id="delete" name="delete" value="<%=id%>"
-                                        class="btn btn-danger">Delete
-                                </button>
+                                        class="btn btn-danger">Delete</button>
                             </div>
                         </form>
                     </td>

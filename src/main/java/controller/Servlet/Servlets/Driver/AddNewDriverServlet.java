@@ -19,7 +19,7 @@ public class AddNewDriverServlet extends HttpServlet {
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
         if (services.Driver.AddNewDriver.addNewDriver(firstName, lastName, sessionFactory)) {
-            req.setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
+            req.getSession().setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
                     "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
                     "  <strong>Success!</strong> New driver added.\n" +
                     "</div>");

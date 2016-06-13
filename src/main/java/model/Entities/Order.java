@@ -1,11 +1,12 @@
 package model.Entities;
 
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -26,10 +27,12 @@ public class Order {
     private Wagon orderWagon;
 
     @OneToMany(mappedBy = "waypointOrder", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private List<Waypoint> waypointList;
+    @Fetch(FetchMode.SELECT)
+    private List<Waypoint> waypointList = new ArrayList<Waypoint>();
 
     @OneToMany(mappedBy = "currentOrder", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private Set<Driver> driverSet;
+    @Fetch (FetchMode.SELECT)
+    private Set<Driver> driverSet = new HashSet<Driver>();
 
     public Order() {
     }

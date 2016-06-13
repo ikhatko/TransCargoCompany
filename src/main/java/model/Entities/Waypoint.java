@@ -31,6 +31,11 @@ public class Waypoint {
     public Waypoint() {
     }
 
+    @Override
+    public String toString() {
+        return "" + waypointId;
+    }
+
     public Waypoint(Cargo waypointCargo, WaypointType waypointType, City waypointCity) {
         this.waypointCargo = waypointCargo;
         this.waypointType = waypointType;

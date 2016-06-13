@@ -20,7 +20,7 @@ public class AddNewOrderServlet extends HttpServlet {
         String orderStatus = req.getParameter("orderStatus");
 
         if (AddNewOrder.addNewOrder(orderStatus, sessionFactory)) {
-            req.setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
+            req.getSession().setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
                     "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
                     "  <strong>Success!</strong> New order added.\n" +
                     "</div>");

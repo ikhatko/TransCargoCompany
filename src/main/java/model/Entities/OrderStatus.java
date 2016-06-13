@@ -18,6 +18,11 @@ public class OrderStatus {
     public OrderStatus() {
     }
 
+    @Override
+    public String toString() {
+        return orderStatusName;
+    }
+
     public int getOrderStatusId() {
         return orderStatusId;
     }

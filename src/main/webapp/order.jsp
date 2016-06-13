@@ -19,6 +19,7 @@
         <div class="col-sm-10">
             <form action="/AddNewOrder" method="post" class="form-horizontal">
                 ${errorMsg}
+                <%request.getSession().removeAttribute("errorMsg");%>
                 <fieldset>
 
                     <!-- Form Name -->
@@ -30,7 +31,7 @@
                         <label class="col-md-4 control-label" for="orderStatus">Order status</label>
                         <div class="col-md-4">
                             <select id="orderStatus" name="orderStatus" class="form-control" required>
-                                <option value="">Choose user role</option>
+                                <option value="">Choose order status</option>
                                 <option value="1">Not done</option>
                                 <option value="2">Done</option>
                             </select>
@@ -100,7 +101,9 @@
                         <%=order.getDriverSet()%>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">Edit</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">
+                            Edit
+                        </button>
 
                         <!-- Modal -->
                         <div class="modal fade" id="myModal<%=id%>" role="dialog">
@@ -115,16 +118,19 @@
                                     <form class="form-horizontal" method="post">
                                         <fieldset>
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="idmodal">User ID</label>
+                                                <label class="col-md-4 control-label" for="idmodal">Order ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="idmodal" value="<%=order.getOrderId()%>" name="id" class="form-control input-md" type="text" readonly="readonly">
+                                                    <input id="idmodal" value="<%=order.getOrderId()%>" name="id"
+                                                           class="form-control input-md" type="text"
+                                                           readonly="readonly">
                                                 </div>
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="orderStatusModal">User role</label>
+                                                <label class="col-md-4 control-label" for="orderStatusModal">Order status</label>
                                                 <div class="col-md-4">
-                                                    <select id="orderStatusModal" name="orderStatusId" class="form-control">
+                                                    <select id="orderStatusModal" name="orderStatusId"
+                                                            class="form-control">
                                                         <option selected disabled>Choose order status</option>
                                                         <option value="1">Not done</option>
                                                         <option value="2">Done</option>
@@ -134,25 +140,34 @@
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="orderWagonId">Order wagon ID</label>
+                                                <label class="col-md-4 control-label" for="orderWagonId">Order wagon
+                                                    ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="orderWagonId" name="orderWagonId" value="<%=order.getOrderWagon()%>" class="form-control input-md" type="text">
+                                                    <input id="orderWagonId" name="orderWagonId"
+                                                           value="<%=order.getOrderWagon()%>"
+                                                           class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="waypointList">Order waypoint list</label>
+                                                <label class="col-md-4 control-label" for="waypointList">Order waypoint
+                                                    list</label>
                                                 <div class="col-md-4">
-                                                    <input id="waypointList" value="<%=order.getWaypointList()%>" name="waypointList" class="form-control input-md" type="text" disabled>
+                                                    <input id="waypointList" value="<%=order.getWaypointList()%>"
+                                                           name="waypointList" class="form-control input-md" type="text"
+                                                           disabled>
                                                 </div>
                                             </div>
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="driverSet">Order driver set</label>
+                                                <label class="col-md-4 control-label" for="driverSet">Order driver
+                                                    set</label>
                                                 <div class="col-md-4">
-                                                    <input id="driverSet" value="<%=order.getDriverSet()%>" name="driverSet" class="form-control input-md" type="text" disabled>
+                                                    <input id="driverSet" value="<%=order.getDriverSet()%>"
+                                                           name="driverSet" class="form-control input-md" type="text"
+                                                           disabled>
                                                 </div>
                                             </div>
 
@@ -160,7 +175,9 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="submit">Save changes</label>
                                                 <div class="col-md-4">
-                                                    <button id="submit-modal" type="submit" class="btn btn-primary">Save</button>
+                                                    <button id="submit-modal" type="submit" class="btn btn-primary">
+                                                        Save
+                                                    </button>
                                                 </div>
                                             </div>
 
@@ -168,7 +185,8 @@
                                     </form>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
                                     </div>
                                 </div>
 

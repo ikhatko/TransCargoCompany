@@ -23,7 +23,7 @@ public class AddNewWagonServlet extends HttpServlet {
         String maxVolume = req.getParameter("maxVolume");
 
         if (AddNewWagon.addNewWagon(licensePlate, driversChange, maxWeight, maxVolume, sessionFactory)) {
-            req.setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
+            req.getSession().setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
                     "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
                     "  <strong>Success!</strong> New wagon added.\n" +
                     "</div>");

@@ -22,7 +22,7 @@ public class AddNewWaypointServlet extends HttpServlet {
         String city = req.getParameter("city");
 
         if (AddNewWaypoint.addNewWaypoint(cargoId, waypointType, city, sessionFactory)) {
-            req.setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
+            req.getSession().setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
                     "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
                     "  <strong>Success!</strong> New waypoint added.\n" +
                     "</div>");

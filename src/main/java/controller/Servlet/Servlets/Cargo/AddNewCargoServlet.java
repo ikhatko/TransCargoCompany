@@ -21,7 +21,7 @@ public class AddNewCargoServlet extends HttpServlet {
         float weight = Float.parseFloat(req.getParameter("weight"));
         float volume = Float.parseFloat(req.getParameter("volume"));
         if (AddNewCargo.addNewCargo(name, weight, volume,sessionFactory)) {
-            req.setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
+            req.getSession().setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
                     "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
                     "  <strong>Success!</strong> New cargo added.\n" +
                     "</div>");
