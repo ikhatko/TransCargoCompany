@@ -1,5 +1,8 @@
 package model.DAO.Interfaces;
 
-public interface UserDAO {
+import model.Entities.User;
+import org.hibernate.Session;
 
+public interface UserDAO {
+    User checkUser(String email, String password, Session session);
 }

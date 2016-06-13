@@ -94,10 +94,11 @@
                 <%
                     List<Cargo> resultList = (List) request.getAttribute("resultList");
                     for (Cargo cargo : resultList) {
+                        int id = cargo.getCargoId();
                 %>
                 <tr>
                     <td>
-                        <%=cargo.getCargoId()%>
+                        <%=id%>
                     </td>
                     <td>
                         <%=cargo.getName()%>
@@ -112,10 +113,10 @@
                         <%=cargo.getCargoStatus()%>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Edit</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">Edit</button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal fade" id="myModal<%=id%>" role="dialog">
                             <div class="modal-dialog">
                                 <!-- Modal content-->
                                 <div class="modal-content">
@@ -191,7 +192,7 @@
                     <td>
                         <form action="/Cargo" method="post">
                             <div class="form-group">
-                                <button type="submit" id="delete" name="delete" value="<%=cargo.getCargoId()%>"
+                                <button type="submit" id="delete" name="delete" value="<%=id%>"
                                         class="btn btn-danger">Delete
                                 </button>
                             </div>

@@ -12,8 +12,8 @@ public class UpdateWagon {
 
     private static Logger logger = Logger.getLogger(UpdateWagon.class);
 
-    public static void updateWagon(int id, String licensePlate, int driversChange, float maxWeight,
-                                   float maxVolume, String currentCityId, String wagonStatusId, SessionFactory sessionFactory) {
+    public static void updateWagon(int id, String licensePlate, String driversChange, String maxWeight,
+                                   String maxVolume, String currentCityId, String wagonStatusId, SessionFactory sessionFactory) {
         logger.info("Trying to update Wagon with id:" + id);
         Session session = null;
 
@@ -23,9 +23,15 @@ public class UpdateWagon {
             Wagon wagon = (Wagon) wagonDAO.read(id);
 
             wagon.setLicensePlate(licensePlate);
-            wagon.setDriversChange(driversChange);
-            wagon.setMaxWeight(maxWeight);
-            wagon.setMaxVolume(maxVolume);
+            if (maxWeight != null && !maxWeight.equals("")) {
+                wagon.setMaxWeight(Float.parseFloat(maxWeight));
+            }
+            if (maxVolume != null && !maxVolume.equals("")) {
+                wagon.setMaxWeight(Float.parseFloat(maxVolume));
+            }
+            if (driversChange != null) {
+                wagon.setDriversChange(Integer.parseInt(driversChange));
+            }
 
             if (currentCityId != null && !currentCityId.equals("null") && !currentCityId.equals("")) {
                 City city = new City();
@@ -35,12 +41,10 @@ public class UpdateWagon {
                 wagon.setCurrentCity(null);
             }
 
-            if (wagonStatusId != null && !wagonStatusId.equals("null") && !wagonStatusId.equals("")) {
+            if (wagonStatusId != null) {
                 WagonStatus wagonStatus = new WagonStatus();
                 wagonStatus.setWagonStatusId(Integer.parseInt(wagonStatusId));
                 wagon.setWagonStatus(wagonStatus);
-            } else {
-                wagon.setWagonStatus(null);
             }
 
             Transaction transaction = session.beginTransaction();

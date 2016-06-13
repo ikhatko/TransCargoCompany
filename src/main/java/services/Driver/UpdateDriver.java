@@ -24,9 +24,12 @@ public class UpdateDriver {
 
             driver.setFirstName(firstName);
             driver.setLastName(lastName);
-            DriverStatus driverStatus = new DriverStatus();
-            driverStatus.setDriverStatusId(Integer.parseInt(driverStatusId));
-            driver.setDriverStatus(driverStatus);
+
+            if (driverStatusId != null) {
+                DriverStatus driverStatus = new DriverStatus();
+                driverStatus.setDriverStatusId(Integer.parseInt(driverStatusId));
+                driver.setDriverStatus(driverStatus);
+            }
 
             if (hours != null && !hours.equals("null") && !hours.equals("")) {
                 driver.setThisMonthHours(Double.parseDouble(hours));

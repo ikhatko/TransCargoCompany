@@ -20,7 +20,7 @@ public class Waypoint {
     private Cargo waypointCargo;
 
     @ManyToOne
-    @JoinColumn(name = "orderId", nullable = false)
+    @JoinColumn(name = "orderId")
     @Cascade(CascadeType.PERSIST)
     private Order waypointOrder;
 

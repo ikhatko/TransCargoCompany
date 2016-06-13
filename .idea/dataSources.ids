@@ -358,7 +358,6 @@
         <data-type>int(11)</data-type>
       </column>
       <column id="94" parent="13" name="order_id">
-        <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
       </column>
       <column id="95" parent="13" name="waypoint_type">

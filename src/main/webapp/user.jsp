@@ -1,5 +1,5 @@
+<%@ page import="model.Entities.User" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.Entities.Driver" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,12 +17,12 @@
         <%@include file="menu.html" %>
         <br>
         <div class="col-sm-10">
-            <form action="/AddNewDriver" method="post" class="form-horizontal">
+            <form action="/AddNewUser" method="post" class="form-horizontal">
                 ${errorMsg}
                 <fieldset>
 
                     <!-- Form Name -->
-                    <legend>Add new driver</legend>
+                    <legend>Add new user</legend>
                     <!-- Text input-->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="firstName">First Name</label>
@@ -40,6 +40,39 @@
                             <input id="lastName" name="lastName" placeholder="Last Name" class="form-control input-md"
                                    required="" type="text">
 
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="email">Email</label>
+                        <div class="col-md-4">
+                            <input id="email" name="email" placeholder="Email address" class="form-control input-md"
+                                   required="" type="text">
+
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="email">Password</label>
+                        <div class="col-md-4">
+                            <input id="password" name="password" placeholder="Password" class="form-control input-md"
+                                   required="" type="text">
+                        </div>
+                    </div>
+
+                    <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="userRole">User role</label>
+                        <div class="col-md-4">
+                            <select id="userRole" name="userRole" class="form-control">
+                                <option selected disabled>Choose user role</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Staff</option>
+                                <option value="3">Driver</option>
+                                <option value="4">Public</option>
+                            </select>
                         </div>
                     </div>
 
@@ -70,19 +103,10 @@
                         Last Name
                     </th>
                     <th>
-                        This Month Hours
+                        Email
                     </th>
                     <th>
-                        Current City
-                    </th>
-                    <th>
-                        Current Wagon
-                    </th>
-                    <th>
-                        Driver Status
-                    </th>
-                    <th>
-                        Order id
+                        Password
                     </th>
                     <th>
                         Edit
@@ -94,35 +118,28 @@
                 </thead>
                 <tbody>
                 <%
-                    List<Driver> resultList = (List) request.getAttribute("resultList");
-                    for (Driver driver : resultList) {
-                        request.getSession().setAttribute("driver", driver);
-                        int id = driver.getDriverId();
+                    List<User> resultList = (List) request.getAttribute("resultList");
+                    for (User user : resultList) {
+                        int id = user.getUserId();
                 %>
                 <tr>
                     <td>
                         <%=id%>
                     </td>
                     <td>
-                        <%=driver.getFirstName()%>
+                        <%=user.getFirstName()%>
                     </td>
                     <td>
-                        <%=driver.getLastName()%>
+                        <%=user.getLastName()%>
                     </td>
                     <td>
-                        <%=driver.getThisMonthHours()%>
+                        <%=user.getEmail()%>
                     </td>
                     <td>
-                        <%=driver.getCurrentCity()%>
+                        <%=user.getPassword()%>
                     </td>
                     <td>
-                        <%=driver.getCurrentWagon()%>
-                    </td>
-                    <td>
-                        <%=driver.getDriverStatus()%>
-                    </td>
-                    <td>
-                        <%=driver.getCurrentOrder()%>
+                        <%=user.getUserRole()%>
                     </td>
                     <td>
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">Edit</button>
@@ -134,22 +151,23 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Edit driver</h4>
+                                        <h4 class="modal-title">Edit user</h4>
                                     </div>
                                     <br>
                                     <form class="form-horizontal" method="post">
                                         <fieldset>
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="firstName">Driver ID</label>
+                                                <label class="col-md-4 control-label" for="idmodal">User ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="idmodal" value="<%=id%>" name="id" class="form-control input-md" type="text" readonly="readonly">
+                                                    <input id="idmodal" value="<%=user.getUserId()%>" name="id" class="form-control input-md" type="text" readonly="readonly">
                                                 </div>
                                             </div>
+
                                             <!-- Text input-->
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="firstName">First Name</label>
                                                 <div class="col-md-4">
-                                                    <input id="modalFname" value="<%=driver.getFirstName()%>" name="firstName" class="form-control input-md" type="text">
+                                                    <input id="modalFname" value="<%=user.getFirstName()%>" name="firstName" class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
@@ -157,53 +175,36 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="lastName">Last Name</label>
                                                 <div class="col-md-4">
-                                                    <input id="modalLname" name="lastName" value="<%=driver.getLastName()%>" class="form-control input-md" type="text">
+                                                    <input id="modalLname" name="lastName" value="<%=user.getLastName()%>" class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="hours">This month hours</label>
+                                                <label class="col-md-4 control-label" for="emailModal">User email</label>
                                                 <div class="col-md-4">
-                                                    <input id="hours" value="<%=driver.getThisMonthHours()%>" name="hours" placeholder="placeholder" class="form-control input-md" type="text">
+                                                    <input id="emailModal" value="<%=user.getEmail()%>" name="email" class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="city">Current city ID</label>
+                                                <label class="col-md-4 control-label" for="passwordModal">User password</label>
                                                 <div class="col-md-4">
-                                                    <input id="city" value="<%=driver.getCurrentCity()%>" name="city" class="form-control input-md" type="text">
+                                                    <input id="passwordModal" value="<%=user.getPassword()%>" name="password" class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
-                                            <!-- Select Basic -->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="driverStatus">Driver status</label>
+                                                <label class="col-md-4 control-label" for="userRoleModal">User role</label>
                                                 <div class="col-md-4">
-                                                    <select id="driverStatus" name="driverStatus" class="form-control">
-                                                        <option selected disabled>Choose status</option>
-                                                        <option value="1">Rest</option>
-                                                        <option value="2">Drive</option>
-                                                        <option value="3">Relay</option>
+                                                    <select id="userRoleModal" name="userRole" class="form-control">
+                                                        <option selected disabled>Choose user role</option>
+                                                        <option value="1">Admin</option>
+                                                        <option value="2">Staff</option>
+                                                        <option value="3">Driver</option>
+                                                        <option value="4">Public</option>
                                                     </select>
-                                                </div>
-                                            </div>
-
-                                            <!-- Text input-->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="wagon">Current wagon ID</label>
-                                                <div class="col-md-4">
-                                                    <input id="wagon" value="<%=driver.getCurrentWagon()%>" name="wagon" class="form-control input-md" type="text">
-                                                </div>
-                                            </div>
-
-                                            <!-- Text input-->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="orderId">Order ID</label>
-                                                <div class="col-md-4">
-                                                    <input id="orderId" name="orderId" value="<%=driver.getCurrentOrder()%>" class="form-control input-md" type="text">
-
                                                 </div>
                                             </div>
 
@@ -227,7 +228,7 @@
                         </div>
                     </td>
                     <td>
-                        <form action="/Driver" method="post">
+                        <form action="/User" method="post">
                             <div class="form-group">
                                 <button type="submit" id="delete" name="delete" value="<%=id%>"
                                         class="btn btn-danger">Delete

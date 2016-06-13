@@ -1,5 +1,6 @@
 package services.User;
 
+import model.DAO.Impl.UserDAOImpl;
 import model.Entities.User;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
@@ -15,10 +16,7 @@ public class CheckLogin {
         try {
             session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
-            Query query = session.createQuery("from User where email=:email AND password=:password");
-            query.setParameter("email", email);
-            query.setParameter("password", password);
-            user = (User) query.uniqueResult();
+            user = new UserDAOImpl(session).checkUser(email, password, session);
             transaction.commit();
         } catch (HibernateException e) {
             e.printStackTrace();

@@ -28,17 +28,6 @@ public class User {
     public User() {
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", userRole=" + userRole +
-                '}';
-    }
 
     public User(String firstName, String lastName, String email, String password) {
         this.password = password;
@@ -47,6 +36,15 @@ public class User {
         this.firstName = firstName;
         userRole = new UserRole();
         userRole.setUserRoleId(4);
+    }
+
+    public User(String firstName, String lastName, String email, String password, int userRoleId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        userRole = new UserRole();
+        userRole.setUserRoleId(userRoleId);
     }
 
     public int getUserId() {
@@ -81,4 +79,19 @@ public class User {
         this.userRole = userRole;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }

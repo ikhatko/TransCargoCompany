@@ -1,10 +1,10 @@
-package controller.Servlet.Servlets.Wagon;
+package controller.Servlet.Servlets.User;
 
-import model.Entities.Wagon;
+import model.Entities.User;
 import org.hibernate.SessionFactory;
-import services.Wagon.GetAllWagons;
-import services.Wagon.RemoveWagon;
-import services.Wagon.UpdateWagon;
+import services.User.GetAllUsers;
+import services.User.RemoveUser;
+import services.User.UpdateUser;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,14 +14,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/Wagon")
-public class WagonServlet extends HttpServlet {
+@WebServlet("/User")
+public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
-        List<Wagon> allWagons = GetAllWagons.getAllWagons(sessionFactory);
-        req.setAttribute("resultList", allWagons);
-        req.getRequestDispatcher("wagon.jsp").include(req, resp);
+        List<User> allUsers = GetAllUsers.getAllUsers(sessionFactory);
+        req.setAttribute("resultList", allUsers);
+        req.getRequestDispatcher("user.jsp").include(req, resp);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class WagonServlet extends HttpServlet {
         if (delete != null) {
             try {
                 int id = Integer.parseInt(delete);
-                RemoveWagon.removeWagon(id, sessionFactory);
+                RemoveUser.removeUser(id, sessionFactory);
                 doGet(req, resp);
             } catch (NumberFormatException e) {
                 req.setAttribute("errorMsg", "<div class=\"alert alert-warning\">\n" +
@@ -40,15 +40,13 @@ public class WagonServlet extends HttpServlet {
                         "</div>");
             }
         } else {
-            String id = req.getParameter("id");
-            String licensePlate = req.getParameter("licensePlate");
-            String driversChange = req.getParameter("driversChange");
-            String maxWeight = req.getParameter("maxWeight");
-            String maxVolume = req.getParameter("maxVolume");
-            String currentCity = req.getParameter("currentCity");
-            String wagonStatus = req.getParameter("wagonStatus");
-
-            UpdateWagon.updateWagon(Integer.parseInt(id), licensePlate, driversChange, maxWeight, maxVolume, currentCity, wagonStatus, sessionFactory);
+            Integer id = Integer.valueOf(req.getParameter("id"));
+            String firstName = req.getParameter("firstName");
+            String lastName = req.getParameter("lastName");
+            String email = req.getParameter("email");
+            String password = req.getParameter("password");
+            String userRoleId = req.getParameter("userRole");
+            UpdateUser.updateUser(id, firstName, lastName, email, password, userRoleId, sessionFactory);
             doGet(req, resp);
         }
     }

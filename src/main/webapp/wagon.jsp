@@ -112,10 +112,11 @@
                 <%
                     List<Wagon> resultList = (List) request.getAttribute("resultList");
                     for (Wagon wagon : resultList) {
+                        int id = wagon.getWagonId();
                 %>
                 <tr>
                     <td>
-                        <%=wagon.getWagonId()%>
+                        <%=id%>
                     </td>
                     <td>
                         <%=wagon.getLicensePlate()%>
@@ -136,10 +137,10 @@
                         <%=wagon.getWagonStatus()%>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Edit</button>
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">Edit</button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal fade" id="myModal<%=id%>" role="dialog">
                             <div class="modal-dialog">
                                 <!-- Modal content-->
                                 <div class="modal-content">
@@ -151,7 +152,7 @@
                                     <form class="form-horizontal" method="post">
                                         <fieldset>
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="idmodal">Driver ID</label>
+                                                <label class="col-md-4 control-label" for="idmodal">Wagon ID</label>
                                                 <div class="col-md-4">
                                                     <input id="idmodal" value="<%=wagon.getWagonId()%>" name="id" class="form-control input-md" type="text" readonly="readonly">
                                                 </div>
@@ -170,8 +171,8 @@
                                                 <label class="col-md-4 control-label" for="driversChangeModal">Drivers change</label>
                                                 <div class="col-md-4">
                                                     <select id="driversChangeModal" name="driversChange" class="form-control">
-                                                        <option disabled>Choose drivers change</option>
-                                                        <option selected value="1">Single</option>
+                                                        <option selected disabled>Choose drivers change</option>
+                                                        <option value="1">Single</option>
                                                         <option value="2">Double</option>
                                                     </select>
                                                 </div>
@@ -206,8 +207,8 @@
                                                 <label class="col-md-4 control-label" for="wagonStatusModal">Wagon status</label>
                                                 <div class="col-md-4">
                                                     <select id="wagonStatusModal" name="wagonStatus" class="form-control">
-                                                        <option disabled>Choose status</option>
-                                                        <option selected value="1">Ready</option>
+                                                        <option selected disabled>Choose status</option>
+                                                        <option value="1">Ready</option>
                                                         <option value="2">Broken</option>
                                                     </select>
                                                 </div>
@@ -235,7 +236,7 @@
                     <td>
                         <form action="/Wagon" method="post">
                             <div class="form-group">
-                                <button type="submit" id="delete" name="delete" value="<%=wagon.getWagonId()%>"
+                                <button type="submit" id="delete" name="delete" value="<%=id%>"
                                         class="btn btn-danger">Delete
                                 </button>
                             </div>

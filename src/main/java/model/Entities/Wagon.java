@@ -35,7 +35,7 @@ public class Wagon {
     public Wagon() {
     }
 
-    public Wagon(String licensePlate, int driversChange, float maxWeight, float maxVolume) {
+    public Wagon(String licensePlate,float maxWeight, float maxVolume, int driversChange) {
         this.licensePlate = licensePlate;
         this.driversChange = driversChange;
         this.maxWeight = maxWeight;
