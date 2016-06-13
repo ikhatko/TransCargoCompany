@@ -1,10 +1,10 @@
 package controller.Servlet.Servlets.Order;
 
-import model.Entities.User;
+import model.Entities.Order;
 import org.hibernate.SessionFactory;
-import services.User.GetAllUsers;
-import services.User.RemoveUser;
-import services.User.UpdateUser;
+import services.Order.GetAllOrders;
+import services.Order.RemoveOrder;
+import services.Order.UpdateOrder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,9 +19,9 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
-        List<User> allUsers = GetAllUsers.getAllUsers(sessionFactory);
-        req.setAttribute("resultList", allUsers);
-        req.getRequestDispatcher("user.jsp").include(req, resp);
+        List<Order> allOrders = GetAllOrders.getAllOrders(sessionFactory);
+        req.setAttribute("resultList", allOrders);
+        req.getRequestDispatcher("order.jsp").include(req, resp);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class OrderServlet extends HttpServlet {
         if (delete != null) {
             try {
                 int id = Integer.parseInt(delete);
-                RemoveUser.removeUser(id, sessionFactory);
+                RemoveOrder.removeOrder(id, sessionFactory);
                 doGet(req, resp);
             } catch (NumberFormatException e) {
                 req.setAttribute("errorMsg", "<div class=\"alert alert-warning\">\n" +
@@ -41,12 +41,9 @@ public class OrderServlet extends HttpServlet {
             }
         } else {
             Integer id = Integer.valueOf(req.getParameter("id"));
-            String firstName = req.getParameter("firstName");
-            String lastName = req.getParameter("lastName");
-            String email = req.getParameter("email");
-            String password = req.getParameter("password");
-            String userRoleId = req.getParameter("userRole");
-            UpdateUser.updateUser(id, firstName, lastName, email, password, userRoleId, sessionFactory);
+            String orderStatusId = req.getParameter("orderStatusId");
+            String orderWagonId = req.getParameter("orderWagonId");
+            UpdateOrder.updateOrder(id,orderStatusId,orderWagonId,sessionFactory);
             doGet(req, resp);
         }
     }
