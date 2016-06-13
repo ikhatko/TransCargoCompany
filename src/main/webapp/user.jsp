@@ -110,6 +110,9 @@
                         Password
                     </th>
                     <th>
+                        Role
+                    </th>
+                    <th>
                         Edit
                     </th>
                     <th>

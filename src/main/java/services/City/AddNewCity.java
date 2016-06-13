@@ -11,7 +11,8 @@ public class AddNewCity {
 
     private static Logger logger = Logger.getLogger(AddNewCity.class);
 
-    public static boolean addNewCity(String cityName, String distance, SessionFactory sessionFactory) {
+    public static boolean addNewCity(String cityName, String distance,
+                                     SessionFactory sessionFactory) {
         boolean result = false;
         Session session = null;
         City city = null;

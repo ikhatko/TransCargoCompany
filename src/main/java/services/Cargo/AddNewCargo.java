@@ -11,7 +11,8 @@ public class AddNewCargo {
 
     private static Logger logger = Logger.getLogger(AddNewCargo.class);
 
-    public static boolean addNewCargo(String name, float weight, float volume ,SessionFactory sessionFactory) {
+    public static boolean addNewCargo(String name, float weight, float volume,
+                                      SessionFactory sessionFactory) {
         boolean result = false;
         Session session = null;
         Cargo cargo = null;
