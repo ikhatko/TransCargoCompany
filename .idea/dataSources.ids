@@ -407,17 +407,17 @@
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="105" parent="14" name="cargo_status_id">
+      <column id="105" parent="14" name="waypoint_type_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
       <column id="106" parent="14" name="waypoint_type">
         <mandatory>1</mandatory>
-        <data-type>varchar(255)</data-type>
+        <data-type>varchar(33)</data-type>
       </column>
       <key id="107" parent="14" name="PRIMARY">
-        <columns>cargo_status_id</columns>
+        <columns>waypoint_type_id</columns>
         <primary>1</primary>
       </key>
     </database-model>

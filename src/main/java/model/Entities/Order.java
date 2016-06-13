@@ -21,12 +21,12 @@ public class Order {
     @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     private OrderStatus orderStatus;
 
-    @OneToMany(mappedBy = "waypointOrder", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    private List<Waypoint> waypointList;
-
     @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     private Wagon orderWagon;
+
+    @OneToMany(mappedBy = "waypointOrder", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private List<Waypoint> waypointList;
 
     @OneToMany(mappedBy = "currentOrder", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Driver> driverSet;

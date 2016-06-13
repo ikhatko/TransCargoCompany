@@ -181,8 +181,8 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="driverStatus">Driver status</label>
                                                 <div class="col-md-4">
-                                                    <select id="driverStatus" name="driverStatus" class="form-control">
-                                                        <option selected disabled>Choose status</option>
+                                                    <select id="driverStatus" name="driverStatus" class="form-control" required>
+                                                        <option value="">Choose status</option>
                                                         <option value="1">Rest</option>
                                                         <option value="2">Drive</option>
                                                         <option value="3">Relay</option>

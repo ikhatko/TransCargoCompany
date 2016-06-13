@@ -31,6 +31,12 @@ public class Waypoint {
     public Waypoint() {
     }
 
+    public Waypoint(Cargo waypointCargo, WaypointType waypointType, City waypointCity) {
+        this.waypointCargo = waypointCargo;
+        this.waypointType = waypointType;
+        this.waypointCity = waypointCity;
+    }
+
     public int getWaypointId() {
         return waypointId;
     }

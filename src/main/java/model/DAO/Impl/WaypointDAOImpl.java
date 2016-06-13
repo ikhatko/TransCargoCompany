@@ -1,11 +1,12 @@
 package model.DAO.Impl;
 
-import model.DAO.Interfaces.WagonDAO;
+import model.DAO.Interfaces.WaypointDAO;
+import model.Entities.Waypoint;
 import org.hibernate.Session;
 
-public class WaypointDAOImpl extends GenericDAOImpl  implements WagonDAO {
+public class WaypointDAOImpl extends GenericDAOImpl  implements WaypointDAO {
 
-    public WaypointDAOImpl(Class entityType, Session session) {
-        super(entityType, session);
+    public WaypointDAOImpl(Session session) {
+        super(Waypoint.class, session);
     }
 }

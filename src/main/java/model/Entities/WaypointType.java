@@ -10,7 +10,7 @@ public class WaypointType {
 
     @Id
     @GeneratedValue
-    private int cargoStatusId;
+    private int waypointTypeId;
 
     @Column(nullable = false)
     private String waypointType;
@@ -18,12 +18,17 @@ public class WaypointType {
     public WaypointType() {
     }
 
-    public int getCargoStatusId() {
-        return cargoStatusId;
+    @Override
+    public String toString() {
+        return waypointType;
     }
 
-    public void setCargoStatusId(int cargoStatusId) {
-        this.cargoStatusId = cargoStatusId;
+    public int getWaypointTypeId() {
+        return waypointTypeId;
+    }
+
+    public void setWaypointTypeId(int cargoStatusId) {
+        this.waypointTypeId = cargoStatusId;
     }
 
     public String getWaypointStatusName() {
