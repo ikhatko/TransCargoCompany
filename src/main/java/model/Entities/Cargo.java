@@ -1,5 +1,8 @@
 package model.Entities;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,9 +21,25 @@ public class Cargo {
     private float volume;
 
     @ManyToOne
+    @Cascade(CascadeType.PERSIST)
     private CargoStatus cargoStatus;
 
     public Cargo() {
+    }
+
+    public Cargo(String name, float weight, float volume) {
+        this.name = name;
+        this.weight = weight;
+        this.volume = volume;
+        cargoStatus = new CargoStatus();
+        cargoStatus.setCargoStatusId(1);
+    }
+
+    public Cargo(String name, float weight, float volume, CargoStatus cargoStatus) {
+        this.name = name;
+        this.weight = weight;
+        this.volume = volume;
+        this.cargoStatus = cargoStatus;
     }
 
     public int getCargoId() {

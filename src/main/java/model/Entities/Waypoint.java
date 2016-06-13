@@ -1,5 +1,8 @@
 package model.Entities;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,16 +12,20 @@ public class Waypoint {
     private int waypointId;
 
     @ManyToOne
+    @Cascade(CascadeType.PERSIST)
     private City waypointCity;
 
     @ManyToOne
+    @Cascade(CascadeType.PERSIST)
     private Cargo waypointCargo;
 
     @ManyToOne
     @JoinColumn(name = "orderId", nullable = false)
+    @Cascade(CascadeType.PERSIST)
     private Order waypointOrder;
 
     @ManyToOne
+    @Cascade(CascadeType.PERSIST)
     private WaypointType waypointType;
 
     public Waypoint() {

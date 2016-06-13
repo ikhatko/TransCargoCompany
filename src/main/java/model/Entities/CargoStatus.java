@@ -15,6 +15,11 @@ public class CargoStatus {
     public CargoStatus() {
     }
 
+    @Override
+    public String toString() {
+        return "" + cargoStatusName;
+    }
+
     public int getCargoStatusId() {
         return cargoStatusId;
     }

@@ -1,6 +1,11 @@
 package model.Entities;
 
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
 import java.util.Set;
 
@@ -13,15 +18,17 @@ public class Order {
     private int orderId;
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     private OrderStatus orderStatus;
 
-    @OneToMany(mappedBy = "waypointOrder", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "waypointOrder", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Waypoint> waypointList;
 
     @ManyToOne
+    @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     private Wagon orderWagon;
 
-    @OneToMany(mappedBy = "currentOrder", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "currentOrder", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Set<Driver> driverSet;
 
     public Order() {

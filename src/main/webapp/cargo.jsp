@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>
-<%@ page import="model.Entities.Wagon" %>
+<%@ page import="model.Entities.Cargo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,47 +17,35 @@
         <%@include file="menu.html" %>
         <br>
         <div class="col-sm-10">
-            <form action="/AddNewWagon" method="post" class="form-horizontal">
+            <form action="/AddNewCargo" method="post" class="form-horizontal">
                 ${errorMsg}
                 <fieldset>
 
                     <!-- Form Name -->
-                    <legend>Add new wagon</legend>
+                    <legend>Add new cargo</legend>
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="licensePlate">License Plate</label>
+                        <label class="col-md-4 control-label" for="cargoName">Cargo name</label>
                         <div class="col-md-4">
-                            <input id="licensePlate" name="licensePlate" placeholder="License Plate"
+                            <input id="cargoName" name="name" placeholder="Cargo name"
                                    class="form-control input-md" required="" type="text">
                         </div>
                     </div>
 
-                    <!-- Select Basic -->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="driversChange">Drivers change</label>
-                        <div class="col-md-4">
-                            <select id="driversChange" name="driversChange" class="form-control">
-                                <option selected disabled>Choose drivers change</option>
-                                <option value="1">Single</option>
-                                <option value="2">Double</option>
-                            </select>
-                        </div>
-                    </div>
-
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="maxWeight">Max Weight</label>
+                        <label class="col-md-4 control-label" for="cargoWeight">Cargo weight</label>
                         <div class="col-md-4">
-                            <input id="maxWeight" name="maxWeight" placeholder="Max Weight" class="form-control input-md"
+                            <input id="cargoWeight" name="weight" placeholder="Cargo weight" class="form-control input-md"
                                    required="" type="text">
                         </div>
                     </div>
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="maxVolume">Max Volume</label>
+                        <label class="col-md-4 control-label" for="cargoVolume">Cargo volume</label>
                         <div class="col-md-4">
-                            <input id="maxVolume" name="maxVolume" placeholder="Max Volume" class="form-control input-md"
+                            <input id="cargoVolume" name="volume" placeholder="Cargo volume" class="form-control input-md"
                                    required="" type="text">
                         </div>
                     </div>
@@ -83,22 +71,16 @@
                         Id
                     </th>
                     <th>
-                        License Plate
+                        Name
                     </th>
                     <th>
-                        Drivers Change
+                        Cargo Weight
                     </th>
                     <th>
-                        Max Weight
+                        Cargo Volume
                     </th>
                     <th>
-                        Max Volume
-                    </th>
-                    <th>
-                        Current City
-                    </th>
-                    <th>
-                        Wagon Status
+                        Cargo Status
                     </th>
                     <th>
                         Edit
@@ -110,30 +92,24 @@
                 </thead>
                 <tbody>
                 <%
-                    List<Wagon> resultList = (List) request.getAttribute("resultList");
-                    for (Wagon wagon : resultList) {
+                    List<Cargo> resultList = (List) request.getAttribute("resultList");
+                    for (Cargo cargo : resultList) {
                 %>
                 <tr>
                     <td>
-                        <%=wagon.getWagonId()%>
+                        <%=cargo.getCargoId()%>
                     </td>
                     <td>
-                        <%=wagon.getLicensePlate()%>
+                        <%=cargo.getName()%>
                     </td>
                     <td>
-                        <%=wagon.getDriversChange()%>
+                        <%=cargo.getWeight()%>
                     </td>
                     <td>
-                        <%=wagon.getMaxWeight()%>
+                        <%=cargo.getVolume()%>
                     </td>
                     <td>
-                        <%=wagon.getMaxVolume()%>
-                    </td>
-                    <td>
-                        <%=wagon.getCurrentCity()%>
-                    </td>
-                    <td>
-                        <%=wagon.getWagonStatus()%>
+                        <%=cargo.getCargoStatus()%>
                     </td>
                     <td>
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Edit</button>
@@ -145,70 +121,50 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Edit wagon</h4>
+                                        <h4 class="modal-title">Edit cargo</h4>
                                     </div>
                                     <br>
                                     <form class="form-horizontal" method="post">
                                         <fieldset>
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="idmodal">Driver ID</label>
+                                                <label class="col-md-4 control-label" for="idmodal">Cargo ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="idmodal" value="<%=wagon.getWagonId()%>" name="id" class="form-control input-md" type="text" readonly="readonly">
+                                                    <input id="idmodal" value="<%=cargo.getCargoId()%>" name="id" class="form-control input-md" type="text" readonly="readonly">
                                                 </div>
                                             </div>
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="licensePlateModal">License Plate</label>
+                                                <label class="col-md-4 control-label" for="nameModal">Cargo name</label>
                                                 <div class="col-md-4">
-                                                    <input id="licensePlateModal" value="<%=wagon.getLicensePlate()%>" name="licensePlate" class="form-control input-md" type="text">
-                                                </div>
-                                            </div>
-
-                                            <!-- Text input-->
-                                            <!-- Select Basic -->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="driversChangeModal">Drivers change</label>
-                                                <div class="col-md-4">
-                                                    <select id="driversChangeModal" name="driversChange" class="form-control">
-                                                        <option disabled>Choose drivers change</option>
-                                                        <option selected value="1">Single</option>
-                                                        <option value="2">Double</option>
-                                                    </select>
+                                                    <input id="nameModal" value="<%=cargo.getName()%>" name="name" class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="maxWeightModal">Max weight</label>
+                                                <label class="col-md-4 control-label" for="weightModal">Cargo weight</label>
                                                 <div class="col-md-4">
-                                                    <input id="maxWeightModal" value="<%=wagon.getMaxWeight()%>" name="maxWeight" class="form-control input-md" type="text">
+                                                    <input id="weightModal" value="<%=cargo.getWeight()%>" name="weight" class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="maxVolumeModal">Max volume</label>
+                                                <label class="col-md-4 control-label" for="volumeModal">Cargo volume</label>
                                                 <div class="col-md-4">
-                                                    <input id="maxVolumeModal" value="<%=wagon.getMaxVolume()%>" name="maxVolume" class="form-control input-md" type="text">
-                                                </div>
-                                            </div>
-
-                                            <!-- Text input-->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="currentCityModal">Current city ID</label>
-                                                <div class="col-md-4">
-                                                    <input id="currentCityModal" value="<%=wagon.getCurrentCity()%>" name="currentCity" class="form-control input-md" type="text">
+                                                    <input id="volumeModal" value="<%=cargo.getVolume()%>" name="volume" class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
                                             <!-- Select Basic -->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="wagonStatusModal">Wagon status</label>
+                                                <label class="col-md-4 control-label" for="cargoStatusModal">Cargo status</label>
                                                 <div class="col-md-4">
-                                                    <select id="wagonStatusModal" name="wagonStatus" class="form-control">
+                                                    <select id="cargoStatusModal" name="cargoStatusId" class="form-control">
                                                         <option disabled>Choose status</option>
                                                         <option selected value="1">Ready</option>
-                                                        <option value="2">Broken</option>
+                                                        <option value="2">Shipped</option>
+                                                        <option value="3">Delivered</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -233,9 +189,9 @@
                         </div>
                     </td>
                     <td>
-                        <form action="/Wagon" method="post">
+                        <form action="/Cargo" method="post">
                             <div class="form-group">
-                                <button type="submit" id="delete" name="delete" value="<%=wagon.getWagonId()%>"
+                                <button type="submit" id="delete" name="delete" value="<%=cargo.getCargoId()%>"
                                         class="btn btn-danger">Delete
                                 </button>
                             </div>
