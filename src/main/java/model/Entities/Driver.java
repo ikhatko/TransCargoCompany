@@ -93,8 +93,7 @@ public class Driver {
         return thisMonthHours;
     }
 
-    public void setThisMonthHours(double thisMonthHours) {
-        this.thisMonthHours = thisMonthHours;
+    public void setThisMonthHours(double thisMonthHours) { this.thisMonthHours = thisMonthHours;
     }
 
     public City getCurrentCity() {
