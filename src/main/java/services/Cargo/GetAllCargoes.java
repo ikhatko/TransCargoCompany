@@ -12,9 +12,12 @@ import java.util.List;
 /**
  * The type Get all cargoes.
  */
-public class GetAllCargoes {
+public final class GetAllCargoes {
 
     private static Logger logger = Logger.getLogger(GetAllCargoes.class);
+
+    private GetAllCargoes() {
+    }
 
     /**
      * Gets all cargoes.

@@ -20,21 +20,29 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        SessionFactory sessionFactory = (SessionFactory)
+                req.getServletContext().getAttribute("SessionFactory");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        User user = CheckLogin.checkEmailAndPassword(email, password, sessionFactory);
+        User user = CheckLogin.checkEmailAndPassword(email,
+                password, sessionFactory);
         if (user != null) {
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
             resp.sendRedirect("/index.jsp");
         } else {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("login.jsp");
-            req.setAttribute("errorMsg", "<div class=\"alert alert-warning\">\n" +
-                    "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
-                    "  <strong>Warning!</strong> Wrong email or password.\n" +
-                    "</div>");
+            RequestDispatcher requestDispatcher =
+                    req.getRequestDispatcher("login.jsp");
+            req.setAttribute("errorMsg",
+                    "<div class=\"alert alert-warning\">\n"
+                            + "  <a href=\"#\" class=\"close\" "
+                            + "data-dismiss=\"alert\""
+                            + " aria-label=\"close\">&times;</a>\n"
+                            + "  <strong>Warning!</strong> "
+                            + "Wrong email or password.\n"
+                            + "</div>");
             requestDispatcher.include(req, resp);
         }
     }

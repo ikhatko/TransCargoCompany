@@ -10,9 +10,12 @@ import org.hibernate.Transaction;
 /**
  * The type Add new cargo.
  */
-public class AddNewCargo {
+public final class AddNewCargo {
 
     private static Logger logger = Logger.getLogger(AddNewCargo.class);
+
+    private AddNewCargo() {
+    }
 
     /**
      * Add new cargo boolean.
@@ -23,8 +26,11 @@ public class AddNewCargo {
      * @param sessionFactory the session factory
      * @return the boolean
      */
-    public static boolean addNewCargo(String name, float weight, float volume,
-                                      SessionFactory sessionFactory) {
+
+
+    public static boolean addNewCargo(final String name, final float weight,
+                                      final float volume,
+                                      final SessionFactory sessionFactory) {
         boolean result = false;
         Session session = null;
         Cargo cargo = null;

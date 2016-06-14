@@ -12,9 +12,12 @@ import org.hibernate.Transaction;
 /**
  * The type Update cargo.
  */
-public class UpdateCargo {
+public final class UpdateCargo {
 
     private static Logger logger = Logger.getLogger(UpdateCargo.class);
+
+    private UpdateCargo() {
+    }
 
     /**
      * Update cargo.
@@ -26,8 +29,9 @@ public class UpdateCargo {
      * @param cargoStatusId  the cargo status id
      * @param sessionFactory the session factory
      */
-    public static void updateCargo(int id, String name, String weight, String volume,
-                                    String cargoStatusId, SessionFactory sessionFactory) {
+    public static void updateCargo(int id, String name, String weight,
+                                   String volume, String cargoStatusId,
+                                   SessionFactory sessionFactory) {
         logger.info("Trying to update Cargo with id:" + id);
         Session session = null;
 
@@ -40,7 +44,9 @@ public class UpdateCargo {
             cargo.setWeight(Float.parseFloat(weight));
             cargo.setVolume(Float.parseFloat(volume));
 
-            if (cargoStatusId != null && !cargoStatusId.equals("null") && !cargoStatusId.equals("")) {
+            if (cargoStatusId != null
+                    && !cargoStatusId.equals("null")
+                    && !cargoStatusId.equals("")) {
                 CargoStatus cargoStatus = new CargoStatus();
                 cargoStatus.setCargoStatusId(Integer.parseInt(cargoStatusId));
                 cargo.setCargoStatus(cargoStatus);

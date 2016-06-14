@@ -20,16 +20,20 @@ import java.util.List;
 @WebServlet("/Driver")
 public class DriverServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        SessionFactory sessionFactory = (SessionFactory)
+                req.getServletContext().getAttribute("SessionFactory");
         List<Driver> allDrivers = GetAllDrivers.getAllDrivers(sessionFactory);
         req.setAttribute("resultList", allDrivers);
         req.getRequestDispatcher("driver.jsp").include(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        SessionFactory sessionFactory = (SessionFactory)
+                req.getServletContext().getAttribute("SessionFactory");
         String delete = req.getParameter("delete");
         if (delete != null) {
             try {
@@ -37,10 +41,13 @@ public class DriverServlet extends HttpServlet {
                 RemoveDriver.removeDriver(id, sessionFactory);
                 doGet(req, resp);
             } catch (NumberFormatException e) {
-                req.setAttribute("errorMsg", "<div class=\"alert alert-warning\">\n" +
-                        "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
-                        "  <strong>Warning!</strong> Wrong deleted id!\n" +
-                        "</div>");
+                req.setAttribute("errorMsg",
+                        "<div class=\"alert alert-warning\">\n"
+                                + "  <a href=\"#\" class=\"close\" "
+                                + "data-dismiss=\"alert\""
+                                + " aria-label=\"close\">&times;</a>\n"
+                                + "<strong>Warning!</strong> Wrong id!\n"
+                                + "</div>");
             }
         } else {
             String id = req.getParameter("id");
@@ -51,7 +58,9 @@ public class DriverServlet extends HttpServlet {
             String driverStatusId = req.getParameter("driverStatus");
             String wagonId = req.getParameter("wagon");
             String orderId = req.getParameter("orderId");
-            UpdateDriver.updateDriver(Integer.parseInt(id), sessionFactory, firstName, lastName, hours, cityId, driverStatusId, wagonId, orderId);
+            UpdateDriver.updateDriver(Integer.parseInt(id), sessionFactory,
+                    firstName, lastName, hours, cityId,
+                    driverStatusId, wagonId, orderId);
             doGet(req, resp);
         }
     }

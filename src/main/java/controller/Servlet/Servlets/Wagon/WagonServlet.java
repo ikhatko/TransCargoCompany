@@ -20,16 +20,20 @@ import java.util.List;
 @WebServlet("/Wagon")
 public class WagonServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        SessionFactory sessionFactory = (SessionFactory)
+                req.getServletContext().getAttribute("SessionFactory");
         List<Wagon> allWagons = GetAllWagons.getAllWagons(sessionFactory);
         req.setAttribute("resultList", allWagons);
         req.getRequestDispatcher("wagon.jsp").include(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        SessionFactory sessionFactory = (SessionFactory)
+                req.getServletContext().getAttribute("SessionFactory");
         String delete = req.getParameter("delete");
         if (delete != null) {
             try {
@@ -37,10 +41,13 @@ public class WagonServlet extends HttpServlet {
                 RemoveWagon.removeWagon(id, sessionFactory);
                 doGet(req, resp);
             } catch (NumberFormatException e) {
-                req.setAttribute("errorMsg", "<div class=\"alert alert-warning\">\n" +
-                        "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
-                        "  <strong>Warning!</strong> Wrong deleted id!\n" +
-                        "</div>");
+                req.setAttribute("errorMsg",
+                        "<div class=\"alert alert-warning\">\n"
+                                + "  <a href=\"#\" class=\"close\" "
+                                + "data-dismiss=\"alert\""
+                                + " aria-label=\"close\">&times;</a>\n"
+                                + "<strong>Warning!</strong> Wrong id!\n"
+                                + "</div>");
             }
         } else {
             String id = req.getParameter("id");
@@ -51,7 +58,9 @@ public class WagonServlet extends HttpServlet {
             String currentCity = req.getParameter("currentCity");
             String wagonStatus = req.getParameter("wagonStatus");
 
-            UpdateWagon.updateWagon(Integer.parseInt(id), licensePlate, driversChange, maxWeight, maxVolume, currentCity, wagonStatus, sessionFactory);
+            UpdateWagon.updateWagon(Integer.parseInt(id), licensePlate,
+                    driversChange, maxWeight, maxVolume,
+                    currentCity, wagonStatus, sessionFactory);
             doGet(req, resp);
         }
     }

@@ -14,7 +14,7 @@ public class CargoDAOImlp extends GenericDAOImpl implements CargoDAO {
      *
      * @param session the session
      */
-    public CargoDAOImlp(Session session) {
+    public CargoDAOImlp(final Session session) {
         super(Cargo.class, session);
     }
 }

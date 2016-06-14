@@ -18,22 +18,31 @@ import java.io.IOException;
 public class AddNewCityServlet extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        SessionFactory sessionFactory = (SessionFactory) req.getServletContext().getAttribute("SessionFactory");
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        SessionFactory sessionFactory = (SessionFactory)
+                req.getServletContext().getAttribute("SessionFactory");
         String cityName = req.getParameter("cityName");
         String distance = req.getParameter("distance");
         if (AddNewCity.addNewCity(cityName, distance, sessionFactory)) {
-            req.getSession().setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
-                    "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
-                    "  <strong>Success!</strong> New city added.\n" +
-                    "</div>");
+            req.getSession().setAttribute("errorMsg",
+                    "<div class=\"alert alert-success\">\n"
+                            + "  <a href=\"#\" class=\"close\" "
+                            + "data-dismiss=\"alert\" "
+                            + "aria-label=\"close\">&times;</a>\n"
+                            + "  <strong>Success!</strong> New city added.\n"
+                            + "</div>");
             resp.sendRedirect("/City");
-        }else {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/City");
-            req.setAttribute("errorMsg", "<div class=\"alert alert-success\">\n" +
-                    "  <a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>\n" +
-                    "  <strong>Error!</strong> New city not added.\n" +
-                    "</div>");
+        } else {
+            RequestDispatcher requestDispatcher =
+                    req.getRequestDispatcher("/City");
+            req.setAttribute("errorMsg",
+                    "<div class=\"alert alert-success\">\n"
+                            + "  <a href=\"#\" class=\"close\" "
+                            + "data-dismiss=\"alert\" "
+                            + "aria-label=\"close\">&times;</a>\n"
+                            + "  <strong>Error!</strong> New city not added.\n"
+                            + "</div>");
             requestDispatcher.include(req, resp);
         }
 
