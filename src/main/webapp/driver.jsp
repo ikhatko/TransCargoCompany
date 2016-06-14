@@ -183,7 +183,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="city">Current city ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="city" value="<%=driver.getCurrentCity().getCityId()%>" name="city"
+                                                    <input id="city" value="<%=driver.getCurrentCity()%>" name="city"
                                                            class="form-control input-md" type="text">
                                                 </div>
                                             </div>
