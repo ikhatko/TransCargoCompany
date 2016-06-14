@@ -7,10 +7,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Remove waypoint.
+ */
 public class RemoveWaypoint {
 
     private static Logger logger = Logger.getLogger(RemoveWaypoint.class);
 
+    /**
+     * Remove waypoint.
+     *
+     * @param id             the id
+     * @param sessionFactory the session factory
+     */
     public static void removeWaypoint(int id, SessionFactory sessionFactory) {
         logger.info("Removing waypoint with id:" + id);
 

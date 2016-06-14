@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type Waypoint servlet.
+ */
 @WebServlet("/Waypoint")
 public class WaypointServlet extends HttpServlet {
     @Override

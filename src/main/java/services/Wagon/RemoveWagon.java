@@ -7,10 +7,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Remove wagon.
+ */
 public class RemoveWagon {
 
     private static Logger logger = Logger.getLogger(RemoveWagon.class);
 
+    /**
+     * Remove wagon.
+     *
+     * @param id             the id
+     * @param sessionFactory the session factory
+     */
     public static void removeWagon(int id, SessionFactory sessionFactory) {
         logger.info("Removing wagon with id:" + id);
 

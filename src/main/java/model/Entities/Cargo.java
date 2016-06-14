@@ -5,6 +5,9 @@ import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 
+/**
+ * The type Cargo.
+ */
 @Entity
 public class Cargo {
     @Id
@@ -24,6 +27,9 @@ public class Cargo {
     @Cascade(CascadeType.PERSIST)
     private CargoStatus cargoStatus;
 
+    /**
+     * Instantiates a new Cargo.
+     */
     public Cargo() {
     }
 
@@ -32,6 +38,13 @@ public class Cargo {
         return "" + cargoId;
     }
 
+    /**
+     * Instantiates a new Cargo.
+     *
+     * @param name   the name
+     * @param weight the weight
+     * @param volume the volume
+     */
     public Cargo(String name, float weight, float volume) {
         this.name = name;
         this.weight = weight;
@@ -40,6 +53,14 @@ public class Cargo {
         cargoStatus.setCargoStatusId(1);
     }
 
+    /**
+     * Instantiates a new Cargo.
+     *
+     * @param name        the name
+     * @param weight      the weight
+     * @param volume      the volume
+     * @param cargoStatus the cargo status
+     */
     public Cargo(String name, float weight, float volume, CargoStatus cargoStatus) {
         this.name = name;
         this.weight = weight;
@@ -47,42 +68,92 @@ public class Cargo {
         this.cargoStatus = cargoStatus;
     }
 
+    /**
+     * Gets cargo id.
+     *
+     * @return the cargo id
+     */
     public int getCargoId() {
         return cargoId;
     }
 
+    /**
+     * Sets cargo id.
+     *
+     * @param cargoId the cargo id
+     */
     public void setCargoId(int cargoId) {
         this.cargoId = cargoId;
     }
 
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets weight.
+     *
+     * @return the weight
+     */
     public float getWeight() {
         return weight;
     }
 
+    /**
+     * Sets weight.
+     *
+     * @param weight the weight
+     */
     public void setWeight(float weight) {
         this.weight = weight;
     }
 
+    /**
+     * Gets volume.
+     *
+     * @return the volume
+     */
     public float getVolume() {
         return volume;
     }
 
+    /**
+     * Sets volume.
+     *
+     * @param volume the volume
+     */
     public void setVolume(float volume) {
         this.volume = volume;
     }
 
+    /**
+     * Gets cargo status.
+     *
+     * @return the cargo status
+     */
     public CargoStatus getCargoStatus() {
         return cargoStatus;
     }
 
+    /**
+     * Sets cargo status.
+     *
+     * @param cargoStatus the cargo status
+     */
     public void setCargoStatus(CargoStatus cargoStatus) {
         this.cargoStatus = cargoStatus;
     }

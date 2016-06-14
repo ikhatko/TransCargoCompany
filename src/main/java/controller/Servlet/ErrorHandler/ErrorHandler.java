@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * The type Error handler.
+ */
 @WebServlet("/ErrorHandler")
 public class ErrorHandler extends HttpServlet {
     @Override

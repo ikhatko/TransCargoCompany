@@ -10,10 +10,22 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Add new waypoint.
+ */
 public class AddNewWaypoint {
 
     private static Logger logger = Logger.getLogger(AddNewWaypoint.class);
 
+    /**
+     * Add new waypoint boolean.
+     *
+     * @param waypointCargoId the waypoint cargo id
+     * @param waypointTypeId  the waypoint type id
+     * @param waypointCityId  the waypoint city id
+     * @param sessionFactory  the session factory
+     * @return the boolean
+     */
     public static boolean addNewWaypoint(String waypointCargoId, String waypointTypeId, String waypointCityId, SessionFactory sessionFactory) {
         boolean result = false;
         Session session = null;

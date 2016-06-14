@@ -9,10 +9,19 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * The type Get all cities.
+ */
 public class GetAllCities {
 
     private static Logger logger = Logger.getLogger(GetAllCities.class);
 
+    /**
+     * Gets all cities.
+     *
+     * @param sessionFactory the session factory
+     * @return the all cities
+     */
     public static List getAllCities(SessionFactory sessionFactory) {
         logger.info("Trying to get all cities");
         Session session = null;

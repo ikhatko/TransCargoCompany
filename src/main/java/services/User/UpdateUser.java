@@ -8,10 +8,24 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Update user.
+ */
 public class UpdateUser {
 
     private static Logger logger = Logger.getLogger(UpdateUser.class);
 
+    /**
+     * Update user.
+     *
+     * @param id             the id
+     * @param firstName      the first name
+     * @param lastName       the last name
+     * @param email          the email
+     * @param password       the password
+     * @param userRoleId     the user role id
+     * @param sessionFactory the session factory
+     */
     public static void updateUser(int id, String firstName, String lastName, String email, String password, String userRoleId, SessionFactory sessionFactory) {
         logger.info("Trying to update User with id:" + id);
         Session session = null;

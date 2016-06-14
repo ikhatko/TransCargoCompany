@@ -7,10 +7,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Remove order.
+ */
 public class RemoveOrder {
 
     private static Logger logger = Logger.getLogger(RemoveOrder.class);
 
+    /**
+     * Remove order.
+     *
+     * @param id             the id
+     * @param sessionFactory the session factory
+     */
     public static void removeOrder(int id, SessionFactory sessionFactory) {
         logger.info("Removing order with id:" + id);
 

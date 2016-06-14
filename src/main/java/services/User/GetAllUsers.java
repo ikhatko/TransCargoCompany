@@ -9,10 +9,19 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * The type Get all users.
+ */
 public class GetAllUsers {
 
     private static Logger logger = Logger.getLogger(GetAllUsers.class);
 
+    /**
+     * Gets all users.
+     *
+     * @param sessionFactory the session factory
+     * @return the all users
+     */
     public static List getAllUsers(SessionFactory sessionFactory) {
         logger.info("Trying to get all users.");
         Session session = null;

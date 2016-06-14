@@ -9,10 +9,19 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * The type Get all drivers.
+ */
 public class GetAllDrivers {
 
     private static Logger logger = Logger.getLogger(GetAllDrivers.class);
 
+    /**
+     * Gets all drivers.
+     *
+     * @param sessionFactory the session factory
+     * @return the all drivers
+     */
     public static List getAllDrivers(SessionFactory sessionFactory) {
         logger.info("Trying to get all drivers");
         Session session = null;

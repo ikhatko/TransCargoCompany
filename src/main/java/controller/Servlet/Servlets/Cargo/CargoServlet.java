@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type Cargo servlet.
+ */
 @WebServlet("/Cargo")
 public class CargoServlet extends HttpServlet {
     @Override

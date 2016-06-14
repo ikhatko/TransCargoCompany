@@ -7,10 +7,24 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Add new user.
+ */
 public class AddNewUser {
 
     private static Logger logger = Logger.getLogger(AddNewUser.class);
 
+    /**
+     * Add new user boolean.
+     *
+     * @param firstName      the first name
+     * @param lastName       the last name
+     * @param email          the email
+     * @param password       the password
+     * @param userRoleId     the user role id
+     * @param sessionFactory the session factory
+     * @return the boolean
+     */
     public static boolean addNewUser(String firstName, String lastName, String email, String password, int userRoleId, SessionFactory sessionFactory) {
         boolean result = false;
         Session session = null;

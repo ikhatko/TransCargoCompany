@@ -5,8 +5,16 @@ import model.Entities.User;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+/**
+ * The type User dao.
+ */
 public class UserDAOImpl extends GenericDAOImpl implements UserDAO {
 
+    /**
+     * Instantiates a new User dao.
+     *
+     * @param session the session
+     */
     public UserDAOImpl(Session session) {
         super(User.class, session);
     }

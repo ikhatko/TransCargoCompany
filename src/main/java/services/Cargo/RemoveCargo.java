@@ -7,10 +7,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Remove cargo.
+ */
 public class RemoveCargo {
 
     private static Logger logger = Logger.getLogger(RemoveCargo.class);
 
+    /**
+     * Remove cargo.
+     *
+     * @param id             the id
+     * @param sessionFactory the session factory
+     */
     public static void removeCargo(int id, SessionFactory sessionFactory) {
         logger.info("Removing cargo with id:" + id);
 

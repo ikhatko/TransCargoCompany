@@ -9,10 +9,19 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * The type Get all waypoints.
+ */
 public class GetAllWaypoints {
 
     private static Logger logger = Logger.getLogger(GetAllWaypoints.class);
 
+    /**
+     * Gets all waypoints.
+     *
+     * @param sessionFactory the session factory
+     * @return the all waypoints
+     */
     public static List getAllWaypoints(SessionFactory sessionFactory) {
         logger.info("Trying to get all waypoints");
         Session session = null;

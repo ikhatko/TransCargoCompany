@@ -7,10 +7,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Remove user.
+ */
 public class RemoveUser {
 
     private static Logger logger = Logger.getLogger(RemoveUser.class);
 
+    /**
+     * Remove user.
+     *
+     * @param id             the id
+     * @param sessionFactory the session factory
+     */
     public static void removeUser(int id, SessionFactory sessionFactory) {
         logger.info("Removing user with id:" + id);
 

@@ -9,10 +9,19 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * The type Get all orders.
+ */
 public class GetAllOrders {
 
     private static Logger logger = Logger.getLogger(GetAllOrders.class);
 
+    /**
+     * Gets all orders.
+     *
+     * @param sessionFactory the session factory
+     * @return the all orders
+     */
     public static List getAllOrders(SessionFactory sessionFactory) {
         logger.info("Trying to get all orders");
         Session session = null;

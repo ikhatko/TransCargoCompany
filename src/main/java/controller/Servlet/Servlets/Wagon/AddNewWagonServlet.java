@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Add new wagon servlet.
+ */
 @WebServlet("/AddNewWagon")
 public class AddNewWagonServlet extends HttpServlet {
 

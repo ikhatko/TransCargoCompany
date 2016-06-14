@@ -7,10 +7,21 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Add new driver.
+ */
 public class AddNewDriver {
 
     private static Logger logger = Logger.getLogger(AddNewDriver.class);
 
+    /**
+     * Add new driver boolean.
+     *
+     * @param firstName      the first name
+     * @param lastName       the last name
+     * @param sessionFactory the session factory
+     * @return the boolean
+     */
     public static boolean addNewDriver(String firstName, String lastName, SessionFactory sessionFactory) {
         boolean result = false;
         Session session = null;

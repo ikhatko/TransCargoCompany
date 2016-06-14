@@ -9,10 +9,19 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
+/**
+ * The type Get all wagons.
+ */
 public class GetAllWagons {
 
     private static Logger logger = Logger.getLogger(GetAllWagons.class);
 
+    /**
+     * Gets all wagons.
+     *
+     * @param sessionFactory the session factory
+     * @return the all wagons
+     */
     public static List getAllWagons(SessionFactory sessionFactory) {
         logger.info("Trying to get all wagons");
         Session session = null;

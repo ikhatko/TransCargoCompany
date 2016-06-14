@@ -7,10 +7,21 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Add new city.
+ */
 public class AddNewCity {
 
     private static Logger logger = Logger.getLogger(AddNewCity.class);
 
+    /**
+     * Add new city boolean.
+     *
+     * @param cityName       the city name
+     * @param distance       the distance
+     * @param sessionFactory the session factory
+     * @return the boolean
+     */
     public static boolean addNewCity(String cityName, String distance,
                                      SessionFactory sessionFactory) {
         boolean result = false;

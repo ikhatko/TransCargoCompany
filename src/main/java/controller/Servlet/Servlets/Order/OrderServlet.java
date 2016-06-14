@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type Order servlet.
+ */
 @WebServlet("/Order")
 public class OrderServlet extends HttpServlet {
     @Override

@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Register servlet.
+ */
 @WebServlet("/Register")
 public class RegisterServlet extends HttpServlet {
     @Override

@@ -9,10 +9,23 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Update cargo.
+ */
 public class UpdateCargo {
 
     private static Logger logger = Logger.getLogger(UpdateCargo.class);
 
+    /**
+     * Update cargo.
+     *
+     * @param id             the id
+     * @param name           the name
+     * @param weight         the weight
+     * @param volume         the volume
+     * @param cargoStatusId  the cargo status id
+     * @param sessionFactory the session factory
+     */
     public static void updateCargo(int id, String name, String weight, String volume,
                                     String cargoStatusId, SessionFactory sessionFactory) {
         logger.info("Trying to update Cargo with id:" + id);

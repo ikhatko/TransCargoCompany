@@ -7,10 +7,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Remove city.
+ */
 public class RemoveCity {
 
     private static Logger logger = Logger.getLogger(RemoveCity.class);
 
+    /**
+     * Remove city.
+     *
+     * @param id             the id
+     * @param sessionFactory the session factory
+     */
     public static void removeCity(int id, SessionFactory sessionFactory) {
         logger.info("Removing city with id:" + id);
 

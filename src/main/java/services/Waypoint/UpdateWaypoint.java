@@ -8,10 +8,23 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Update waypoint.
+ */
 public class UpdateWaypoint {
 
     private static Logger logger = Logger.getLogger(UpdateWaypoint.class);
 
+    /**
+     * Update waypoint.
+     *
+     * @param id              the id
+     * @param waypointCargoId the waypoint cargo id
+     * @param waypointTypeId  the waypoint type id
+     * @param waypointCityId  the waypoint city id
+     * @param orderId         the order id
+     * @param sessionFactory  the session factory
+     */
     public static void updateWaypoint(int id, String waypointCargoId, String waypointTypeId, String waypointCityId, String orderId, SessionFactory sessionFactory) {
         logger.info("Trying to update Waypoint with id:" + id);
         Session session = null;

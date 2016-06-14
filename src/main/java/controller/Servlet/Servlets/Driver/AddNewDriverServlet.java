@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Add new driver servlet.
+ */
 @WebServlet("/AddNewDriver")
 public class AddNewDriverServlet extends HttpServlet {
 

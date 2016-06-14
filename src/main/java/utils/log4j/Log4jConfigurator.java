@@ -2,6 +2,9 @@ package utils.log4j;
 
 import org.apache.log4j.xml.DOMConfigurator;
 
+/**
+ * The type Log 4 j configurator.
+ */
 public class Log4jConfigurator {
     static {
         init();

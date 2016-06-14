@@ -10,6 +10,9 @@ import utils.hibernate.CustomNamingStrategy;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+/**
+ * The type Hibernate session factory listner.
+ */
 public class HibernateSessionFactoryListner implements ServletContextListener{
 
     private static Logger logger = Logger.getLogger(HibernateSessionFactoryListner.class);

@@ -7,10 +7,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Remove driver.
+ */
 public class RemoveDriver {
 
     private static Logger logger = Logger.getLogger(RemoveDriver.class);
 
+    /**
+     * Remove driver.
+     *
+     * @param id             the id
+     * @param sessionFactory the session factory
+     */
     public static void removeDriver(int id, SessionFactory sessionFactory) {
         logger.info("Removing driver with id:" + id);
 

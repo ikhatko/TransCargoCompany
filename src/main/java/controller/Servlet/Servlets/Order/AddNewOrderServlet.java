@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Add new order servlet.
+ */
 @WebServlet("/AddNewOrder")
 public class AddNewOrderServlet extends HttpServlet {
 

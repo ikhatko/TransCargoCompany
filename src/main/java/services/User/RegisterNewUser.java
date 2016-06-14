@@ -8,10 +8,23 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Register new user.
+ */
 public class RegisterNewUser {
 
     private static Logger logger = Logger.getLogger(RegisterNewUser.class);
 
+    /**
+     * Register new user boolean.
+     *
+     * @param firstName      the first name
+     * @param lastName       the last name
+     * @param email          the email
+     * @param password       the password
+     * @param sessionFactory the session factory
+     * @return the boolean
+     */
     public static boolean registerNewUser(String firstName, String lastName, String email, String password, SessionFactory sessionFactory) {
         logger.info(String.format("Trying to register new user:: %s , %s, %s", firstName, lastName, email));
 

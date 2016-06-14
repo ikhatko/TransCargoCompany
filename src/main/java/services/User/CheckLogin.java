@@ -5,10 +5,21 @@ import model.Entities.User;
 import org.apache.log4j.Logger;
 import org.hibernate.*;
 
+/**
+ * The type Check login.
+ */
 public class CheckLogin {
 
     private static Logger logger = Logger.getLogger(CheckLogin.class);
 
+    /**
+     * Check email and password user.
+     *
+     * @param email          the email
+     * @param password       the password
+     * @param sessionFactory the session factory
+     * @return the user
+     */
     public static User checkEmailAndPassword(String email, String password, SessionFactory sessionFactory) {
         logger.info(String.format("Checking: email:%s,password:%s", email, password));
         User user = null;

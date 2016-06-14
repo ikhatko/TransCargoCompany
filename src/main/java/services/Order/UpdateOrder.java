@@ -10,10 +10,21 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Update order.
+ */
 public class UpdateOrder {
 
     private static Logger logger = Logger.getLogger(UpdateOrder.class);
 
+    /**
+     * Update order.
+     *
+     * @param id             the id
+     * @param orderStatusId  the order status id
+     * @param orderWagonId   the order wagon id
+     * @param sessionFactory the session factory
+     */
     public static void updateOrder(int id, String orderStatusId, String orderWagonId , SessionFactory sessionFactory) {
         logger.info("Trying to update Order with id:" + id);
         Session session = null;

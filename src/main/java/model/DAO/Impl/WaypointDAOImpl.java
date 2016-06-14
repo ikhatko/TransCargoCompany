@@ -4,8 +4,16 @@ import model.DAO.Interfaces.WaypointDAO;
 import model.Entities.Waypoint;
 import org.hibernate.Session;
 
+/**
+ * The type Waypoint dao.
+ */
 public class WaypointDAOImpl extends GenericDAOImpl  implements WaypointDAO {
 
+    /**
+     * Instantiates a new Waypoint dao.
+     *
+     * @param session the session
+     */
     public WaypointDAOImpl(Session session) {
         super(Waypoint.class, session);
     }

@@ -8,10 +8,26 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Update driver.
+ */
 public class UpdateDriver {
 
     private static Logger logger = Logger.getLogger(UpdateDriver.class);
 
+    /**
+     * Update driver.
+     *
+     * @param id             the id
+     * @param sessionFactory the session factory
+     * @param firstName      the first name
+     * @param lastName       the last name
+     * @param hours          the hours
+     * @param cityId         the city id
+     * @param driverStatusId the driver status id
+     * @param wagonId        the wagon id
+     * @param orderId        the order id
+     */
     public static void updateDriver(int id, SessionFactory sessionFactory, String firstName, String lastName,
                                     String hours, String cityId, String driverStatusId, String wagonId, String orderId) {
         logger.info("Trying to update Driver with id:" + id);

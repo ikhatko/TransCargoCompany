@@ -8,10 +8,20 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Add new order.
+ */
 public class AddNewOrder {
 
     private static Logger logger = Logger.getLogger(AddNewOrder.class);
 
+    /**
+     * Add new order boolean.
+     *
+     * @param orderStatusId  the order status id
+     * @param sessionFactory the session factory
+     * @return the boolean
+     */
     public static boolean addNewOrder(String orderStatusId, SessionFactory sessionFactory) {
         boolean result = false;
         Session session = null;

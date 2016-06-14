@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type City servlet.
+ */
 @WebServlet("/City")
 public class CityServlet extends HttpServlet {
     @Override

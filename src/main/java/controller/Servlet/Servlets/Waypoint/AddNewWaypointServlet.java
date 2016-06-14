@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Add new waypoint servlet.
+ */
 @WebServlet("/AddNewWaypoint")
 public class AddNewWaypointServlet extends HttpServlet {
 

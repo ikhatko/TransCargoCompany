@@ -7,10 +7,23 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Add new wagon.
+ */
 public class AddNewWagon {
 
     private static Logger logger = Logger.getLogger(AddNewWagon.class);
 
+    /**
+     * Add new wagon boolean.
+     *
+     * @param licensePlate   the license plate
+     * @param driversChange  the drivers change
+     * @param maxWeight      the max weight
+     * @param maxVolume      the max volume
+     * @param sessionFactory the session factory
+     * @return the boolean
+     */
     public static boolean addNewWagon(String licensePlate, String driversChange, String maxWeight, String maxVolume, SessionFactory sessionFactory) {
         boolean result = false;
         Session session = null;
