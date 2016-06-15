@@ -14,6 +14,9 @@ import java.io.PrintWriter;
 @WebServlet("/ErrorHandler")
 public class ErrorHandler extends HttpServlet {
 
+    /**
+     * The constant ERROR_CODE.
+     */
     public static final int ERROR_CODE = 500;
 
     @Override

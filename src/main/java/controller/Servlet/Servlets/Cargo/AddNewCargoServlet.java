@@ -23,8 +23,8 @@ public class AddNewCargoServlet extends HttpServlet {
         SessionFactory sessionFactory = (SessionFactory)
                 req.getServletContext().getAttribute("SessionFactory");
         String name = req.getParameter("name");
-        float weight = Float.parseFloat(req.getParameter("weight"));
-        float volume = Float.parseFloat(req.getParameter("volume"));
+        String weight = req.getParameter("weight");
+        String volume = req.getParameter("volume");
         if (AddNewCargo.addNewCargo(name, weight,
                 volume, sessionFactory)) {
             req.getSession().setAttribute("errorMsg",

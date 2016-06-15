@@ -19,6 +19,7 @@ public class Waypoint {
     private City waypointCity;
 
     @ManyToOne
+    @JoinColumn(name = "cargoId")
     @Cascade(CascadeType.PERSIST)
     private Cargo waypointCargo;
 

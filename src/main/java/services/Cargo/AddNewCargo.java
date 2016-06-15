@@ -28,8 +28,8 @@ public final class AddNewCargo {
      */
 
 
-    public static boolean addNewCargo(final String name, final float weight,
-                                      final float volume,
+    public static boolean addNewCargo(final String name, final String weight,
+                                      final String volume,
                                       final SessionFactory sessionFactory) {
         boolean result = false;
         Session session = null;
@@ -38,7 +38,7 @@ public final class AddNewCargo {
         try {
             session = sessionFactory.openSession();
             CargoDAOImlp cargoDAO = new CargoDAOImlp(session);
-            cargo = new Cargo(name, weight, volume);
+            cargo = new Cargo(name, Float.parseFloat(weight), Float.parseFloat(volume));
             Transaction transaction = session.beginTransaction();
             cargoDAO.create(cargo);
             transaction.commit();

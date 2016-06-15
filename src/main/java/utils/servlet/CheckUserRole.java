@@ -3,9 +3,18 @@ package utils.servlet;
 import model.Entities.User;
 import org.apache.log4j.Logger;
 
+/**
+ * The type Check user role.
+ */
 public class CheckUserRole {
     private static Logger logger = Logger.getLogger(CheckUserRole.class);
 
+    /**
+     * Gets user role.
+     *
+     * @param user the user
+     * @return the user role
+     */
     public static String getUserRole(User user) {
         logger.info("Checking user role:" + user.getEmail());
         String role = "public";

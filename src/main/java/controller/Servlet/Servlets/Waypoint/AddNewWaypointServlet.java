@@ -38,7 +38,7 @@ public class AddNewWaypointServlet extends HttpServlet {
             resp.sendRedirect("/Waypoint");
         } else {
             RequestDispatcher requestDispatcher =
-                    req.getRequestDispatcher("/Wagon");
+                    req.getRequestDispatcher("/Waypoint");
             req.setAttribute("errorMsg",
                     "<div class=\"alert alert-success\">\n"
                             + "  <a href=\"#\" class=\"close\" "

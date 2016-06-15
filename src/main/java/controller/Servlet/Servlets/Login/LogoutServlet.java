@@ -7,6 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
+/**
+ * The type Logout servlet.
+ */
 @WebServlet("/Logout")
 public class LogoutServlet extends HttpServlet {
     private static Logger logger = Logger.getLogger(LogoutServlet.class);

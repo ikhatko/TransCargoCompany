@@ -1,5 +1,4 @@
 <%@ page import="java.util.List" %>
-<%@ page import="model.Entities.Wagon" %>
 <%@ page import="model.Entities.Waypoint" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -15,7 +14,7 @@
 
 <div class="container-fluid">
     <div class="row content">
-        <%@include file="menu.html" %>
+        <%@include file="../admin/menu.html" %>
         <br>
         <div class="col-sm-10">
             <form action="/AddNewWaypoint" method="post" class="form-horizontal">
@@ -130,7 +129,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Edit wagon</h4>
+                                        <h4 class="modal-title">Edit waypoint</h4>
                                     </div>
                                     <br>
                                     <form class="form-horizontal" method="post">
@@ -213,7 +212,7 @@
                         </div>
                     </td>
                     <td>
-                        <form action="/Wagon" method="post">
+                        <form action="/Waypoint" method="post">
                             <div class="form-group">
                                 <button type="submit" id="delete" name="delete" value="<%=id%>"
                                         class="btn btn-danger">Delete

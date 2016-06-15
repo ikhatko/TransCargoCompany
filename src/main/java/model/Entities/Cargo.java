@@ -2,8 +2,11 @@ package model.Entities;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * The type Cargo.
@@ -27,6 +30,10 @@ public class Cargo {
     @Cascade(CascadeType.PERSIST)
     private CargoStatus cargoStatus;
 
+    @OneToMany(mappedBy = "waypointCargo", cascade = javax.persistence.CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    private Set<Waypoint> waypoints;
+
     /**
      * Instantiates a new Cargo.
      */
@@ -36,6 +43,14 @@ public class Cargo {
     @Override
     public String toString() {
         return "" + cargoId;
+    }
+
+    public Set<Waypoint> getWaypoints() {
+        return waypoints;
+    }
+
+    public void setWaypoints(Set<Waypoint> waypoints) {
+        this.waypoints = waypoints;
     }
 
     /**
