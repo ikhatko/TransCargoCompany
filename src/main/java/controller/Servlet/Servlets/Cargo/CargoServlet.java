@@ -1,10 +1,12 @@
 package controller.Servlet.Servlets.Cargo;
 
 import model.Entities.Cargo;
+import model.Entities.User;
 import org.hibernate.SessionFactory;
 import services.Cargo.GetAllCargoes;
 import services.Cargo.RemoveCargo;
 import services.Cargo.UpdateCargo;
+import utils.servlet.CheckUserRole;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +28,14 @@ public class CargoServlet extends HttpServlet {
                 req.getServletContext().getAttribute("SessionFactory");
         List<Cargo> allCargo = GetAllCargoes.getAllCargoes(sessionFactory);
         req.setAttribute("resultList", allCargo);
-        req.getRequestDispatcher("cargo.jsp").include(req, resp);
+        User user = (User) req.getSession().getAttribute("user");
+        String userRole = CheckUserRole.getUserRole(user);
+        if (!userRole.equals("public")) {
+            req.getRequestDispatcher(userRole + "/cargo.jsp").include(req, resp);
+        } else {
+            resp.sendRedirect("public/index.jsp");
+        }
+
     }
 
     @Override

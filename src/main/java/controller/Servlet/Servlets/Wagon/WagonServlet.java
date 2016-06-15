@@ -1,10 +1,12 @@
 package controller.Servlet.Servlets.Wagon;
 
+import model.Entities.User;
 import model.Entities.Wagon;
 import org.hibernate.SessionFactory;
 import services.Wagon.GetAllWagons;
 import services.Wagon.RemoveWagon;
 import services.Wagon.UpdateWagon;
+import utils.servlet.CheckUserRole;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +28,14 @@ public class WagonServlet extends HttpServlet {
                 req.getServletContext().getAttribute("SessionFactory");
         List<Wagon> allWagons = GetAllWagons.getAllWagons(sessionFactory);
         req.setAttribute("resultList", allWagons);
-        req.getRequestDispatcher("wagon.jsp").include(req, resp);
+        User user = (User) req.getSession().getAttribute("user");
+        String userRole = CheckUserRole.getUserRole(user);
+        if (!userRole.equals("public")) {
+            req.getRequestDispatcher(userRole + "/wagon.jsp").include(req, resp);
+        } else {
+            resp.sendRedirect("public/index.jsp");
+        }
+
     }
 
     @Override

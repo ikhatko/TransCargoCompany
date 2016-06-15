@@ -1,13 +1,14 @@
 <%@ page import="java.util.List" %>
 <%@ page import="model.Entities.Wagon" %>
+<%@ page import="model.Entities.Waypoint" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <title>Welcome to Trans Cargo Company</title>
 </head>
 <body>
@@ -17,49 +18,39 @@
         <%@include file="menu.html" %>
         <br>
         <div class="col-sm-10">
-            <form action="/AddNewWagon" method="post" class="form-horizontal">
+            <form action="/AddNewWaypoint" method="post" class="form-horizontal">
                 ${errorMsg}
                 <%request.getSession().removeAttribute("errorMsg");%>
                 <fieldset>
 
                     <!-- Form Name -->
-                    <legend>Add new wagon</legend>
+                    <legend>Add new waypoint</legend>
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="licensePlate">License Plate</label>
+                        <label class="col-md-4 control-label" for="city">Waypoint City</label>
                         <div class="col-md-4">
-                            <input id="licensePlate" name="licensePlate" placeholder="License Plate"
+                            <input id="city" name="city" placeholder="Waypoint City"
                                    class="form-control input-md" required="" type="text">
                         </div>
                     </div>
 
                     <!-- Select Basic -->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="driversChange">Drivers change</label>
+                        <label class="col-md-4 control-label" for="waypointType">Waypoint Type</label>
                         <div class="col-md-4">
-                            <select id="driversChange" name="driversChange" class="form-control" required>
-                                <option value="">Choose drivers change</option>
-                                <option value="1">Single</option>
-                                <option value="2">Double</option>
+                            <select id="waypointType" name="waypointType" class="form-control" required>
+                                <option value="">Choose waypoint type</option>
+                                <option value="1">Loading</option>
+                                <option value="2">Unloading</option>
                             </select>
                         </div>
                     </div>
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="maxWeight">Max Weight</label>
+                        <label class="col-md-4 control-label" for="cargoId">Waypoint cargo ID</label>
                         <div class="col-md-4">
-                            <input id="maxWeight" name="maxWeight" placeholder="Max Weight"
-                                   class="form-control input-md"
-                                   required="" type="text">
-                        </div>
-                    </div>
-
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="maxVolume">Max Volume</label>
-                        <div class="col-md-4">
-                            <input id="maxVolume" name="maxVolume" placeholder="Max Volume"
+                            <input id="cargoId" name="cargoId" placeholder="Waypoint cargo"
                                    class="form-control input-md"
                                    required="" type="text">
                         </div>
@@ -83,25 +74,19 @@
                 <thead>
                 <tr>
                     <th>
-                        Id
+                        Waypoint Id
                     </th>
                     <th>
-                        License Plate
+                        City
                     </th>
                     <th>
-                        Drivers Change
+                        Type
                     </th>
                     <th>
-                        Max Weight
+                        Cargo
                     </th>
                     <th>
-                        Max Volume
-                    </th>
-                    <th>
-                        Current City
-                    </th>
-                    <th>
-                        Wagon Status
+                        Order
                     </th>
                     <th>
                         Edit
@@ -113,31 +98,25 @@
                 </thead>
                 <tbody>
                 <%
-                    List<Wagon> resultList = (List) request.getAttribute("resultList");
-                    for (Wagon wagon : resultList) {
-                        int id = wagon.getWagonId();
+                    List<Waypoint> resultList = (List) request.getAttribute("resultList");
+                    for (Waypoint waypoint : resultList) {
+                        int id = waypoint.getWaypointId();
                 %>
                 <tr>
                     <td>
                         <%=id%>
                     </td>
                     <td>
-                        <%=wagon.getLicensePlate()%>
+                        <%=waypoint.getWaypointCity()%>
                     </td>
                     <td>
-                        <%=wagon.getDriversChange()%>
+                        <%=waypoint.getWaypointType()%>
                     </td>
                     <td>
-                        <%=wagon.getMaxWeight()%>
+                        <%=waypoint.getWaypointCargo()%>
                     </td>
                     <td>
-                        <%=wagon.getMaxVolume()%>
-                    </td>
-                    <td>
-                        <%=wagon.getCurrentCity()%>
-                    </td>
-                    <td>
-                        <%=wagon.getWagonStatus()%>
+                        <%=waypoint.getWaypointOrder()%>
                     </td>
                     <td>
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">
@@ -157,80 +136,57 @@
                                     <form class="form-horizontal" method="post">
                                         <fieldset>
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="idmodal">Wagon ID</label>
+                                                <label class="col-md-4 control-label" for="idmodal">Waypoint ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="idmodal" value="<%=wagon.getWagonId()%>" name="id"
+                                                    <input id="idmodal" value="<%=id%>" name="id"
                                                            class="form-control input-md" type="text"
                                                            readonly="readonly">
                                                 </div>
                                             </div>
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="licensePlateModal">License
-                                                    Plate</label>
+                                                <label class="col-md-4 control-label" for="waypointCityModal">Waypoint
+                                                    City ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="licensePlateModal" value="<%=wagon.getLicensePlate()%>"
-                                                           name="licensePlate" class="form-control input-md"
-                                                           type="text">
+                                                    <input id="waypointCityModal"
+                                                           value="<%=waypoint.getWaypointCity()%>" name="city"
+                                                           class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
-                                            <!-- Text input-->
                                             <!-- Select Basic -->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="driversChangeModal">Drivers
-                                                    change</label>
+                                                <label class="col-md-4 control-label" for="waypointTypeModal">Waypoint
+                                                    Type</label>
                                                 <div class="col-md-4">
-                                                    <select id="driversChangeModal" name="driversChange"
+                                                    <select id="waypointTypeModal" name="waypointType"
                                                             class="form-control">
-                                                        <option selected disabled>Choose drivers change</option>
-                                                        <option value="1">Single</option>
-                                                        <option value="2">Double</option>
+                                                        <option selected disabled>Choose waypoint type</option>
+                                                        <option value="1">Loading</option>
+                                                        <option value="2">Unloading</option>
                                                     </select>
                                                 </div>
                                             </div>
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="maxWeightModal">Max
-                                                    weight</label>
+                                                <label class="col-md-4 control-label" for="waypointCargoModal">Waypoint
+                                                    Cargo ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="maxWeightModal" value="<%=wagon.getMaxWeight()%>"
-                                                           name="maxWeight" class="form-control input-md" type="text">
+                                                    <input id="waypointCargoModal"
+                                                           value="<%=waypoint.getWaypointCargo()%>" name="cargoId"
+                                                           class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="maxVolumeModal">Max
-                                                    volume</label>
+                                                <label class="col-md-4 control-label" for="currentCityModal">Waypoint
+                                                    Order ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="maxVolumeModal" value="<%=wagon.getMaxVolume()%>"
-                                                           name="maxVolume" class="form-control input-md" type="text">
-                                                </div>
-                                            </div>
-
-                                            <!-- Text input-->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="currentCityModal">Current
-                                                    city ID</label>
-                                                <div class="col-md-4">
-                                                    <input id="currentCityModal" value="<%=wagon.getCurrentCity()%>"
-                                                           name="currentCity" class="form-control input-md" type="text">
-                                                </div>
-                                            </div>
-
-                                            <!-- Select Basic -->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="wagonStatusModal">Wagon
-                                                    status</label>
-                                                <div class="col-md-4">
-                                                    <select id="wagonStatusModal" name="wagonStatus"
-                                                            class="form-control">
-                                                        <option selected disabled>Choose status</option>
-                                                        <option value="1">Ready</option>
-                                                        <option value="2">Broken</option>
-                                                    </select>
+                                                    <input id="currentCityModal"
+                                                           value="<%=waypoint.getWaypointOrder()%>" name="order"
+                                                           class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 
@@ -272,7 +228,7 @@
         </div>
     </div>
 </div>
-<%@include file="footer.html" %>
+<%@include file="../footer.html" %>
 </body>
 </html>
 

@@ -1,10 +1,12 @@
 package controller.Servlet.Servlets.Order;
 
 import model.Entities.Order;
+import model.Entities.User;
 import org.hibernate.SessionFactory;
 import services.Order.GetAllOrders;
 import services.Order.RemoveOrder;
 import services.Order.UpdateOrder;
+import utils.servlet.CheckUserRole;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +28,14 @@ public class OrderServlet extends HttpServlet {
                 req.getServletContext().getAttribute("SessionFactory");
         List<Order> allOrders = GetAllOrders.getAllOrders(sessionFactory);
         req.setAttribute("resultList", allOrders);
-        req.getRequestDispatcher("order.jsp").include(req, resp);
+        User user = (User) req.getSession().getAttribute("user");
+        String userRole = CheckUserRole.getUserRole(user);
+        if (!userRole.equals("public")) {
+            req.getRequestDispatcher(userRole + "/order.jsp").include(req, resp);
+        } else {
+            resp.sendRedirect("public/index.jsp");
+        }
+
     }
 
     @Override

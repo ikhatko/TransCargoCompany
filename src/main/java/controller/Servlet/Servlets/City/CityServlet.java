@@ -1,10 +1,12 @@
 package controller.Servlet.Servlets.City;
 
 import model.Entities.City;
+import model.Entities.User;
 import org.hibernate.SessionFactory;
 import services.City.GetAllCities;
 import services.City.RemoveCity;
 import services.City.UpdateCity;
+import utils.servlet.CheckUserRole;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +28,14 @@ public class CityServlet extends HttpServlet {
                 req.getServletContext().getAttribute("SessionFactory");
         List<City> allCities = GetAllCities.getAllCities(sessionFactory);
         req.setAttribute("resultList", allCities);
-        req.getRequestDispatcher("city.jsp").include(req, resp);
+        User user = (User) req.getSession().getAttribute("user");
+        String userRole = CheckUserRole.getUserRole(user);
+        if (!userRole.equals("public")) {
+            req.getRequestDispatcher(userRole + "/city.jsp").include(req, resp);
+        } else {
+            resp.sendRedirect("public/index.jsp");
+        }
+
     }
 
     @Override

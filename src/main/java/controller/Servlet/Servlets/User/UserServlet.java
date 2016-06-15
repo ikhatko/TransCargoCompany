@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import services.User.GetAllUsers;
 import services.User.RemoveUser;
 import services.User.UpdateUser;
+import utils.servlet.CheckUserRole;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +27,14 @@ public class UserServlet extends HttpServlet {
                 req.getServletContext().getAttribute("SessionFactory");
         List<User> allUsers = GetAllUsers.getAllUsers(sessionFactory);
         req.setAttribute("resultList", allUsers);
-        req.getRequestDispatcher("user.jsp").include(req, resp);
+        User user = (User) req.getSession().getAttribute("user");
+        String userRole = CheckUserRole.getUserRole(user);
+        if (userRole.equals("admin")) {
+            req.getRequestDispatcher(userRole + "/user.jsp").include(req, resp);
+        } else {
+            resp.sendRedirect("public/index.jsp");
+        }
+
     }
 
     @Override

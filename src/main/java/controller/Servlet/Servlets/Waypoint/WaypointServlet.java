@@ -1,10 +1,12 @@
 package controller.Servlet.Servlets.Waypoint;
 
+import model.Entities.User;
 import model.Entities.Waypoint;
 import org.hibernate.SessionFactory;
 import services.Waypoint.GetAllWaypoints;
 import services.Waypoint.RemoveWaypoint;
 import services.Waypoint.UpdateWaypoint;
+import utils.servlet.CheckUserRole;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,7 +29,14 @@ public class WaypointServlet extends HttpServlet {
         List<Waypoint> allWaypoints =
                 GetAllWaypoints.getAllWaypoints(sessionFactory);
         req.setAttribute("resultList", allWaypoints);
-        req.getRequestDispatcher("waypoint.jsp").include(req, resp);
+        User user = (User) req.getSession().getAttribute("user");
+        String userRole = CheckUserRole.getUserRole(user);
+        if (!userRole.equals("public")) {
+            req.getRequestDispatcher(userRole + "/waypoint.jsp").include(req, resp);
+        } else {
+            resp.sendRedirect("public/index.jsp");
+        }
+
     }
 
     @Override

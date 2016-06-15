@@ -1,10 +1,12 @@
 package controller.Servlet.Servlets.Driver;
 
 import model.Entities.Driver;
+import model.Entities.User;
 import org.hibernate.SessionFactory;
 import services.Driver.GetAllDrivers;
 import services.Driver.RemoveDriver;
 import services.Driver.UpdateDriver;
+import utils.servlet.CheckUserRole;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +28,14 @@ public class DriverServlet extends HttpServlet {
                 req.getServletContext().getAttribute("SessionFactory");
         List<Driver> allDrivers = GetAllDrivers.getAllDrivers(sessionFactory);
         req.setAttribute("resultList", allDrivers);
-        req.getRequestDispatcher("driver.jsp").include(req, resp);
+        User user = (User) req.getSession().getAttribute("user");
+        String userRole = CheckUserRole.getUserRole(user);
+        if (!userRole.equals("public")) {
+            req.getRequestDispatcher(userRole + "/driver.jsp").include(req, resp);
+        } else {
+            resp.sendRedirect("public/index.jsp");
+        }
+
     }
 
     @Override
