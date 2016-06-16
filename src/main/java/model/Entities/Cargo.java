@@ -34,6 +34,11 @@ public class Cargo {
     @Fetch(FetchMode.SELECT)
     private Set<Waypoint> waypoints;
 
+    @ManyToOne
+    @JoinColumn(name = "orderId")
+    @Cascade(CascadeType.PERSIST)
+    private Order cargoOrder;
+
     /**
      * Instantiates a new Cargo.
      */
@@ -171,5 +176,13 @@ public class Cargo {
      */
     public void setCargoStatus(CargoStatus cargoStatus) {
         this.cargoStatus = cargoStatus;
+    }
+
+    public Order getCargoOrder() {
+        return cargoOrder;
+    }
+
+    public void setCargoOrder(Order cargoOrder) {
+        this.cargoOrder = cargoOrder;
     }
 }

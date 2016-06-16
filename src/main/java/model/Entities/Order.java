@@ -37,6 +37,10 @@ public class Order {
     @Fetch (FetchMode.SELECT)
     private Set<Driver> driverSet = new HashSet<Driver>();
 
+    @OneToMany(mappedBy = "cargoOrder", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @Fetch (FetchMode.SELECT)
+    private Set<Cargo> cargoSet = new HashSet<Cargo>();
+
     /**
      * Instantiates a new Order.
      */
@@ -132,6 +136,14 @@ public class Order {
      */
     public void setDriverSet(Set<Driver> driverSet) {
         this.driverSet = driverSet;
+    }
+
+    public Set<Cargo> getCargoSet() {
+        return cargoSet;
+    }
+
+    public void setCargoSet(Set<Cargo> cargoSet) {
+        this.cargoSet = cargoSet;
     }
 
     @Override

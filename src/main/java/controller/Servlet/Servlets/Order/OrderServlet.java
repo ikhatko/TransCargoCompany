@@ -1,8 +1,10 @@
 package controller.Servlet.Servlets.Order;
 
+import model.Entities.Cargo;
 import model.Entities.Order;
 import model.Entities.User;
 import org.hibernate.SessionFactory;
+import services.Cargo.GetFreeCargoes;
 import services.Order.GetAllOrders;
 import services.Order.RemoveOrder;
 import services.Order.UpdateOrder;
@@ -27,7 +29,11 @@ public class OrderServlet extends HttpServlet {
         SessionFactory sessionFactory = (SessionFactory)
                 req.getServletContext().getAttribute("SessionFactory");
         List<Order> allOrders = GetAllOrders.getAllOrders(sessionFactory);
+        List<Cargo> cargos = GetFreeCargoes.getFreeCargoes(sessionFactory);
+
         req.setAttribute("resultList", allOrders);
+        req.setAttribute("cargoesList", cargos);
+
         User user = (User) req.getSession().getAttribute("user");
         String userRole = CheckUserRole.getUserRole(user);
         if (!userRole.equals("public")) {

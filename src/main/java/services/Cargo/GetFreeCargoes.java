@@ -12,11 +12,11 @@ import java.util.List;
 /**
  * The type Get all cargoes.
  */
-public final class GetAllCargoes {
+public final class GetFreeCargoes {
 
-    private static Logger logger = Logger.getLogger(GetAllCargoes.class);
+    private static Logger logger = Logger.getLogger(GetFreeCargoes.class);
 
-    private GetAllCargoes() {
+    private GetFreeCargoes() {
     }
 
     /**
@@ -25,8 +25,8 @@ public final class GetAllCargoes {
      * @param sessionFactory the session factory
      * @return the all cargoes
      */
-    public static List getAllCargoes(SessionFactory sessionFactory) {
-        logger.info("Trying to get all cargoes");
+    public static List getFreeCargoes(SessionFactory sessionFactory) {
+        logger.info("Trying to get all free cargoes.");
         Session session = null;
         List<Cargo> all = null;
         try {
@@ -34,13 +34,13 @@ public final class GetAllCargoes {
             CargoDAOImlp cargoDAO = new CargoDAOImlp(session);
 
             Transaction transaction = session.beginTransaction();
-            all = cargoDAO.getAll();
+            all = cargoDAO.getFreeCargoes();
             transaction.commit();
 
             if (!all.isEmpty()) {
-                logger.info("List of cargoes successfully received");
+                logger.info("List of free cargoes successfully received");
             } else {
-                logger.info("Cargoes list is empty.");
+                logger.info("Free cargoes list is empty.");
             }
         } catch (Exception e) {
             e.printStackTrace();

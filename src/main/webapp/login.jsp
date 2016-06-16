@@ -19,10 +19,10 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
-                            <a href="#" class="active" id="login-form-link">Login</a>
+                            <a href="#" id="login-form-link">Login</a>
                         </div>
                         <div class="col-xs-6">
-                            <a href="#" id="register-form-link">Register</a>
+                            <a href="#" class="active" id="register-form-link">Register</a>
                         </div>
                     </div>
                     <hr>
@@ -69,8 +69,8 @@
                                 </div>
                             </form>
                             <form data-toggle="validator" id="register-form" action="/Register" method="post"
-                                  role="form" style="display: none;">
-                                <script>$('#myForm').validator()</script>
+                                  role="form" style="display: block;">
+
                                 <div class="form-group">
                                     <label for="firstName" class="control-label">First Name</label>
                                     <input type="text" name="firstName" id="firstName" tabindex="1" class="form-control"
