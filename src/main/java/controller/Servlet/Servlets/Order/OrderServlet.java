@@ -1,13 +1,13 @@
 package controller.Servlet.Servlets.Order;
 
-import model.Entities.Cargo;
-import model.Entities.Order;
-import model.Entities.User;
+import model.Entities.*;
 import org.hibernate.SessionFactory;
 import services.Cargo.GetFreeCargoes;
+import services.Driver.GetAllFreeDrivers;
 import services.Order.GetAllOrders;
 import services.Order.RemoveOrder;
 import services.Order.UpdateOrder;
+import services.Wagon.GetAllFreeAndReadyWagons;
 import utils.servlet.CheckUserRole;
 
 import javax.servlet.ServletException;
@@ -29,10 +29,14 @@ public class OrderServlet extends HttpServlet {
         SessionFactory sessionFactory = (SessionFactory)
                 req.getServletContext().getAttribute("SessionFactory");
         List<Order> allOrders = GetAllOrders.getAllOrders(sessionFactory);
-        List<Cargo> cargos = GetFreeCargoes.getFreeCargoes(sessionFactory);
+        List<Cargo> cargoes = GetFreeCargoes.getFreeCargoes(sessionFactory);
+        List<Wagon> wagons = GetAllFreeAndReadyWagons.getAllFreeAndReadyWagons(sessionFactory);
+        List<Driver> drivers = GetAllFreeDrivers.getAllFreeDrivers(sessionFactory);
 
         req.setAttribute("resultList", allOrders);
-        req.setAttribute("cargoesList", cargos);
+        req.setAttribute("cargoesList", cargoes);
+        req.setAttribute("wagonsList", wagons);
+        req.setAttribute("driversList", drivers);
 
         User user = (User) req.getSession().getAttribute("user");
         String userRole = CheckUserRole.getUserRole(user);

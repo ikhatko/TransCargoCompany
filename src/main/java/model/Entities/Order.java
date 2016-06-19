@@ -21,6 +21,10 @@ public class Order {
     @GeneratedValue
     private int orderId;
 
+    private float maxWeight;
+
+    private float maxHeight;
+
     @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     private OrderStatus orderStatus;

@@ -47,7 +47,7 @@ public class Cargo {
 
     @Override
     public String toString() {
-        return "" + cargoId;
+        return "" + name;
     }
 
     public Set<Waypoint> getWaypoints() {

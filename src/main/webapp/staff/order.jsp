@@ -1,6 +1,8 @@
-<%@ page import="model.Entities.Order" %>
-<%@ page import="java.util.List" %>
 <%@ page import="model.Entities.Cargo" %>
+<%@ page import="model.Entities.Order" %>
+<%@ page import="model.Entities.Wagon" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Entities.Driver" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -61,16 +63,18 @@
                     </th>
                     <th>
                         Order Status
-
+                    </th>
+                    <th>
+                        Cargoes List
                     </th>
                     <th>
                         Order Wagon
                     </th>
                     <th>
-                        Waypoint List
+                        Driver
                     </th>
                     <th>
-                        Driver Set
+                        Waypoints Set
                     </th>
                     <th>
                         Edit
@@ -112,9 +116,9 @@
                                     <form class="form-horizontal" method="post">
                                         <fieldset>
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="idmodal">Order ID</label>
+                                                <label class="col-md-4 control-label" for="idmodalES">Order ID</label>
                                                 <div class="col-md-4">
-                                                    <input id="idmodal" value="<%=order.getOrderId()%>" name="id"
+                                                    <input id="idmodalES" value="<%=order.getOrderId()%>" name="id"
                                                            class="form-control input-md" type="text"
                                                            readonly="readonly">
                                                 </div>
@@ -207,7 +211,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="submit">Save changes</label>
                                                 <div class="col-md-4">
-                                                    <button id="submitEditStatus" type="submit" class="btn btn-primary">
+                                                    <button id="submitCargo" type="submit" class="btn btn-primary">
                                                         Save
                                                     </button>
                                                 </div>
@@ -243,18 +247,28 @@
                                         <h4 class="modal-title">Edit wagon</h4>
                                     </div>
                                     <br>
-                                    <form class="form-horizontal" method="post" action="EditOrderWagon">
+                                    <form class="form-horizontal" method="post" action="/EditOrderWagon">
                                         <fieldset>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="idmodalW">Order ID</label>
+                                                <div class="col-md-4">
+                                                    <input id="idmodalW" value="<%=order.getOrderId()%>" name="id"
+                                                           class="form-control input-md" type="text"
+                                                           readonly="readonly">
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="orderWagonEdit">Order
                                                     wagon</label>
                                                 <div class="col-md-4">
                                                     <select id="orderWagonEdit" name="orderWagon"
                                                             class="form-control">
-                                                        <%--FOREACH--%>
-                                                        <option selected disabled>Choose order status</option>
-                                                        <option value="1">Not done</option>
-                                                        <option value="2">Done</option>
+                                                        <option selected disabled>Choose wagon</option>
+                                                        <% List<Wagon> wagonsList = (List<Wagon>) request.getAttribute("wagonsList");
+                                                            for (Wagon wagon : wagonsList) {
+                                                        %>
+                                                        <option value="<%=wagon.getWagonId()%>"><%=wagon.getLicensePlate()%></option>
+                                                        <%}%>
                                                     </select>
                                                 </div>
                                             </div>
@@ -284,7 +298,68 @@
                     <%--drivers--%>
                     <td>
                         <%=order.getDriverSet()%>
-                        <%--CURRENT WAGON DRIVERS--%>
+                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#myModalD<%=id%>">
+                            Edit
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModalD<%=id%>" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Edit wagon</h4>
+                                    </div>
+                                    <br>
+                                    <form class="form-horizontal" method="post" action="/EditOrderDriver">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="idmodalD">Order ID</label>
+                                                <div class="col-md-4">
+                                                    <input id="idmodalD" value="<%=order.getOrderId()%>" name="id"
+                                                           class="form-control input-md" type="text"
+                                                           readonly="readonly">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="orderWagonEdit">Order
+                                                    driver</label>
+                                                <div class="col-md-4">
+                                                    <select id="orderDriverEdit" name="orderDriver"
+                                                            class="form-control">
+                                                        <option selected disabled>Choose driver</option>
+                                                        <% List<Driver> driversList = (List<Driver>) request.getAttribute("driversList");
+                                                            for (Driver driver : driversList) {
+                                                        %>
+                                                        <option value="<%=driver.getDriverId()%>"><%=driver.getFirstName()%> <%=driver.getLastName()%> </option>
+                                                        <%}%>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- Button -->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="submit">Save changes</label>
+                                                <div class="col-md-4">
+                                                    <button id="submit-driver" type="submit" class="btn btn-primary">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+                                    </form>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </td>
                     <%--waypoints--%>
                     <td>

@@ -18,9 +18,16 @@ public class CargoesToOrder extends HttpServlet {
             throws ServletException, IOException {
         SessionFactory sessionFactory = (SessionFactory)
                 req.getServletContext().getAttribute("SessionFactory");
-        int[] addedCargoes = Arrays.stream(req.getParameterValues("addedCargoes")).mapToInt(Integer::parseInt).toArray();
-        int id = Integer.parseInt(req.getParameter("id"));
-        SetCargoesToOrder.setCargoesToOrder(addedCargoes, id, sessionFactory);
+        String[] addedCargoes1 = req.getParameterValues("addedCargoes");
+        String id1 = req.getParameter("id");
+
+        if (id1 != null && addedCargoes1 != null) {
+            int[] addedCargoes =
+                    Arrays.stream(addedCargoes1).mapToInt(Integer::parseInt).toArray();
+            int id = Integer.parseInt(id1);
+            SetCargoesToOrder.setCargoesToOrder(addedCargoes,
+                    id, sessionFactory);
+        }
         resp.sendRedirect("/Order");
     }
 }

@@ -13,8 +13,6 @@ public class City {
 
     private String cityName;
 
-    private long distance;
-
     /**
      * Instantiates a new City.
      */
@@ -25,11 +23,9 @@ public class City {
      * Instantiates a new City.
      *
      * @param cityName the city name
-     * @param distance the distance
      */
-    public City(String cityName, long distance) {
+    public City(String cityName) {
         this.cityName = cityName;
-        this.distance = distance;
     }
 
     /**
@@ -68,26 +64,8 @@ public class City {
         this.cityName = cityName;
     }
 
-    /**
-     * Gets distance.
-     *
-     * @return the distance
-     */
-    public long getDistance() {
-        return distance;
-    }
-
-    /**
-     * Sets distance.
-     *
-     * @param distance the distance
-     */
-    public void setDistance(long distance) {
-        this.distance = distance;
-    }
-
     @Override
     public String toString() {
-        return "" + cityId;
+        return "" + cityName;
     }
 }

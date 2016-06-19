@@ -23,7 +23,7 @@ public class UpdateCity {
      * @param distance       the distance
      * @param sessionFactory the session factory
      */
-    public static void updateCity(int id, String cityName, String distance, SessionFactory sessionFactory) {
+    public static void updateCity(int id, String cityName, SessionFactory sessionFactory) {
 
         logger.info("Trying to update city with id:" + id);
         Session session = null;
@@ -34,9 +34,7 @@ public class UpdateCity {
             City city = (City) cityDAO.read(id);
 
             city.setCityName(cityName);
-            if (distance != null && !distance.equals("")) {
-                city.setDistance(Long.parseLong(distance));
-            }
+
             Transaction transaction = session.beginTransaction();
             transaction.commit();
 
