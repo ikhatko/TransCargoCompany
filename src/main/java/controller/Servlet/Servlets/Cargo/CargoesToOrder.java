@@ -2,6 +2,7 @@ package controller.Servlet.Servlets.Cargo;
 
 import org.hibernate.SessionFactory;
 import services.Cargo.SetCargoesToOrder;
+import services.Order.SetWeightAndVolume;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +29,8 @@ public class CargoesToOrder extends HttpServlet {
             SetCargoesToOrder.setCargoesToOrder(addedCargoes,
                     id, sessionFactory);
         }
+        SetWeightAndVolume setWeightAndVolume = new SetWeightAndVolume();
+        setWeightAndVolume.setMaxWeightAndVolume(id1, sessionFactory);
         resp.sendRedirect("/Order");
     }
 }

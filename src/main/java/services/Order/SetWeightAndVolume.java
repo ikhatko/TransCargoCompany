@@ -37,12 +37,10 @@ public class SetWeightAndVolume {
 
             List<Waypoint> orderWaypoints = GetOrderWaypoints.getOrderWaypoints(orderId, sessionFactory);
             String[] waypointsCities = getWaypointsCities(orderWaypoints);
-            for (String waypointsCity : waypointsCities) {
-                System.out.println(waypointsCity);
-            }
             String[] strings = removeDuplicateCities(waypointsCities);
             String[] trueOrder = getTrueOrder(strings);
             List<Waypoint> trueWaypointOrder = getTrueWaypointsOrder(trueOrder, orderWaypoints);
+            order.setWaypointList(trueWaypointOrder);
             order.setMaxVolume(maxVolume);
             order.setMaxWeight(maxWeight);
             transaction.commit();
@@ -70,9 +68,6 @@ public class SetWeightAndVolume {
 
     private String[] getTrueOrder(String[] citiesName) {
         String[] trueOrder = new String[citiesName.length + 1];
-        for (String s : citiesName) {
-            System.out.println("city: " + s);
-        }
         GeoApiContext context = new GeoApiContext();
         context.setApiKey(API_KEY);
         try {
@@ -141,7 +136,9 @@ public class SetWeightAndVolume {
                 }
             }
         }
-
+        for (Waypoint waypoint : result) {
+            System.out.println(waypoint.getWaypointCity() + " " + waypoint.getWaypointType() + " " + waypoint.getWaypointCargo().getName());
+        }
         return result;
     }
 

@@ -17,10 +17,10 @@ public class EditOrderDriver extends HttpServlet {
             throws ServletException, IOException {
         SessionFactory sessionFactory = (SessionFactory)
                 req.getServletContext().getAttribute("SessionFactory");
-        String orderDriver = req.getParameter("orderDriver");
+        String[] orderDrivers = req.getParameterValues("orderDriver");
         String id = req.getParameter("id");
-        if (id != null && orderDriver != null) {
-            AddDriverToOrder.addDriverToOrder(orderDriver, id, sessionFactory);
+        if (id != null && orderDrivers != null) {
+            AddDriverToOrder.addDriverToOrder(orderDrivers, id, sessionFactory);
         }
         resp.sendRedirect("/Order");
     }
