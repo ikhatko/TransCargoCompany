@@ -69,7 +69,7 @@
                                 </div>
                             </form>
                             <form data-toggle="validator" id="register-form" action="/Register" method="post"
-                                  role="form" style="display: block;">
+                                  role="form" style="display: none;">
 
                                 <div class="form-group">
                                     <label for="firstName" class="control-label">First Name</label>

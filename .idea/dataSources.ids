@@ -203,7 +203,7 @@
       <column id="57" parent="8" name="order_wagon">
         <data-type>int(11)</data-type>
       </column>
-      <column id="58" parent="8" name="max_height">
+      <column id="58" parent="8" name="max_volume">
         <mandatory>1</mandatory>
         <data-type>float</data-type>
       </column>

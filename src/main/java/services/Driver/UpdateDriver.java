@@ -41,7 +41,7 @@ public class UpdateDriver {
             driver.setFirstName(firstName);
             driver.setLastName(lastName);
 
-            if (driverStatusId != null && !hours.equals("null") && !hours.equals("")) {
+            if (driverStatusId != null && !driverStatusId.equals("null") && !driverStatusId.equals("")) {
                 DriverStatus driverStatus = new DriverStatus();
                 driverStatus.setDriverStatusId(Integer.parseInt(driverStatusId));
                 driver.setDriverStatus(driverStatus);

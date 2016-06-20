@@ -23,7 +23,7 @@ public class Order {
 
     private float maxWeight;
 
-    private float maxHeight;
+    private float maxVolume;
 
     @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
@@ -38,11 +38,11 @@ public class Order {
     private List<Waypoint> waypointList = new ArrayList<Waypoint>();
 
     @OneToMany(mappedBy = "currentOrder", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @Fetch (FetchMode.SELECT)
+    @Fetch(FetchMode.SELECT)
     private Set<Driver> driverSet = new HashSet<Driver>();
 
     @OneToMany(mappedBy = "cargoOrder", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @Fetch (FetchMode.SELECT)
+    @Fetch(FetchMode.SELECT)
     private Set<Cargo> cargoSet = new HashSet<Cargo>();
 
     /**
@@ -148,6 +148,22 @@ public class Order {
 
     public void setCargoSet(Set<Cargo> cargoSet) {
         this.cargoSet = cargoSet;
+    }
+
+    public float getMaxWeight() {
+        return maxWeight;
+    }
+
+    public void setMaxWeight(float maxWeight) {
+        this.maxWeight = maxWeight;
+    }
+
+    public float getMaxVolume() {
+        return maxVolume;
+    }
+
+    public void setMaxVolume(float maxVolume) {
+        this.maxVolume = maxVolume;
     }
 
     @Override

@@ -77,6 +77,12 @@
                         Waypoints Set
                     </th>
                     <th>
+                        Order max weight
+                    </th>
+                    <th>
+                        Order max volume
+                    </th>
+                    <th>
                         Edit
                     </th>
                     <th>
@@ -199,7 +205,8 @@
                                                     %>
                                                     <div class="checkbox">
                                                         <label for="checkboxes<%=cargoId%>">
-                                                            <input name="addedCargoes" id="checkboxes<%=cargoId%>" value="<%=cargoId%>" type="checkbox">
+                                                            <input name="addedCargoes" id="checkboxes<%=cargoId%>"
+                                                                   value="<%=cargoId%>" type="checkbox">
                                                             <%=cargo.getName()%>
                                                         </label>
                                                     </div>
@@ -264,11 +271,18 @@
                                                     <select id="orderWagonEdit" name="orderWagon"
                                                             class="form-control">
                                                         <option selected disabled>Choose wagon</option>
-                                                        <% List<Wagon> wagonsList = (List<Wagon>) request.getAttribute("wagonsList");
+                                                        <%
+                                                            List<Wagon> wagonsList = (List<Wagon>) request.getAttribute("wagonsList");
                                                             for (Wagon wagon : wagonsList) {
+                                                                if (wagon.getMaxVolume() >= order.getMaxVolume()
+                                                                        && wagon.getMaxWeight() >= order.getMaxWeight()) {
                                                         %>
-                                                        <option value="<%=wagon.getWagonId()%>"><%=wagon.getLicensePlate()%></option>
-                                                        <%}%>
+                                                        <option value="<%=wagon.getWagonId()%>"><%=wagon.getLicensePlate()%>
+                                                        </option>
+                                                        <%
+                                                                }
+                                                            }
+                                                        %>
                                                     </select>
                                                 </div>
                                             </div>
@@ -323,22 +337,58 @@
                                                            readonly="readonly">
                                                 </div>
                                             </div>
+                                            <%
+                                                List<Driver> driversList = (List<Driver>) request.getAttribute("driversList");
+                                                if (order.getOrderWagon().getDriversChange() == 1) {
+                                            %>
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="orderWagonEdit">Order
+                                                <label class="col-md-4 control-label" for="orderDriverEdit">Order
                                                     driver</label>
                                                 <div class="col-md-4">
                                                     <select id="orderDriverEdit" name="orderDriver"
                                                             class="form-control">
                                                         <option selected disabled>Choose driver</option>
-                                                        <% List<Driver> driversList = (List<Driver>) request.getAttribute("driversList");
+                                                        <%
                                                             for (Driver driver : driversList) {
                                                         %>
-                                                        <option value="<%=driver.getDriverId()%>"><%=driver.getFirstName()%> <%=driver.getLastName()%> </option>
+                                                        <option value="<%=driver.getDriverId()%>"><%=driver.getFirstName()%> <%=driver.getLastName()%>
+                                                        </option>
                                                         <%}%>
                                                     </select>
                                                 </div>
                                             </div>
-
+                                            <!-- Button -->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="submit">Save
+                                                    changes</label>
+                                                <div class="col-md-4">
+                                                    <button id="submit-driver1" type="submit"
+                                                            class="btn btn-primary">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <%
+                                            } else if (order.getOrderWagon().getDriversChange() == 2) {
+                                            %>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="checkboxes">Select two
+                                                    drivers</label>
+                                                <div class="col-md-4">
+                                                    <%
+                                                        for (Driver driver : driversList) {
+                                                    %>
+                                                    <div class="checkbox">
+                                                        <label for="checkboxes<%=driver.getDriverId()%>">
+                                                            <input name="orderDriver"
+                                                                   id="checkboxes<%=driver.getDriverId()%>"
+                                                                   value="<%=driver.getDriverId()%>" type="checkbox">
+                                                            <%=driver.getFirstName()%> <%=driver.getLastName()%>
+                                                        </label>
+                                                    </div>
+                                                    <%}%>
+                                                </div>
+                                            </div>
                                             <!-- Button -->
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="submit">Save changes</label>
@@ -348,7 +398,7 @@
                                                     </button>
                                                 </div>
                                             </div>
-
+                                            <%}%>
                                         </fieldset>
                                     </form>
 
@@ -357,7 +407,6 @@
                                         </button>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </td>
@@ -365,6 +414,16 @@
                     <td>
                         <%=order.getWaypointList()%>
                         <%--SHOW ALL WAYPOINTS--%>
+
+                    </td>
+                    <%--weight--%>
+                    <td>
+                        <%=order.getMaxWeight()%>
+
+                    </td>
+                    <%--volume--%>
+                    <td>
+                        <%=order.getMaxVolume()%>
 
                     </td>
                     <%--main edit--%>
