@@ -1,0 +1,15 @@
+INSERT INTO testbase.city (city_name) VALUES ('St Petersburg, Russia');
+INSERT INTO testbase.city (city_name) VALUES ('Moscow');
+INSERT INTO testbase.city (city_name) VALUES ('Minsk');
+INSERT INTO testbase.city (city_name) VALUES ('Pskov');
+INSERT INTO testbase.city (city_name) VALUES ('Novgorod');
+INSERT INTO testbase.city (city_name) VALUES ('Tver');
+INSERT INTO testbase.city (city_name) VALUES ('Yaroslavl');
+INSERT INTO testbase.city (city_name) VALUES ('Vologda');
+INSERT INTO testbase.city (city_name) VALUES ('Petrozavodsk');
+INSERT INTO testbase.city (city_name) VALUES ('Kiev');
+INSERT INTO testbase.city (city_name) VALUES ('Oryol');
+INSERT INTO testbase.city (city_name) VALUES ('Kazan');
+INSERT INTO testbase.city (city_name) VALUES ('Samara');
+INSERT INTO testbase.city (city_name) VALUES ('Chelyabinsk');
+INSERT INTO testbase.city (city_name) VALUES ('Astana');
