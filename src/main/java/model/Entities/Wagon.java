@@ -201,8 +201,11 @@ public class Wagon {
         this.wagonStatus = wagonStatus;
     }
 
+
     @Override
     public String toString() {
-        return "" + wagonId;
+        return "" + licensePlate;
     }
+
+
 }

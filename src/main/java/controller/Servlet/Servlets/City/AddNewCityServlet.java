@@ -23,8 +23,7 @@ public class AddNewCityServlet extends HttpServlet {
         SessionFactory sessionFactory = (SessionFactory)
                 req.getServletContext().getAttribute("SessionFactory");
         String cityName = req.getParameter("cityName");
-        String distance = req.getParameter("distance");
-        if (AddNewCity.addNewCity(cityName, distance, sessionFactory)) {
+        if (AddNewCity.addNewCity(cityName, sessionFactory)) {
             req.getSession().setAttribute("errorMsg",
                     "<div class=\"alert alert-success\">\n"
                             + "  <a href=\"#\" class=\"close\" "

@@ -18,11 +18,10 @@ public class AddNewCity {
      * Add new city boolean.
      *
      * @param cityName       the city name
-     * @param distance       the distance
      * @param sessionFactory the session factory
      * @return the boolean
      */
-    public static boolean addNewCity(String cityName, String distance,
+    public static boolean addNewCity(String cityName,
                                      SessionFactory sessionFactory) {
         boolean result = false;
         Session session = null;
@@ -31,7 +30,7 @@ public class AddNewCity {
         try {
             session = sessionFactory.openSession();
             CityDAOImpl cityDAO = new CityDAOImpl(session);
-            city = new City(cityName, Long.parseLong(distance));
+            city = new City(cityName);
             Transaction transaction = session.beginTransaction();
             cityDAO.create(city);
             transaction.commit();

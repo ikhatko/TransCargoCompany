@@ -40,7 +40,7 @@ public class Waypoint {
 
     @Override
     public String toString() {
-        return "" + waypointId;
+        return waypointCargo + " " + waypointCity + " " + waypointType.getWaypointStatusName() + "<br>";
     }
 
     /**

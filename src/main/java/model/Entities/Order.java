@@ -21,6 +21,10 @@ public class Order {
     @GeneratedValue
     private int orderId;
 
+    private float maxWeight;
+
+    private float maxVolume;
+
     @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     private OrderStatus orderStatus;
@@ -34,8 +38,13 @@ public class Order {
     private List<Waypoint> waypointList = new ArrayList<Waypoint>();
 
     @OneToMany(mappedBy = "currentOrder", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-    @Fetch (FetchMode.SELECT)
-    private Set<Driver> driverSet = new HashSet<Driver>();
+    @Fetch(FetchMode.SELECT)
+    private List<Driver> driverSet = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cargoOrder", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    private Set<Cargo> cargoSet = new HashSet<Cargo>();
+
 
     /**
      * Instantiates a new Order.
@@ -121,17 +130,38 @@ public class Order {
      *
      * @return the driver set
      */
-    public Set<Driver> getDriverSet() {
+
+    public void setCargoSet(Set<Cargo> cargoSet) {
+        this.cargoSet = cargoSet;
+    }
+
+    public List<Driver> getDriverSet() {
         return driverSet;
     }
 
-    /**
-     * Sets driver set.
-     *
-     * @param driverSet the driver set
-     */
-    public void setDriverSet(Set<Driver> driverSet) {
+    public void setDriverSet(List<Driver> driverSet) {
         this.driverSet = driverSet;
+    }
+
+    public Set<Cargo> getCargoSet() {
+        return cargoSet;
+    }
+
+
+    public float getMaxWeight() {
+        return maxWeight;
+    }
+
+    public void setMaxWeight(float maxWeight) {
+        this.maxWeight = maxWeight;
+    }
+
+    public float getMaxVolume() {
+        return maxVolume;
+    }
+
+    public void setMaxVolume(float maxVolume) {
+        this.maxVolume = maxVolume;
     }
 
     @Override

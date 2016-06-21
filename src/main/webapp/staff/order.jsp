@@ -1,5 +1,8 @@
+<%@ page import="model.Entities.Cargo" %>
 <%@ page import="model.Entities.Order" %>
+<%@ page import="model.Entities.Wagon" %>
 <%@ page import="java.util.List" %>
+<%@ page import="model.Entities.Driver" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -62,13 +65,22 @@
                         Order Status
                     </th>
                     <th>
+                        Cargoes List
+                    </th>
+                    <th>
                         Order Wagon
                     </th>
                     <th>
-                        Waypoint List
+                        Driver
                     </th>
                     <th>
-                        Driver Set
+                        Waypoints Set
+                    </th>
+                    <th>
+                        Order max weight
+                    </th>
+                    <th>
+                        Order max volume
                     </th>
                     <th>
                         Edit
@@ -85,21 +97,336 @@
                         int id = order.getOrderId();
                 %>
                 <tr>
+                    <%--id--%>
                     <td>
                         <%=id%>
                     </td>
+                    <%--status--%>
                     <td>
                         <%=order.getOrderStatus()%>
+                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#myModalES<%=id%>">
+                            Edit
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModalES<%=id%>" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Edit status</h4>
+                                    </div>
+                                    <br>
+                                    <form class="form-horizontal" method="post">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="idmodalES">Order ID</label>
+                                                <div class="col-md-4">
+                                                    <input id="idmodalES" value="<%=order.getOrderId()%>" name="id"
+                                                           class="form-control input-md" type="text"
+                                                           readonly="readonly">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="orderStatusModal1">Order
+                                                    status</label>
+                                                <div class="col-md-4">
+                                                    <select id="orderStatusModal1" name="orderStatusId"
+                                                            class="form-control">
+                                                        <option selected disabled>Choose order status</option>
+                                                        <option value="1">Not done</option>
+                                                        <option value="2">Done</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- Button -->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="submit">Save changes</label>
+                                                <div class="col-md-4">
+                                                    <button id="submitEditStatus" type="submit" class="btn btn-primary">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+                                    </form>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </td>
+                    <%--cargoes--%>
+                    <td>
+                        <%=order.getCargoSet()%>
+                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#myModalEC<%=id%>">
+                            Edit
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModalEC<%=id%>" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Edit status</h4>
+                                    </div>
+                                    <br>
+                                    <form class="form-horizontal" method="post" action="/CargoesToOrder">
+                                        <fieldset>
+
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="idmodalSC">Order ID</label>
+                                                <div class="col-md-4">
+                                                    <input id="idmodalSC" value="<%=order.getOrderId()%>" name="id"
+                                                           class="form-control input-md" type="text"
+                                                           readonly="readonly">
+                                                </div>
+                                            </div>
+                                            <!-- Multiple Checkboxes -->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Choose cargoes</label>
+                                                <div class="col-md-4">
+                                                    <%
+                                                        List<Cargo> cargoesList = (List<Cargo>) request.getAttribute("cargoesList");
+                                                        for (Cargo cargo : cargoesList) {
+                                                            int cargoId = cargo.getCargoId();
+                                                    %>
+                                                    <div class="checkbox">
+                                                        <label for="checkboxes<%=cargoId%>">
+                                                            <input name="addedCargoes" id="checkboxes<%=cargoId%>"
+                                                                   value="<%=cargoId%>" type="checkbox">
+                                                            <%=cargo.getName()%>
+                                                        </label>
+                                                    </div>
+                                                    <%}%>
+                                                </div>
+                                            </div>
+
+                                            <!-- Button -->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="submit">Save changes</label>
+                                                <div class="col-md-4">
+                                                    <button id="submitCargo" type="submit" class="btn btn-primary">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+                                    </form>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </td>
+                    <%--wagon--%>
                     <td>
                         <%=order.getOrderWagon()%>
+                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#myModalEW<%=id%>">
+                            Edit
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModalEW<%=id%>" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Edit wagon</h4>
+                                    </div>
+                                    <br>
+                                    <form class="form-horizontal" method="post" action="/EditOrderWagon">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="idmodalW">Order ID</label>
+                                                <div class="col-md-4">
+                                                    <input id="idmodalW" value="<%=order.getOrderId()%>" name="id"
+                                                           class="form-control input-md" type="text"
+                                                           readonly="readonly">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="orderWagonEdit">Order
+                                                    wagon</label>
+                                                <div class="col-md-4">
+                                                    <select id="orderWagonEdit" name="orderWagon"
+                                                            class="form-control">
+                                                        <option selected disabled>Choose wagon</option>
+                                                        <%
+                                                            List<Wagon> wagonsList = (List<Wagon>) request.getAttribute("wagonsList");
+                                                            for (Wagon wagon : wagonsList) {
+                                                                if (wagon.getMaxVolume() >= order.getMaxVolume()
+                                                                        && wagon.getMaxWeight() >= order.getMaxWeight()) {
+                                                        %>
+                                                        <option value="<%=wagon.getWagonId()%>"><%=wagon.getLicensePlate()%>
+                                                        </option>
+                                                        <%
+                                                                }
+                                                            }
+                                                        %>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <!-- Button -->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="submit">Save changes</label>
+                                                <div class="col-md-4">
+                                                    <button id="submit-modal" type="submit" class="btn btn-primary">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </fieldset>
+                                    </form>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </td>
-                    <td>
-                        <%=order.getWaypointList()%>
-                    </td>
+                    <%--drivers--%>
                     <td>
                         <%=order.getDriverSet()%>
+                        <button type="button" class="btn btn-success" data-toggle="modal"
+                                data-target="#myModalD<%=id%>">
+                            Edit
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModalD<%=id%>" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Edit wagon</h4>
+                                    </div>
+                                    <br>
+                                    <form class="form-horizontal" method="post" action="/EditOrderDriver">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="idmodalD">Order ID</label>
+                                                <div class="col-md-4">
+                                                    <input id="idmodalD" value="<%=order.getOrderId()%>" name="id"
+                                                           class="form-control input-md" type="text"
+                                                           readonly="readonly">
+                                                </div>
+                                            </div>
+                                            <%
+                                                List<Driver> driversList = (List<Driver>) request.getAttribute("driversList");
+                                                if (order.getOrderWagon().getDriversChange() == 1) {
+                                            %>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="orderDriverEdit">Order
+                                                    driver</label>
+                                                <div class="col-md-4">
+                                                    <select id="orderDriverEdit" name="orderDriver"
+                                                            class="form-control">
+                                                        <option selected disabled>Choose driver</option>
+                                                        <%
+                                                            for (Driver driver : driversList) {
+                                                        %>
+                                                        <option value="<%=driver.getDriverId()%>"><%=driver.getFirstName()%> <%=driver.getLastName()%>
+                                                        </option>
+                                                        <%}%>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!-- Button -->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="submit">Save
+                                                    changes</label>
+                                                <div class="col-md-4">
+                                                    <button id="submit-driver1" type="submit"
+                                                            class="btn btn-primary">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <%
+                                            } else if (order.getOrderWagon().getDriversChange() == 2) {
+                                            %>
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="checkboxes">Select two
+                                                    drivers</label>
+                                                <div class="col-md-4">
+                                                    <%
+                                                        for (Driver driver : driversList) {
+                                                    %>
+                                                    <div class="checkbox">
+                                                        <label for="checkboxes<%=driver.getDriverId()%>">
+                                                            <input name="orderDriver"
+                                                                   id="checkboxes<%=driver.getDriverId()%>"
+                                                                   value="<%=driver.getDriverId()%>" type="checkbox">
+                                                            <%=driver.getFirstName()%> <%=driver.getLastName()%>
+                                                        </label>
+                                                    </div>
+                                                    <%}%>
+                                                </div>
+                                            </div>
+                                            <!-- Button -->
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label" for="submit">Save changes</label>
+                                                <div class="col-md-4">
+                                                    <button id="submit-driver" type="submit" class="btn btn-primary">
+                                                        Save
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <%}%>
+                                        </fieldset>
+                                    </form>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </td>
+                    <%--waypoints--%>
+                    <td>
+                        <%=order.getWaypointList()%>
+                        <%--SHOW ALL WAYPOINTS--%>
+
+                    </td>
+                    <%--weight--%>
+                    <td>
+                        <%=order.getMaxWeight()%>
+
+                    </td>
+                    <%--volume--%>
+                    <td>
+                        <%=order.getMaxVolume()%>
+
+                    </td>
+                    <%--main edit--%>
                     <td>
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">
                             Edit
@@ -127,7 +454,8 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="orderStatusModal">Order status</label>
+                                                <label class="col-md-4 control-label" for="orderStatusModal">Order
+                                                    status</label>
                                                 <div class="col-md-4">
                                                     <select id="orderStatusModal" name="orderStatusId"
                                                             class="form-control">
@@ -175,7 +503,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="submit">Save changes</label>
                                                 <div class="col-md-4">
-                                                    <button id="submit-modal" type="submit" class="btn btn-primary">
+                                                    <button id="submit-modalMain" type="submit" class="btn btn-primary">
                                                         Save
                                                     </button>
                                                 </div>
@@ -193,6 +521,7 @@
                             </div>
                         </div>
                     </td>
+                    <%--delete--%>
                     <td>
                         <form action="/Order" method="post">
                             <div class="form-group">

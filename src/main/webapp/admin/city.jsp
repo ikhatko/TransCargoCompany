@@ -35,16 +35,6 @@
                         </div>
                     </div>
 
-                    <!-- Text input-->
-                    <div class="form-group">
-                        <label class="col-md-4 control-label" for="distance">Distance</label>
-                        <div class="col-md-4">
-                            <input id="distance" name="distance" placeholder="Distance" class="form-control input-md"
-                                   required="" type="text">
-
-                        </div>
-                    </div>
-
                     <!-- Button -->
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="submit"></label>
@@ -69,9 +59,6 @@
                         City Name
                     </th>
                     <th>
-                        City Distance
-                    </th>
-                    <th>
                         Edit
                     </th>
                     <th>
@@ -91,9 +78,6 @@
                     </td>
                     <td>
                         <%=city.getCityName()%>
-                    </td>
-                    <td>
-                        <%=city.getDistance()%>
                     </td>
                     <td>
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">
@@ -126,16 +110,6 @@
                                                 <div class="col-md-4">
                                                     <input id="cityNameModal" value="<%=city.getCityName()%>"
                                                            name="cityName" class="form-control input-md" type="text">
-                                                </div>
-                                            </div>
-
-                                            <!-- Text input-->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="distanceModal">City Distance</label>
-                                                <div class="col-md-4">
-                                                    <input id="distanceModal" name="distance"
-                                                           value="<%=city.getDistance()%>"
-                                                           class="form-control input-md" type="text">
                                                 </div>
                                             </div>
 

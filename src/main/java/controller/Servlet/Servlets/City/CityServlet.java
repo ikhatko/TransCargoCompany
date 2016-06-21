@@ -62,8 +62,7 @@ public class CityServlet extends HttpServlet {
             String id = req.getParameter("id");
             String cityName = req.getParameter("cityName");
             String distance = req.getParameter("distance");
-            UpdateCity.updateCity(Integer.parseInt(id), cityName,
-                    distance, sessionFactory);
+            UpdateCity.updateCity(Integer.parseInt(id), cityName, sessionFactory);
             doGet(req, resp);
         }
     }
