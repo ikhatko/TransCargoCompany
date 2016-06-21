@@ -32,4 +32,5 @@ public class OrderDAOImpl extends GenericDAOImpl implements OrderDAO {
         list = order.getWaypointList();
         return list;
     }
+
 }

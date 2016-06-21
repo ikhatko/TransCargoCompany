@@ -1,6 +1,7 @@
 package model.DAO.Interfaces;
 
 import model.Entities.Driver;
+import model.Entities.Order;
 
 import java.util.List;
 
@@ -9,4 +10,6 @@ import java.util.List;
  */
 public interface DriverDAO {
     List<Driver> getFreeDrivers();
+
+    Order getOrderByDriverId(int driverId);
 }

@@ -1,5 +1,6 @@
 package model.DAO.Interfaces;
 
+import model.Entities.Order;
 import model.Entities.Waypoint;
 
 import java.util.List;

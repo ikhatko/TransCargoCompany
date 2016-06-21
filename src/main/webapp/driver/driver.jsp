@@ -1,5 +1,3 @@
-<%@ page import="model.Entities.Waypoint" %>
-<%@ page import="java.util.List" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -16,9 +14,29 @@
         <%@include file="drivermenu.html" %>
         <br>
         <div class="col-sm-10">
-            <div class="well">
-                HELLO!
-            </div>
+            <form class="form-horizontal" action="/CurrentOrder">
+                <fieldset>
+                    <!-- Form Name -->
+                    <legend>Input your personal ID to view your order</legend>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="driverId">Input your ID</label>
+                        <div class="col-md-4">
+                            <input id="driverId" name="driverId" placeholder="your id" class="form-control input-md"
+                                   required="" type="text">
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="button"></label>
+                        <div class="col-md-4">
+                            <button id="button" class="btn btn-primary" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
 </div>

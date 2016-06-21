@@ -21,6 +21,7 @@ public class SetWeightAndVolume {
     private static final String API_KEY = "AIzaSyDIkAgFpUkSMtaQMqI3yOaA4dYh4PFlL2A";
     public static final int METERS_TO_KM = 1000;
     public static final int SEC_TO_HOURS = 3600;
+    public static final float COEFFICIENT = 1.1f;
 
     private float maxWeight;
     private float maxVolume;
@@ -31,6 +32,7 @@ public class SetWeightAndVolume {
 
     private static Logger logger = Logger.getLogger(SetWeightAndVolume.class);
     private static DirectionsResult directionsResult;
+    private static List<Waypoint> trueWaypointOrder;
 
     public void setMaxWeightAndVolume(String orderId, SessionFactory sessionFactory) {
         Session session = null;
@@ -44,14 +46,12 @@ public class SetWeightAndVolume {
             String[] waypointsCities = getWaypointsCities(orderWaypoints);
             String[] strings = removeDuplicateCities(waypointsCities);
             String[] trueOrder = getTrueOrder(strings);
-            List<Waypoint> trueWaypointOrder = getTrueWaypointsOrder(trueOrder, orderWaypoints);
-            order.setWaypointList(trueWaypointOrder);
+            trueWaypointOrder = getTrueWaypointsOrder(trueOrder, orderWaypoints);
+
             order.setMaxVolume(maxVolume);
             order.setMaxWeight(maxWeight);
-            System.out.println(distance);
-            System.out.println(duration);
             order.setRouteDistance(distance / METERS_TO_KM);
-            order.setRouteDuration(duration / SEC_TO_HOURS);
+            order.setRouteDuration(duration * COEFFICIENT / SEC_TO_HOURS);
             transaction.commit();
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -162,5 +162,9 @@ public class SetWeightAndVolume {
         if (volume > maxVolume) {
             maxVolume = volume;
         }
+    }
+
+    public static List<Waypoint> getTrueWaypointOrder() {
+        return trueWaypointOrder;
     }
 }
