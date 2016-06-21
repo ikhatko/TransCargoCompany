@@ -78,7 +78,7 @@
 
         </div>
         <br>
-        <div class="col-sm-10">
+        <div class="col-sm-12">
             <table class="table table-striped table-hover table-condensed table-responsive">
                 <thead>
                 <tr>

@@ -30,7 +30,7 @@ public class Cargo {
     @Cascade(CascadeType.PERSIST)
     private CargoStatus cargoStatus;
 
-    @OneToMany(mappedBy = "waypointCargo", cascade = javax.persistence.CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "waypointCargo", cascade = javax.persistence.CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     private Set<Waypoint> waypoints;
 

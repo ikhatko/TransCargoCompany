@@ -1,8 +1,6 @@
-<%@ page import="model.Entities.Cargo" %>
-<%@ page import="model.Entities.Order" %>
-<%@ page import="model.Entities.Wagon" %>
+<%@ page import="model.Entities.*" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.Entities.Driver" %>
+<%@ page import="java.util.Set" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -54,7 +52,7 @@
 
         </div>
         <br>
-        <div class="col-sm-10">
+        <div class="col-sm-12">
             <table class="table table-striped table-hover table-condensed table-responsive">
                 <thead>
                 <tr>
@@ -62,25 +60,35 @@
                         Id
                     </th>
                     <th>
-                        Order Status
+                        Status
                     </th>
                     <th>
-                        Cargoes List
+                        Cargoes
                     </th>
                     <th>
-                        Order Wagon
+                    </th>
+                    <th>
+                        Wagon
                     </th>
                     <th>
                         Driver
                     </th>
                     <th>
+                    </th>
+                    <th>
                         Waypoints Set
                     </th>
                     <th>
-                        Order max weight
+                        Weight(kg)
                     </th>
                     <th>
-                        Order max volume
+                        Volume(m3)
+                    </th>
+                    <th>
+                        Distance(km)
+                    </th>
+                    <th>
+                        Duration(h)
                     </th>
                     <th>
                         Edit
@@ -167,7 +175,15 @@
                     </td>
                     <%--cargoes--%>
                     <td>
-                        <%=order.getCargoSet()%>
+                        <%
+                            Set<Cargo> cargoList = order.getCargoSet();
+                            for (Cargo cargo : cargoList) {
+                        %>
+                        <%=cargo.getName()%><br>
+                        <%}%>
+                    </td>
+                    <%--button--%>
+                    <td>
                         <button type="button" class="btn btn-success" data-toggle="modal"
                                 data-target="#myModalEC<%=id%>">
                             Edit
@@ -197,7 +213,7 @@
                                             <!-- Multiple Checkboxes -->
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">Choose cargoes</label>
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <%
                                                         List<Cargo> cargoesList = (List<Cargo>) request.getAttribute("cargoesList");
                                                         for (Cargo cargo : cargoesList) {
@@ -207,7 +223,7 @@
                                                         <label for="checkboxes<%=cargoId%>">
                                                             <input name="addedCargoes" id="checkboxes<%=cargoId%>"
                                                                    value="<%=cargoId%>" type="checkbox">
-                                                            <%=cargo.getName()%>
+                                                            <%=cargo.getName()%> | <%=cargo.getVolume()%>m3 | <%=cargo.getWeight()%>kg
                                                         </label>
                                                     </div>
                                                     <%}%>
@@ -311,12 +327,19 @@
                     </td>
                     <%--drivers--%>
                     <td>
-                        <%=order.getDriverSet()%>
+                        <%
+                            List<Driver> driverSet = order.getDriverSet();
+                            for (Driver driver : driverSet) {
+                        %>
+                        <%=driver.getFirstName()%> <%=driver.getLastName()%><br>
+                        <%}%>
+                    </td>
+                    <%--button--%>
+                    <td>
                         <button type="button" class="btn btn-success" data-toggle="modal"
                                 data-target="#myModalD<%=id%>">
                             Edit
                         </button>
-
                         <!-- Modal -->
                         <div class="modal fade" id="myModalD<%=id%>" role="dialog">
                             <div class="modal-dialog">
@@ -339,7 +362,6 @@
                                             </div>
                                             <%
                                                 List<Driver> driversList = (List<Driver>) request.getAttribute("driversList");
-                                                if (order.getOrderWagon().getDriversChange() == 1) {
                                             %>
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="orderDriverEdit">Order
@@ -368,37 +390,6 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <%
-                                            } else if (order.getOrderWagon().getDriversChange() == 2) {
-                                            %>
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="checkboxes">Select two
-                                                    drivers</label>
-                                                <div class="col-md-4">
-                                                    <%
-                                                        for (Driver driver : driversList) {
-                                                    %>
-                                                    <div class="checkbox">
-                                                        <label for="checkboxes<%=driver.getDriverId()%>">
-                                                            <input name="orderDriver"
-                                                                   id="checkboxes<%=driver.getDriverId()%>"
-                                                                   value="<%=driver.getDriverId()%>" type="checkbox">
-                                                            <%=driver.getFirstName()%> <%=driver.getLastName()%>
-                                                        </label>
-                                                    </div>
-                                                    <%}%>
-                                                </div>
-                                            </div>
-                                            <!-- Button -->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="submit">Save changes</label>
-                                                <div class="col-md-4">
-                                                    <button id="submit-driver" type="submit" class="btn btn-primary">
-                                                        Save
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <%}%>
                                         </fieldset>
                                     </form>
 
@@ -412,9 +403,12 @@
                     </td>
                     <%--waypoints--%>
                     <td>
-                        <%=order.getWaypointList()%>
-                        <%--SHOW ALL WAYPOINTS--%>
-
+                        <%
+                            List<Waypoint> waypointList = order.getWaypointList();
+                            for (Waypoint waypoint : waypointList) {
+                        %>
+                        <%=waypoint.getWaypointCity()%> - <%=waypoint.getWaypointType().getWaypointStatusName()%> <br>
+                        <%}%>
                     </td>
                     <%--weight--%>
                     <td>
@@ -424,7 +418,14 @@
                     <%--volume--%>
                     <td>
                         <%=order.getMaxVolume()%>
-
+                    </td>
+                    <%--distance--%>
+                    <td>
+                        <%=order.getRouteDistance()%>
+                    </td>
+                    <%--duration--%>
+                    <td>
+                        <%=order.getRouteDuration()%>
                     </td>
                     <%--main edit--%>
                     <td>

@@ -29,6 +29,7 @@ public class UpdateWagon {
      */
     public static void updateWagon(int id, String licensePlate, String driversChange, String maxWeight,
                                    String maxVolume, String currentCityId, String wagonStatusId, SessionFactory sessionFactory) {
+
         logger.info("Trying to update Wagon with id:" + id);
         Session session = null;
 
@@ -38,11 +39,12 @@ public class UpdateWagon {
             Wagon wagon = (Wagon) wagonDAO.read(id);
 
             wagon.setLicensePlate(licensePlate);
+
             if (maxWeight != null && !maxWeight.equals("")) {
                 wagon.setMaxWeight(Float.parseFloat(maxWeight));
             }
             if (maxVolume != null && !maxVolume.equals("")) {
-                wagon.setMaxWeight(Float.parseFloat(maxVolume));
+                wagon.setMaxVolume(Float.parseFloat(maxVolume));
             }
             if (driversChange != null) {
                 wagon.setDriversChange(Integer.parseInt(driversChange));

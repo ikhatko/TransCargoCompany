@@ -25,6 +25,10 @@ public class Order {
 
     private float maxVolume;
 
+    private float routeDistance;
+
+    private float routeDuration;
+
     @ManyToOne
     @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     private OrderStatus orderStatus;
@@ -162,6 +166,23 @@ public class Order {
 
     public void setMaxVolume(float maxVolume) {
         this.maxVolume = maxVolume;
+    }
+
+
+    public float getRouteDistance() {
+        return routeDistance;
+    }
+
+    public void setRouteDistance(float routeDistance) {
+        this.routeDistance = routeDistance;
+    }
+
+    public float getRouteDuration() {
+        return routeDuration;
+    }
+
+    public void setRouteDuration(float routeDuration) {
+        this.routeDuration = routeDuration;
     }
 
     @Override

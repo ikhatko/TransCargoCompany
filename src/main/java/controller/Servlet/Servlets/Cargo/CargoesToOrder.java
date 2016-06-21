@@ -20,17 +20,17 @@ public class CargoesToOrder extends HttpServlet {
         SessionFactory sessionFactory = (SessionFactory)
                 req.getServletContext().getAttribute("SessionFactory");
         String[] addedCargoes1 = req.getParameterValues("addedCargoes");
-        String id1 = req.getParameter("id");
+        String cargoId = req.getParameter("id");
 
-        if (id1 != null && addedCargoes1 != null) {
+        if (cargoId != null && addedCargoes1 != null) {
             int[] addedCargoes =
                     Arrays.stream(addedCargoes1).mapToInt(Integer::parseInt).toArray();
-            int id = Integer.parseInt(id1);
+            int id = Integer.parseInt(cargoId);
             SetCargoesToOrder.setCargoesToOrder(addedCargoes,
                     id, sessionFactory);
         }
         SetWeightAndVolume setWeightAndVolume = new SetWeightAndVolume();
-        setWeightAndVolume.setMaxWeightAndVolume(id1, sessionFactory);
+        setWeightAndVolume.setMaxWeightAndVolume(cargoId, sessionFactory);
         resp.sendRedirect("/Order");
     }
 }

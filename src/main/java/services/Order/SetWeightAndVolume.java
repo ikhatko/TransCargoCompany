@@ -2,6 +2,7 @@ package services.Order;
 
 import com.google.maps.DirectionsApi;
 import com.google.maps.GeoApiContext;
+import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import model.DAO.Impl.OrderDAOImpl;
 import model.Entities.CargoStatus;
@@ -18,14 +19,18 @@ import java.util.*;
 public class SetWeightAndVolume {
 
     private static final String API_KEY = "AIzaSyDIkAgFpUkSMtaQMqI3yOaA4dYh4PFlL2A";
+    public static final int METERS_TO_KM = 1000;
+    public static final int SEC_TO_HOURS = 3600;
 
     private float maxWeight;
     private float maxVolume;
     private float currentWeight;
     private float currentVolume;
+    private float distance;
+    private float duration;
 
     private static Logger logger = Logger.getLogger(SetWeightAndVolume.class);
-    public static DirectionsResult directionsResult;
+    private static DirectionsResult directionsResult;
 
     public void setMaxWeightAndVolume(String orderId, SessionFactory sessionFactory) {
         Session session = null;
@@ -43,6 +48,10 @@ public class SetWeightAndVolume {
             order.setWaypointList(trueWaypointOrder);
             order.setMaxVolume(maxVolume);
             order.setMaxWeight(maxWeight);
+            System.out.println(distance);
+            System.out.println(duration);
+            order.setRouteDistance(distance / METERS_TO_KM);
+            order.setRouteDuration(duration / SEC_TO_HOURS);
             transaction.commit();
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -79,6 +88,10 @@ public class SetWeightAndVolume {
                     .await();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        for (DirectionsLeg leg : directionsResult.routes[0].legs) {
+            distance += leg.distance.inMeters;
+            duration += leg.duration.inSeconds;
         }
         int[] waypointOrder = directionsResult.routes[0].waypointOrder;
         trueOrder[0] = directionsResult.routes[0].legs[0].startAddress;

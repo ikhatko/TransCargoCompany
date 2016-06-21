@@ -18,43 +18,35 @@ import java.util.Set;
 public class AddDriverToOrder {
     private static Logger logger = Logger.getLogger(AddDriverToOrder.class);
 
-    public static void addDriverToOrder(String[] drivers, String orderId,
+    public static void addDriverToOrder(String driver, String orderId,
                                         SessionFactory sessionFactory) {
         logger.info("Trying to add drivers to order id:" + orderId);
         Session session = null;
         try {
             session = sessionFactory.openSession();
             OrderDAOImpl orderDAO = new OrderDAOImpl(session);
-            DriverDAOImpl wagonDAO = new DriverDAOImpl(session);
+            DriverDAOImpl driverDAO = new DriverDAOImpl(session);
 
             Transaction transaction = session.beginTransaction();
 
             Order order = (Order) orderDAO.read(Integer.parseInt(orderId));
 
             if (order.getOrderWagon().getDriversChange() == 1) {
-                Driver orderDriver = (Driver) wagonDAO.read(Integer.parseInt(drivers[0]));
+                Driver orderDriver = (Driver) driverDAO.read(Integer.parseInt(driver));
                 List<Driver> driverList = order.getDriverSet();
-                for (Driver driver : driverList) {
-                    driver.setCurrentOrder(null);
+                for (Driver drivers : driverList) {
+                    drivers.setCurrentOrder(null);
                     DriverStatus driverStatus = new DriverStatus();
                     driverStatus.setDriverStatusId(1);
-                    driver.setDriverStatus(driverStatus);
+                    drivers.setDriverStatus(driverStatus);
                 }
                 DriverStatus driverStatus = new DriverStatus();
                 driverStatus.setDriverStatusId(3);
                 orderDriver.setDriverStatus(driverStatus);
                 orderDriver.setCurrentOrder(order);
             } else if (order.getOrderWagon().getDriversChange() == 2) {
-                List<Driver> driverList = order.getDriverSet();
-                while (driverList.size() > 0) {
-                    driverList.get(0).setCurrentOrder(null);
-                    DriverStatus driverStatus = new DriverStatus();
-                    driverStatus.setDriverStatusId(1);
-                    driverList.get(0).setDriverStatus(driverStatus);
-                    driverList.remove(0);
-                }
-                for (String driver : drivers) {
-                    Driver orderDriver = (Driver) wagonDAO.read(Integer.parseInt(driver));
+                if (order.getDriverSet().size() <= 2) {
+                    Driver orderDriver = (Driver) driverDAO.read(Integer.parseInt(driver));
                     DriverStatus driverStatus = new DriverStatus();
                     driverStatus.setDriverStatusId(3);
                     orderDriver.setDriverStatus(driverStatus);

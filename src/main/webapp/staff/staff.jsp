@@ -13,7 +13,7 @@
     <div class="row content">
         <%@include file="staffmenu.html" %>
         <br>
-        <div class="col-sm-10">
+        <div class="col-sm-12">
             <div class="well">
                 <h4>Dashboard</h4>
                 <p>Some text..</p>

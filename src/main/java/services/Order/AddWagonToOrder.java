@@ -24,12 +24,23 @@ public class AddWagonToOrder {
             WagonDAOImpl wagonDAO = new WagonDAOImpl(session);
 
             Transaction transaction = session.beginTransaction();
+
             Order order = (Order) orderDAO.read(Integer.parseInt(orderId));
             Wagon orderWagon = (Wagon) wagonDAO.read(Integer.parseInt(wagon));
+
+            if (order.getOrderWagon() != null) {
+                Wagon currentWagon = order.getOrderWagon();
+                WagonStatus wagonStatus = new WagonStatus();
+                wagonStatus.setWagonStatusId(1);
+                currentWagon.setWagonStatus(wagonStatus);
+                order.setOrderWagon(null);
+            }
+
             WagonStatus wagonStatus = new WagonStatus();
             wagonStatus.setWagonStatusId(3);
             orderWagon.setWagonStatus(wagonStatus);
             order.setOrderWagon(orderWagon);
+
             transaction.commit();
 
             logger.info("Wagon added successfully");

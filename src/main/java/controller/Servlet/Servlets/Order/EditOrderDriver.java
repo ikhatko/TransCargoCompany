@@ -2,7 +2,6 @@ package controller.Servlet.Servlets.Order;
 
 import org.hibernate.SessionFactory;
 import services.Order.AddDriverToOrder;
-import services.Order.AddWagonToOrder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,10 +16,10 @@ public class EditOrderDriver extends HttpServlet {
             throws ServletException, IOException {
         SessionFactory sessionFactory = (SessionFactory)
                 req.getServletContext().getAttribute("SessionFactory");
-        String[] orderDrivers = req.getParameterValues("orderDriver");
+        String orderDriver = req.getParameter("orderDriver");
         String id = req.getParameter("id");
-        if (id != null && orderDrivers != null) {
-            AddDriverToOrder.addDriverToOrder(orderDrivers, id, sessionFactory);
+        if (id != null && orderDriver != null) {
+            AddDriverToOrder.addDriverToOrder(orderDriver, id, sessionFactory);
         }
         resp.sendRedirect("/Order");
     }

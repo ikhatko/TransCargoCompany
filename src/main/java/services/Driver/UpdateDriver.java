@@ -48,7 +48,7 @@ public class UpdateDriver {
             }
 
             if (hours != null && !hours.equals("null") && !hours.equals("")) {
-                driver.setThisMonthHours(Double.parseDouble(hours));
+                driver.setThisMonthHours(Float.parseFloat(hours));
             }
             if (cityId != null && !cityId.equals("null") && !cityId.equals("")) {
                 City city = new City();
