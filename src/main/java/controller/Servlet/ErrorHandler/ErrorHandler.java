@@ -18,6 +18,7 @@ public class ErrorHandler extends HttpServlet {
      * The constant ERROR_CODE.
      */
     public static final int ERROR_CODE = 500;
+    public static final int STATUS_OK = 200;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

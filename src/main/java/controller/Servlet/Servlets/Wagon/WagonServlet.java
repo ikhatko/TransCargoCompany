@@ -1,8 +1,10 @@
 package controller.Servlet.Servlets.Wagon;
 
+import model.Entities.City;
 import model.Entities.User;
 import model.Entities.Wagon;
 import org.hibernate.SessionFactory;
+import services.City.GetAllCities;
 import services.Wagon.GetAllWagons;
 import services.Wagon.RemoveWagon;
 import services.Wagon.UpdateWagon;
@@ -27,7 +29,11 @@ public class WagonServlet extends HttpServlet {
         SessionFactory sessionFactory = (SessionFactory)
                 req.getServletContext().getAttribute("SessionFactory");
         List<Wagon> allWagons = GetAllWagons.getAllWagons(sessionFactory);
+        List<City> allCities = GetAllCities.getAllCities(sessionFactory);
+
+        req.setAttribute("cityList", allCities);
         req.setAttribute("resultList", allWagons);
+
         User user = (User) req.getSession().getAttribute("user");
         String userRole = CheckUserRole.getUserRole(user);
         if (!userRole.equals("public")) {

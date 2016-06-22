@@ -1,5 +1,6 @@
-<%@ page import="java.util.List" %>
+<%@ page import="model.Entities.City" %>
 <%@ page import="model.Entities.Driver" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -41,6 +42,22 @@
                             <input id="lastName" name="lastName" placeholder="Last Name" class="form-control input-md"
                                    required="" type="text">
 
+                        </div>
+                    </div>
+
+                    <!-- Select Basic -->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="currentCity">Current city</label>
+                        <div class="col-md-4">
+                            <select id="currentCity" name="currentCity" class="form-control">
+                                <%
+                                    List<City> list = (List) request.getAttribute("cityList");
+                                    for (City city : list) {
+                                %>
+                                <option value="<%=city.getCityId()%>"><%=city.getCityName()%>
+                                </option>
+                                <%}%>
+                            </select>
                         </div>
                     </div>
 
@@ -181,10 +198,17 @@
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="city">Current city ID</label>
+                                                <label class="col-md-4 control-label" for="city">Current city</label>
                                                 <div class="col-md-4">
-                                                    <input id="city" value="<%=driver.getCurrentCity()%>" name="city"
-                                                           class="form-control input-md" type="text">
+                                                    <select id="city" name="city" class="form-control">
+                                                        <option value="">Choose current city</option>
+                                                        <%
+                                                            for (City city : list) {
+                                                        %>
+                                                        <option value="<%=city.getCityId()%>"><%=city.getCityName()%>
+                                                        </option>
+                                                        <%}%>
+                                                    </select>
                                                 </div>
                                             </div>
 

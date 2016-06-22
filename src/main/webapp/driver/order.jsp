@@ -31,12 +31,56 @@
         <div class="col-sm-10">
             <div class="well">
                 <% Order order = (Order) request.getAttribute("order");
-                    List<Waypoint> waypointList = order.getWaypointList();
-                    for (Waypoint waypoint : waypointList) {
+                    if (order != null) {
                 %>
-                <%=waypoint.getWaypointType().getWaypointStatusName()%> <%=waypoint.getWaypointCity().getCityName()%>
-                <br>
-                <% }%>
+                <table class="table table-striped table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th>
+                            Your id
+                        </th>
+                        <th>
+                            Drivers
+                        </th>
+                        <th>
+                            Wagon plate
+                        </th>
+                        <th>
+                            Order id
+                        </th>
+                        <th>
+                            Waypoints Set
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <%=request.getParameter("id")%>
+                        </td>
+                        <td>
+                            <%=order.getDriverSet()%>
+                        </td>
+                        <td>
+                            <%=order.getOrderWagon().getLicensePlate()%>
+                        </td>
+                        <td>
+                            <%=order.getOrderId()%>
+                        </td>
+                        <td>
+                            <%
+                                List<Waypoint> waypointList = order.getWaypointList();
+                                for (Waypoint waypoint : waypointList) {
+                            %>
+                            <%=waypoint.getWaypointCity()%> - <%=waypoint.getWaypointType()%><br>
+                            <% }%>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <%} else {%>
+                <p>You don't have orders!</p>
+                <%}%>
             </div>
             <div id="googleMap" style="width:500px;height:380px;"></div>
         </div>

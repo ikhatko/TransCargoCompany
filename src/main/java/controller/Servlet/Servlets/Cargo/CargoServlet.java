@@ -37,7 +37,7 @@ public class CargoServlet extends HttpServlet {
         if (!userRole.equals("public")) {
             req.getRequestDispatcher(userRole + "/cargo.jsp").include(req, resp);
         } else {
-            resp.sendRedirect("public/index.jsp");
+            req.getRequestDispatcher(userRole + "/cargo.jsp").include(req, resp);
         }
 
     }
@@ -67,8 +67,9 @@ public class CargoServlet extends HttpServlet {
             String weight = req.getParameter("weight");
             String volume = req.getParameter("volume");
             String cargoStatusId = req.getParameter("cargoStatusId");
+            String order = req.getParameter("order");
             UpdateCargo.updateCargo(id, name, weight, volume,
-                    cargoStatusId, sessionFactory);
+                    cargoStatusId, order, sessionFactory);
             doGet(req, resp);
         }
     }

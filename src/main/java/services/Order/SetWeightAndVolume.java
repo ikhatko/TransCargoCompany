@@ -22,6 +22,7 @@ public class SetWeightAndVolume {
     public static final int METERS_TO_KM = 1000;
     public static final int SEC_TO_HOURS = 3600;
     public static final float COEFFICIENT = 1.1f;
+    public static final String SAINT_PETERSBURG = "Saint Petersburg";
 
     private float maxWeight;
     private float maxVolume;
@@ -30,9 +31,9 @@ public class SetWeightAndVolume {
     private float distance;
     private float duration;
 
-    private static Logger logger = Logger.getLogger(SetWeightAndVolume.class);
-    private static DirectionsResult directionsResult;
-    private static List<Waypoint> trueWaypointOrder;
+    private Logger logger = Logger.getLogger(SetWeightAndVolume.class);
+    private DirectionsResult directionsResult;
+    private List<Waypoint> trueWaypointOrder;
 
     public void setMaxWeightAndVolume(String orderId, SessionFactory sessionFactory) {
         Session session = null;
@@ -48,6 +49,7 @@ public class SetWeightAndVolume {
             String[] trueOrder = getTrueOrder(strings);
             trueWaypointOrder = getTrueWaypointsOrder(trueOrder, orderWaypoints);
 
+            order.setWaypointList(trueWaypointOrder);
             order.setMaxVolume(maxVolume);
             order.setMaxWeight(maxWeight);
             order.setRouteDistance(distance / METERS_TO_KM);
@@ -81,8 +83,8 @@ public class SetWeightAndVolume {
         context.setApiKey(API_KEY);
         try {
             directionsResult = DirectionsApi.newRequest(context)
-                    .origin("Saint Petersburg")
-                    .destination("Saint Petersburg")
+                    .origin(SAINT_PETERSBURG)
+                    .destination(SAINT_PETERSBURG)
                     .optimizeWaypoints(true)
                     .waypoints(citiesName)
                     .await();
@@ -95,6 +97,7 @@ public class SetWeightAndVolume {
         }
         int[] waypointOrder = directionsResult.routes[0].waypointOrder;
         trueOrder[0] = directionsResult.routes[0].legs[0].startAddress;
+
         for (int i = 1; i < waypointOrder.length; i++) {
             trueOrder[i] = citiesName[waypointOrder[i]];
         }
@@ -164,7 +167,7 @@ public class SetWeightAndVolume {
         }
     }
 
-    public static List<Waypoint> getTrueWaypointOrder() {
+    public List<Waypoint> getTrueWaypointOrder() {
         return trueWaypointOrder;
     }
 }

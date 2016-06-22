@@ -40,25 +40,25 @@ public class UpdateWagon {
 
             wagon.setLicensePlate(licensePlate);
 
-            if (maxWeight != null && !maxWeight.equals("")) {
+            if (checkData(maxWeight)) {
                 wagon.setMaxWeight(Float.parseFloat(maxWeight));
             }
-            if (maxVolume != null && !maxVolume.equals("")) {
+
+            if (checkData(maxVolume)) {
                 wagon.setMaxVolume(Float.parseFloat(maxVolume));
             }
-            if (driversChange != null) {
+
+            if (checkData(driversChange)) {
                 wagon.setDriversChange(Integer.parseInt(driversChange));
             }
 
-            if (currentCityId != null && !currentCityId.equals("null") && !currentCityId.equals("")) {
+            if (checkData(currentCityId)) {
                 City city = new City();
                 city.setCityId(Integer.parseInt(currentCityId));
                 wagon.setCurrentCity(city);
-            } else {
-                wagon.setCurrentCity(null);
             }
 
-            if (wagonStatusId != null) {
+            if (checkData(wagonStatusId)) {
                 WagonStatus wagonStatus = new WagonStatus();
                 wagonStatus.setWagonStatusId(Integer.parseInt(wagonStatusId));
                 wagon.setWagonStatus(wagonStatus);
@@ -71,11 +71,14 @@ public class UpdateWagon {
 
         } catch (HibernateException e) {
             logger.info("Wagon with id:" + id + " doesn't updated");
+            logger.error(e.toString());
             e.printStackTrace();
         } finally {
             session.close();
         }
+    }
 
-
+    private static boolean checkData(String data) {
+        return data != null && !data.equals("null") && !data.equals("");
     }
 }

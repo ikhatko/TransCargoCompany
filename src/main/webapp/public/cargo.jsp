@@ -9,16 +9,17 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/validator.min.js"></script>
     <title>Welcome to Trans Cargo Company</title>
 </head>
 <body>
 
 <div class="container-fluid">
     <div class="row content">
-        <%@include file="staffmenu.html" %>
+        <%@include file="publicmenu.html"%>
         <br>
         <div class="col-sm-10">
-            <form action="/AddCargoWaypoints" method="post" class="form-horizontal">
+            <form data-toggle="validator" action="/AddCargoWaypoints" method="post" class="form-horizontal">
                 ${errorMsg}
                 <%request.getSession().removeAttribute("errorMsg");%>
                 <fieldset>
@@ -31,7 +32,9 @@
                         <label class="col-md-4 control-label" for="cargoName">Cargo name</label>
                         <div class="col-md-4">
                             <input id="cargoName" name="name" placeholder="Cargo name"
-                                   class="form-control input-md" required="" type="text">
+                                   class="form-control input-md" required type="text" pattern="^[_A-z0-9]{1,}$" maxlength="15"
+                                   data-error="Cargo name is invalid">
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
 
@@ -68,21 +71,27 @@
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="cargoWeight">Cargo weight</label>
+                        <label class="col-md-4 control-label" for="cargoWeight">Cargo weight (kg)</label>
                         <div class="col-md-4">
                             <input id="cargoWeight" name="weight" placeholder="Cargo weight"
                                    class="form-control input-md"
-                                   required="" type="text">
+                                   required type="text" maxlength="10"
+                                   data-error="Cargo weight is invalid"
+                                   pattern="[0-9]+([\.,][0-9]+)?">
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
 
                     <!-- Text input-->
                     <div class="form-group">
-                        <label class="col-md-4 control-label" for="cargoVolume">Cargo volume</label>
+                        <label class="col-md-4 control-label" for="cargoVolume">Cargo volume (m3)</label>
                         <div class="col-md-4">
                             <input id="cargoVolume" name="volume" placeholder="Cargo volume"
                                    class="form-control input-md"
-                                   required="" type="text">
+                                   required type="text" maxlength="10"
+                                   data-error="Cargo volume is invalid"
+                                   pattern="[0-9]+([\.,][0-9]+)?">
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
 
@@ -104,9 +113,6 @@
                 <thead>
                 <tr>
                     <th>
-                        Id
-                    </th>
-                    <th>
                         Name
                     </th>
                     <th>
@@ -116,16 +122,7 @@
                         Cargo Volume
                     </th>
                     <th>
-                        Cargo Status
-                    </th>
-                    <th>
-                        Cargo Order
-                    </th>
-                    <th>
                         Edit
-                    </th>
-                    <th>
-                        Delete
                     </th>
                 </tr>
                 </thead>
@@ -137,9 +134,6 @@
                 %>
                 <tr>
                     <td>
-                        <%=id%>
-                    </td>
-                    <td>
                         <%=cargo.getName()%>
                     </td>
                     <td>
@@ -150,9 +144,6 @@
                     </td>
                     <td>
                         <%=cargo.getCargoStatus()%>
-                    </td>
-                    <td>
-                        <%=cargo.getCargoOrder()%>
                     </td>
                     <td>
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">
@@ -208,31 +199,6 @@
                                                 </div>
                                             </div>
 
-                                            <!-- Text input-->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="order">Cargo
-                                                    order</label>
-                                                <div class="col-md-4">
-                                                    <input id="order" value="<%=cargo.getCargoOrder()%>" name="order"
-                                                           class="form-control input-md" type="text">
-                                                </div>
-                                            </div>
-
-                                            <!-- Select Basic -->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="cargoStatusModal">Cargo
-                                                    status</label>
-                                                <div class="col-md-4">
-                                                    <select id="cargoStatusModal" name="cargoStatusId"
-                                                            class="form-control">
-                                                        <option disabled>Choose status</option>
-                                                        <option selected value="1">Ready</option>
-                                                        <option value="2">Shipped</option>
-                                                        <option value="3">Delivered</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
                                             <!-- Button -->
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="submit">Save changes</label>
@@ -254,15 +220,6 @@
 
                             </div>
                         </div>
-                    </td>
-                    <td>
-                        <form action="/Cargo" method="post">
-                            <div class="form-group">
-                                <button type="submit" id="delete" name="delete" value="<%=id%>"
-                                        class="btn btn-danger">Delete
-                                </button>
-                            </div>
-                        </form>
                     </td>
                 </tr>
                 <%}%>

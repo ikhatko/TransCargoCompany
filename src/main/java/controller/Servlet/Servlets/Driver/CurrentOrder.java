@@ -22,11 +22,11 @@ public class CurrentOrder extends HttpServlet {
                 req.getServletContext().getAttribute("SessionFactory");
         String driverId = req.getParameter("driverId");
 
-        List<Waypoint> trueWaypointOrder = SetWeightAndVolume.getTrueWaypointOrder();
+//        List<Waypoint> trueWaypointOrder = SetWeightAndVolume.getTrueWaypointOrder();
         Order order = GetOrderByDriverId.getOrderByDriverId(driverId, sessionFactory);
-
         req.setAttribute("order", order);
-        req.setAttribute("waypointOrder", trueWaypointOrder);
+        req.setAttribute("id", driverId);
+//        req.setAttribute("waypointOrder", trueWaypointOrder);
 
         req.getRequestDispatcher("driver/order.jsp").include(req, resp);
     }

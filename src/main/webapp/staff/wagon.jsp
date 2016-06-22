@@ -1,5 +1,6 @@
-<%@ page import="java.util.List" %>
+<%@ page import="model.Entities.City" %>
 <%@ page import="model.Entities.Wagon" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -8,6 +9,7 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/validator.min.js"></script>
     <title>Welcome to Trans Cargo Company</title>
 </head>
 <body>
@@ -17,7 +19,7 @@
         <%@include file="staffmenu.html" %>
         <br>
         <div class="col-sm-10">
-            <form action="/AddNewWagon" method="post" class="form-horizontal">
+            <form data-toggle="validator" action="/AddNewWagon" method="post" class="form-horizontal">
                 ${errorMsg}
                 <%request.getSession().removeAttribute("errorMsg");%>
                 <fieldset>
@@ -29,7 +31,10 @@
                         <label class="col-md-4 control-label" for="licensePlate">License Plate</label>
                         <div class="col-md-4">
                             <input id="licensePlate" name="licensePlate" placeholder="License Plate"
-                                   class="form-control input-md" required="" type="text">
+                                   class="form-control input-md" required type="text"
+                                   pattern="[A-Z][A-Z][A-Z]\\d\\d\\d\\d\\d">
+                            data-error="Wagon plate is invalid: two letters + 5 digits"
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
 
@@ -62,6 +67,23 @@
                             <input id="maxVolume" name="maxVolume" placeholder="Max Volume"
                                    class="form-control input-md"
                                    required="" type="text">
+                        </div>
+                    </div>
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <label class="col-md-4 control-label" for="city">Current city</label>
+                        <div class="col-md-4">
+                            <select id="city" name="city" class="form-control">
+                                <option value="">Choose current city</option>
+                                <%
+                                    List<City> list = (List) request.getAttribute("cityList");
+                                    for (City city : list) {
+                                %>
+                                <option value="<%=city.getCityId()%>"><%=city.getCityName()%>
+                                </option>
+                                <%}%>
+                            </select>
                         </div>
                     </div>
 
@@ -212,11 +234,18 @@
 
                                             <!-- Text input-->
                                             <div class="form-group">
-                                                <label class="col-md-4 control-label" for="currentCityModal">Current
-                                                    city ID</label>
+                                                <label class="col-md-4 control-label" for="currentCity">Current
+                                                    city</label>
                                                 <div class="col-md-4">
-                                                    <input id="currentCityModal" value="<%=wagon.getCurrentCity()%>"
-                                                           name="currentCity" class="form-control input-md" type="text">
+                                                    <select id="currentCity" name="currentCity" class="form-control">
+                                                        <option value="">Choose current city</option>
+                                                        <%
+                                                            for (City city : list) {
+                                                        %>
+                                                        <option value="<%=city.getCityId()%>"><%=city.getCityName()%>
+                                                        </option>
+                                                        <%}%>
+                                                    </select>
                                                 </div>
                                             </div>
 
