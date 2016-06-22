@@ -16,14 +16,37 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The type Add driver to order.
+ */
 public class AddDriverToOrder {
+    /**
+     * The constant SINGLE.
+     */
     public static final int SINGLE = 1;
+    /**
+     * The constant DOUBLE.
+     */
     public static final int DOUBLE = 2;
+    /**
+     * The constant DRIVER_STATUS_REST.
+     */
     public static final int DRIVER_STATUS_REST = 1;
+    /**
+     * The constant DRIVER_STATUS_RELAY.
+     */
     public static final int DRIVER_STATUS_RELAY = 3;
 
     private static Logger logger = Logger.getLogger(AddDriverToOrder.class);
 
+    /**
+     * Add driver to order boolean.
+     *
+     * @param driver         the driver
+     * @param orderId        the order id
+     * @param sessionFactory the session factory
+     * @return the boolean
+     */
     public static boolean addDriverToOrder(String driver, String orderId,
                                         SessionFactory sessionFactory) {
 

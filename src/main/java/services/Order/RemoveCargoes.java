@@ -12,18 +12,17 @@ import org.hibernate.Transaction;
 import java.util.Set;
 
 /**
- * The type Update order.
+ * The type Remove cargoes.
  */
 public class RemoveCargoes {
 
     private static Logger logger = Logger.getLogger(RemoveCargoes.class);
 
     /**
-     * Update order.
+     * Remove cargoes.
      *
-     * @param id             the id
-     * @param orderStatusId  the order status id
-     * @param orderWagonId   the order wagon id
+     * @param orderId        the order id
+     * @param cargoes        the cargoes
      * @param sessionFactory the session factory
      */
     public static void removeCargoes(String orderId, String[] cargoes, SessionFactory sessionFactory) {

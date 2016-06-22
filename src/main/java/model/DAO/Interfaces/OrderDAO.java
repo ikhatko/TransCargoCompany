@@ -10,5 +10,11 @@ import java.util.List;
  */
 public interface OrderDAO {
 
+    /**
+     * Gets order waypoints list.
+     *
+     * @param orderId the order id
+     * @return the order waypoints list
+     */
     List<Waypoint> getOrderWaypointsList(int orderId);
 }

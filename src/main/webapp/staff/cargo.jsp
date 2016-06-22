@@ -9,6 +9,8 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/validator.min.js"></script>
+
     <title>Welcome to Trans Cargo Company</title>
 </head>
 <body>
@@ -18,7 +20,7 @@
         <%@include file="staffmenu.html" %>
         <br>
         <div class="col-sm-10">
-            <form action="/AddCargoWaypoints" method="post" class="form-horizontal">
+            <form  data-toggle="validator" action="/AddCargoWaypoints" method="post" class="form-horizontal">
                 ${errorMsg}
                 <%request.getSession().removeAttribute("errorMsg");%>
                 <fieldset>
@@ -31,7 +33,9 @@
                         <label class="col-md-4 control-label" for="cargoName">Cargo name</label>
                         <div class="col-md-4">
                             <input id="cargoName" name="name" placeholder="Cargo name"
-                                   class="form-control input-md" required="" type="text">
+                                   class="form-control input-md" required type="text" pattern="^[_A-z0-9]{1,}$" maxlength="15"
+                                   data-error="Cargo name is invalid">
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
 
@@ -39,7 +43,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="loadFrom">Load from</label>
                         <div class="col-md-4">
-                            <select id="loadFrom" name="loadFrom" class="form-control">
+                            <select id="loadFrom" name="loadFrom" class="form-control" required>
                                 <%
                                     List<City> list = (List) request.getAttribute("cityList");
                                     for (City city : list) {
@@ -55,7 +59,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="unloadTo">Unload to</label>
                         <div class="col-md-4">
-                            <select id="unloadTo" name="unloadTo" class="form-control">
+                            <select id="unloadTo" name="unloadTo" class="form-control" required>
                                 <%
                                     for (City city : list) {
                                 %>
@@ -72,7 +76,10 @@
                         <div class="col-md-4">
                             <input id="cargoWeight" name="weight" placeholder="Cargo weight"
                                    class="form-control input-md"
-                                   required="" type="text">
+                                   type="text" maxlength="10"
+                                   data-error="Cargo weight is invalid"
+                                   pattern="[0-9]+([\.,][0-9]+)?" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
 
@@ -82,7 +89,10 @@
                         <div class="col-md-4">
                             <input id="cargoVolume" name="volume" placeholder="Cargo volume"
                                    class="form-control input-md"
-                                   required="" type="text">
+                                   required="" type="text" maxlength="10"
+                                   data-error="Cargo volume is invalid"
+                                   pattern="[0-9]+([\.,][0-9]+)?" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
 

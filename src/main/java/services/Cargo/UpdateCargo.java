@@ -31,6 +31,7 @@ public final class UpdateCargo {
      * @param weight         the weight
      * @param volume         the volume
      * @param cargoStatusId  the cargo status id
+     * @param order          the order
      * @param sessionFactory the session factory
      */
     public static void updateCargo(int id, String name, String weight,

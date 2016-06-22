@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The type Current order.
+ */
 @WebServlet("/CurrentOrder")
 public class CurrentOrder extends HttpServlet {
 
@@ -21,12 +24,10 @@ public class CurrentOrder extends HttpServlet {
         SessionFactory sessionFactory = (SessionFactory)
                 req.getServletContext().getAttribute("SessionFactory");
         String driverId = req.getParameter("driverId");
-
-//        List<Waypoint> trueWaypointOrder = SetWeightAndVolume.getTrueWaypointOrder();
         Order order = GetOrderByDriverId.getOrderByDriverId(driverId, sessionFactory);
+        //TODO: draw route on google map
         req.setAttribute("order", order);
         req.setAttribute("id", driverId);
-//        req.setAttribute("waypointOrder", trueWaypointOrder);
 
         req.getRequestDispatcher("driver/order.jsp").include(req, resp);
     }

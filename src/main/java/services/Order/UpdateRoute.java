@@ -8,10 +8,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Update route.
+ */
 public class UpdateRoute {
 
     private static Logger logger = Logger.getLogger(UpdateRoute.class);
 
+    /**
+     * Update route.
+     *
+     * @param orderId        the order id
+     * @param sessionFactory the session factory
+     */
     public static void updateRoute(String orderId, SessionFactory sessionFactory) {
         logger.info("Trying to update order route with id:" + orderId);
         Session session = null;

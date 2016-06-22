@@ -16,12 +16,27 @@ import org.hibernate.Transaction;
 import java.util.*;
 
 
+/**
+ * This class is using Google API to make route.
+ */
 public class SetWeightAndVolume {
 
     private static final String API_KEY = "AIzaSyDIkAgFpUkSMtaQMqI3yOaA4dYh4PFlL2A";
+    /**
+     * The constant METERS_TO_KM using to set meters to kilometers.
+     */
     public static final int METERS_TO_KM = 1000;
+    /**
+     * The constant SEC_TO_HOURS using to set seconds to hours.
+     */
     public static final int SEC_TO_HOURS = 3600;
+    /**
+     * The constant COEFFICIENT using for route duration.
+     */
     public static final float COEFFICIENT = 1.1f;
+    /**
+     * The constant SAINT_PETERSBURG using for make route origin and destionation.
+     */
     public static final String SAINT_PETERSBURG = "Saint Petersburg";
 
     private float maxWeight;
@@ -35,6 +50,12 @@ public class SetWeightAndVolume {
     private DirectionsResult directionsResult;
     private List<Waypoint> trueWaypointOrder;
 
+    /**
+     * Sets max weight and max volume to Order using route, created by Directions API.
+     *
+     * @param orderId        the order id
+     * @param sessionFactory the session factory
+     */
     public void setMaxWeightAndVolume(String orderId, SessionFactory sessionFactory) {
         Session session = null;
         try {
@@ -63,6 +84,12 @@ public class SetWeightAndVolume {
         }
     }
 
+    /**
+     * Getting cities names from current order waypoints.
+     *
+     * @param cargoesWaypoints list of order waypoints.
+     * @return String array with cities names.
+     */
     private String[] getWaypointsCities(List<Waypoint> cargoesWaypoints) {
         String[] result = new String[cargoesWaypoints.size()];
         for (int i = 0; i < cargoesWaypoints.size(); i++) {
@@ -71,12 +98,24 @@ public class SetWeightAndVolume {
         return result;
     }
 
+    /**
+     * Remove duplicates cities from array.
+     *
+     * @param citiesName array with cities names
+     * @return array that doesn't contains duplicated cities names
+     */
     private String[] removeDuplicateCities(String[] citiesName) {
         Set<String> citiesNames = new HashSet<>(Arrays.asList(citiesName));
         String[] strings = citiesNames.toArray(new String[citiesNames.size()]);
         return strings;
     }
 
+    /**
+     * Getting the real order of the cities, distance and duration of the route.
+     * Using Directions API and API_KEY to send request and getting Direction Result object.
+     * @param citiesName array with cities names
+     * @return an array containing the correct order of cities
+     */
     private String[] getTrueOrder(String[] citiesName) {
         String[] trueOrder = new String[citiesName.length + 1];
         GeoApiContext context = new GeoApiContext();
@@ -104,6 +143,11 @@ public class SetWeightAndVolume {
         return trueOrder;
     }
 
+    /**
+     * @param trueOrder        array with the true cities order
+     * @param cargoesWaypoints list of the cargoes waypoints
+     * @return list that contains true order of waypoints
+     */
     private List<Waypoint> getTrueWaypointsOrder(String[] trueOrder, List<Waypoint> cargoesWaypoints) {
         List<Waypoint> result = new ArrayList<>();
         for (int i = 0; i < trueOrder.length; i++) {
@@ -158,6 +202,12 @@ public class SetWeightAndVolume {
         return result;
     }
 
+    /**
+     * Checking weight and volume.
+     * Setting it to variables maxWeight and maxVolume if state is true.
+     * @param weight current weight
+     * @param volume current volume
+     */
     private void checkMaxWeightAndVolume(float weight, float volume) {
         if (weight > maxWeight) {
             maxWeight = weight;
@@ -167,6 +217,11 @@ public class SetWeightAndVolume {
         }
     }
 
+    /**
+     * Gets true waypoint order.
+     *
+     * @return the true waypoint order
+     */
     public List<Waypoint> getTrueWaypointOrder() {
         return trueWaypointOrder;
     }

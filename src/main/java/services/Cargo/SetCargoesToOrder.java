@@ -11,6 +11,9 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 
+/**
+ * The type Set cargoes to order.
+ */
 public final class SetCargoesToOrder {
 
     private static Logger logger = Logger.getLogger(SetCargoesToOrder.class);
@@ -19,6 +22,13 @@ public final class SetCargoesToOrder {
     }
 
 
+    /**
+     * Sets cargoes to order.
+     *
+     * @param addedCargoes   the added cargoes
+     * @param orderId        the order id
+     * @param sessionFactory the session factory
+     */
     public static void setCargoesToOrder(int[] addedCargoes, int orderId, SessionFactory sessionFactory) {
         logger.info("Trying to add all cargoes");
         Session session = null;

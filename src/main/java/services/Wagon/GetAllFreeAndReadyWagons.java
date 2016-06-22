@@ -10,17 +10,17 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * The type Get all wagons.
+ * The type Get all free and ready wagons.
  */
 public class GetAllFreeAndReadyWagons {
 
     private static Logger logger = Logger.getLogger(GetAllFreeAndReadyWagons.class);
 
     /**
-     * Gets all wagons.
+     * Gets all free and ready wagons.
      *
      * @param sessionFactory the session factory
-     * @return the all wagons
+     * @return the all free and ready wagons
      */
     public static List getAllFreeAndReadyWagons(SessionFactory sessionFactory) {
         logger.info("Trying to get all free wagons");

@@ -19,7 +19,6 @@ public class WagonDAOImpl extends GenericDAOImpl implements WagonDAO {
      *
      * @param session the session
      */
-
     public WagonDAOImpl(Session session) {
         super(Wagon.class, session);
         this.session = session;

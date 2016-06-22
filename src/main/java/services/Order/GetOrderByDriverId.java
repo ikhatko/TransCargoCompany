@@ -11,17 +11,18 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * The type Get all orders.
+ * The type Get order by driver id.
  */
 public class GetOrderByDriverId {
 
     private static Logger logger = Logger.getLogger(GetOrderByDriverId.class);
 
     /**
-     * Gets all orders.
+     * Gets order by driver id.
      *
+     * @param driverId       the driver id
      * @param sessionFactory the session factory
-     * @return the all orders
+     * @return the order by driver id
      */
     public static Order getOrderByDriverId(String driverId, SessionFactory sessionFactory) {
         logger.info("Trying to get order by driver id:" + driverId);

@@ -22,6 +22,7 @@ public class AddNewWagon {
      * @param driversChange  the drivers change
      * @param maxWeight      the max weight
      * @param maxVolume      the max volume
+     * @param currentCity    the current city
      * @param sessionFactory the session factory
      * @return the boolean
      */

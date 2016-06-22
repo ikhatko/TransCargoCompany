@@ -9,7 +9,18 @@ import java.util.List;
  */
 public interface CargoDAO {
 
+    /**
+     * Gets free cargoes.
+     *
+     * @return the free cargoes
+     */
     List<Cargo> getFreeCargoes();
 
+    /**
+     * Sets to order.
+     *
+     * @param array   the array
+     * @param orderId the order id
+     */
     void setToOrder(int[] array, int orderId);
 }

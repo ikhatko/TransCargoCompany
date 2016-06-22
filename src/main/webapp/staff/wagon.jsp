@@ -32,8 +32,8 @@
                         <div class="col-md-4">
                             <input id="licensePlate" name="licensePlate" placeholder="License Plate"
                                    class="form-control input-md" required type="text"
-                                   pattern="[A-Z][A-Z][A-Z]\\d\\d\\d\\d\\d">
-                            data-error="Wagon plate is invalid: two letters + 5 digits"
+                                   pattern="[A-Z]{2}\d{5}"
+                            data-error="Wagon plate is invalid: two letters and five digits">
                             <div class="help-block with-errors"></div>
                         </div>
                     </div>
@@ -56,7 +56,10 @@
                         <div class="col-md-4">
                             <input id="maxWeight" name="maxWeight" placeholder="Max Weight"
                                    class="form-control input-md"
-                                   required="" type="text">
+                                   required type="text"  maxlength="10"
+                                   data-error="Wagon weight is invalid"
+                                   pattern="[0-9]+([\.,][0-9]+)?" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
 
@@ -66,7 +69,10 @@
                         <div class="col-md-4">
                             <input id="maxVolume" name="maxVolume" placeholder="Max Volume"
                                    class="form-control input-md"
-                                   required="" type="text">
+                                   required type="text"  maxlength="10"
+                                   data-error="Wagon volume is invalid"
+                                   pattern="[0-9]+([\.,][0-9]+)?" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
 
@@ -74,7 +80,7 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="city">Current city</label>
                         <div class="col-md-4">
-                            <select id="city" name="city" class="form-control">
+                            <select id="city" name="city" class="form-control" required>
                                 <option value="">Choose current city</option>
                                 <%
                                     List<City> list = (List) request.getAttribute("cityList");

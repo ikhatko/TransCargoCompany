@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * The type Remove cargoes from order.
+ */
 @WebServlet("/RemoveCargoes")
 public class RemoveCargoesFromOrder extends HttpServlet {
     @Override

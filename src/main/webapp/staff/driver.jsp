@@ -9,6 +9,7 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/validator.min.js"></script>
     <title>Welcome to Trans Cargo Company</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
         <%@include file="staffmenu.html" %>
         <br>
         <div class="col-sm-10">
-            <form action="/AddNewDriver" method="post" class="form-horizontal">
+            <form data-toggle="validator" action="/AddNewDriver" method="post" class="form-horizontal">
                 ${errorMsg}
                 <%request.getSession().removeAttribute("errorMsg");%>
                 <fieldset>
@@ -30,8 +31,9 @@
                         <label class="col-md-4 control-label" for="firstName">First Name</label>
                         <div class="col-md-4">
                             <input id="firstName" name="firstName" placeholder="First Name"
-                                   class="form-control input-md" required="" type="text">
-
+                                   class="form-control input-md" type="text" pattern="^[_A-z0-9]{1,}$" maxlength="15"
+                                   data-error="First name is invalid" required>
+                            <div class="help-block with-errors"></div>
                         </div>
                     </div>
 
@@ -40,7 +42,9 @@
                         <label class="col-md-4 control-label" for="lastName">Last Name</label>
                         <div class="col-md-4">
                             <input id="lastName" name="lastName" placeholder="Last Name" class="form-control input-md"
-                                   required="" type="text">
+                                   type="text" pattern="^[_A-z0-9]{1,}$" maxlength="15"
+                                   data-error="First name is invalid" required>
+                            <div class="help-block with-errors"></div>
 
                         </div>
                     </div>
@@ -273,7 +277,8 @@
                         <form action="/Driver" method="post">
                             <div class="form-group">
                                 <button type="submit" id="delete" name="delete" value="<%=id%>"
-                                        class="btn btn-danger">Delete</button>
+                                        class="btn btn-danger">Delete
+                                </button>
                             </div>
                         </form>
                     </td>

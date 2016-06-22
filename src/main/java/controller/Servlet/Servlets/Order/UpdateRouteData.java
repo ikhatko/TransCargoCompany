@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * The type Add new order servlet.
+ * The type Update route data.
  */
 @WebServlet("/UpdateRoute")
 public class UpdateRouteData extends HttpServlet {

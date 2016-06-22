@@ -20,7 +20,6 @@ public class UpdateCity {
      *
      * @param id             the id
      * @param cityName       the city name
-     * @param distance       the distance
      * @param sessionFactory the session factory
      */
     public static void updateCity(int id, String cityName, SessionFactory sessionFactory) {

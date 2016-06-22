@@ -11,9 +11,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Add wagon to order.
+ */
 public class AddWagonToOrder {
     private static Logger logger = Logger.getLogger(AddWagonToOrder.class);
 
+    /**
+     * Add wagon.
+     *
+     * @param wagon          the wagon
+     * @param orderId        the order id
+     * @param sessionFactory the session factory
+     */
     public static void addWagon(String wagon, String orderId,
                                 SessionFactory sessionFactory) {
         logger.info("Trying to add wagon id: " + wagon + " to order id:" + orderId);

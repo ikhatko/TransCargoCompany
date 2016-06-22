@@ -11,12 +11,25 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+/**
+ * The type Add two cargo waypoints.
+ */
 public final class AddTwoCargoWaypoints {
     private static Logger logger = Logger.getLogger(AddTwoCargoWaypoints.class);
 
     private AddTwoCargoWaypoints() {
     }
 
+    /**
+     * Add cargo waypoints.
+     *
+     * @param name           the name
+     * @param weight         the weight
+     * @param volume         the volume
+     * @param loadFrom       the load from
+     * @param unloadTo       the unload to
+     * @param sessionFactory the session factory
+     */
     public static void addCargoWaypoints(String name, String weight,
                                          String volume, String loadFrom,
                                          String unloadTo, SessionFactory sessionFactory) {

@@ -5,6 +5,7 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/validator.min.js"></script>
     <title>Welcome to Trans Cargo Company</title>
 </head>
 <body>
@@ -15,8 +16,8 @@
         <br>
         <div class="col-sm-12">
             <div class="well">
-                <h4>Dashboard</h4>
-                <p>Some text..</p>
+                <h4>Hello!</h4>
+                <p>Try some menu items!</p>
             </div>
         </div>
     </div>

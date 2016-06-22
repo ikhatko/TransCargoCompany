@@ -44,8 +44,9 @@ public class Driver {
     /**
      * Instantiates a new Driver.
      *
-     * @param firstName the first name
-     * @param lastName  the last name
+     * @param firstName   the first name
+     * @param lastName    the last name
+     * @param currentCity the current city
      */
     public Driver(String firstName, String lastName, City currentCity) {
         this.firstName = firstName;

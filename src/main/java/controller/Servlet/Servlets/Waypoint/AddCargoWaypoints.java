@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * The type Add new waypoint servlet.
+ * The type Add cargo waypoints.
  */
 @WebServlet("/AddCargoWaypoints")
 public class AddCargoWaypoints extends HttpServlet {

@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * The type Cargoes to order.
+ */
 @WebServlet("/CargoesToOrder")
 public class CargoesToOrder extends HttpServlet {
     @Override

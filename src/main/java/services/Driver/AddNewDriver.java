@@ -20,6 +20,7 @@ public class AddNewDriver {
      *
      * @param firstName      the first name
      * @param lastName       the last name
+     * @param currentCity    the current city
      * @param sessionFactory the session factory
      * @return the boolean
      */
