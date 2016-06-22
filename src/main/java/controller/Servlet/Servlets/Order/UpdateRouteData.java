@@ -1,8 +1,10 @@
 package controller.Servlet.Servlets.Order;
 
 import org.hibernate.SessionFactory;
-import services.Order.AddWagonToOrder;
+import services.Order.AddNewOrder;
+import services.Order.UpdateRoute;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,20 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * The type Edit order wagon.
+ * The type Update route data.
  */
-@WebServlet("/EditOrderWagon")
-public class EditOrderWagon extends HttpServlet {
+@WebServlet("/UpdateRoute")
+public class UpdateRouteData extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         SessionFactory sessionFactory = (SessionFactory)
                 req.getServletContext().getAttribute("SessionFactory");
-        String orderWagon = req.getParameter("orderWagon");
-        String id = req.getParameter("id");
-        if (id != null && orderWagon != null) {
-            AddWagonToOrder.addWagon(orderWagon, id, sessionFactory);
-        }
+        String orderId = req.getParameter("id");
+        UpdateRoute.updateRoute(orderId, sessionFactory);
         resp.sendRedirect("/Order");
     }
 }

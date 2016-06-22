@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * The type Get all drivers.
+ * The type Get all free drivers.
  */
 public final class GetAllFreeDrivers {
 
@@ -20,10 +20,10 @@ public final class GetAllFreeDrivers {
     }
 
     /**
-     * Gets all drivers.
+     * Gets all free drivers.
      *
      * @param sessionFactory the session factory
-     * @return the all drivers
+     * @return the all free drivers
      */
     public static List getAllFreeDrivers(SessionFactory sessionFactory) {
         logger.info("Trying to get all free drivers");

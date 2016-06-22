@@ -24,7 +24,8 @@ public class AddNewDriverServlet extends HttpServlet {
                 req.getServletContext().getAttribute("SessionFactory");
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
-        if (AddNewDriver.addNewDriver(firstName, lastName, sessionFactory)) {
+        String currentCity = req.getParameter("currentCity");
+        if (AddNewDriver.addNewDriver(firstName, lastName, currentCity , sessionFactory)) {
             req.getSession().setAttribute("errorMsg",
                     "<div class=\"alert alert-success\">\n"
                             + "  <a href=\"#\" class=\"close\" "

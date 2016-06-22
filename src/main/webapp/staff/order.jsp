@@ -1,8 +1,6 @@
-<%@ page import="model.Entities.Cargo" %>
-<%@ page import="model.Entities.Order" %>
-<%@ page import="model.Entities.Wagon" %>
+<%@ page import="model.Entities.*" %>
 <%@ page import="java.util.List" %>
-<%@ page import="model.Entities.Driver" %>
+<%@ page import="java.util.Set" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -34,9 +32,7 @@
                         <label class="col-md-4 control-label" for="orderStatus">Order status</label>
                         <div class="col-md-4">
                             <select id="orderStatus" name="orderStatus" class="form-control" required>
-                                <option value="">Choose order status</option>
                                 <option value="1">Not done</option>
-                                <option value="2">Done</option>
                             </select>
                         </div>
                     </div>
@@ -54,7 +50,7 @@
 
         </div>
         <br>
-        <div class="col-sm-10">
+        <div class="col-sm-12">
             <table class="table table-striped table-hover table-condensed table-responsive">
                 <thead>
                 <tr>
@@ -62,31 +58,40 @@
                         Id
                     </th>
                     <th>
-                        Order Status
+                        Status
                     </th>
                     <th>
-                        Cargoes List
+                        Cargoes
                     </th>
                     <th>
-                        Order Wagon
+                    </th>
+                    <th>
+                        Wagon
+                    </th>
+                    <th>
                     </th>
                     <th>
                         Driver
                     </th>
                     <th>
+                    </th>
+                    <th>
                         Waypoints Set
                     </th>
                     <th>
-                        Order max weight
+                        Weight(kg)
                     </th>
                     <th>
-                        Order max volume
+                        Volume(m3)
                     </th>
                     <th>
-                        Edit
+                        Distance(km)
                     </th>
                     <th>
-                        Delete
+                        Duration(h)
+                    </th>
+                    <th>
+                        Update
                     </th>
                 </tr>
                 </thead>
@@ -138,6 +143,7 @@
                                                             class="form-control">
                                                         <option selected disabled>Choose order status</option>
                                                         <option value="1">Not done</option>
+                                                        <option value="3">Ready</option>
                                                         <option value="2">Done</option>
                                                     </select>
                                                 </div>
@@ -167,7 +173,15 @@
                     </td>
                     <%--cargoes--%>
                     <td>
-                        <%=order.getCargoSet()%>
+                        <%
+                            Set<Cargo> cargoList = order.getCargoSet();
+                            for (Cargo cargo : cargoList) {
+                        %>
+                        <%=cargo.getName()%><br>
+                        <%}%>
+                    </td>
+                    <%--button--%>
+                    <td>
                         <button type="button" class="btn btn-success" data-toggle="modal"
                                 data-target="#myModalEC<%=id%>">
                             Edit
@@ -197,7 +211,7 @@
                                             <!-- Multiple Checkboxes -->
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label">Choose cargoes</label>
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                     <%
                                                         List<Cargo> cargoesList = (List<Cargo>) request.getAttribute("cargoesList");
                                                         for (Cargo cargo : cargoesList) {
@@ -207,7 +221,8 @@
                                                         <label for="checkboxes<%=cargoId%>">
                                                             <input name="addedCargoes" id="checkboxes<%=cargoId%>"
                                                                    value="<%=cargoId%>" type="checkbox">
-                                                            <%=cargo.getName()%>
+                                                            <%=cargo.getName()%> | <%=cargo.getVolume()%>m3
+                                                            | <%=cargo.getWeight()%>kg
                                                         </label>
                                                     </div>
                                                     <%}%>
@@ -239,6 +254,9 @@
                     <%--wagon--%>
                     <td>
                         <%=order.getOrderWagon()%>
+                    </td>
+                    <%--button--%>
+                    <td>
                         <button type="button" class="btn btn-success" data-toggle="modal"
                                 data-target="#myModalEW<%=id%>">
                             Edit
@@ -311,12 +329,19 @@
                     </td>
                     <%--drivers--%>
                     <td>
-                        <%=order.getDriverSet()%>
+                        <%
+                            List<Driver> driverSet = order.getDriverSet();
+                            for (Driver driver : driverSet) {
+                        %>
+                        <%=driver.getFirstName()%> <%=driver.getLastName()%><br>
+                        <%}%>
+                    </td>
+                    <%--button--%>
+                    <td>
                         <button type="button" class="btn btn-success" data-toggle="modal"
                                 data-target="#myModalD<%=id%>">
                             Edit
                         </button>
-
                         <!-- Modal -->
                         <div class="modal fade" id="myModalD<%=id%>" role="dialog">
                             <div class="modal-dialog">
@@ -324,7 +349,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Edit wagon</h4>
+                                        <h4 class="modal-title">Edit drivers</h4>
                                     </div>
                                     <br>
                                     <form class="form-horizontal" method="post" action="/EditOrderDriver">
@@ -339,7 +364,6 @@
                                             </div>
                                             <%
                                                 List<Driver> driversList = (List<Driver>) request.getAttribute("driversList");
-                                                if (order.getOrderWagon().getDriversChange() == 1) {
                                             %>
                                             <div class="form-group">
                                                 <label class="col-md-4 control-label" for="orderDriverEdit">Order
@@ -350,10 +374,16 @@
                                                         <option selected disabled>Choose driver</option>
                                                         <%
                                                             for (Driver driver : driversList) {
+                                                                Wagon orderWagon = order.getOrderWagon();
+                                                                if (orderWagon != null &&
+                                                                        driver.getCurrentCity().getCityId() == orderWagon.getCurrentCity().getCityId()) {
                                                         %>
                                                         <option value="<%=driver.getDriverId()%>"><%=driver.getFirstName()%> <%=driver.getLastName()%>
                                                         </option>
-                                                        <%}%>
+                                                        <%
+                                                                }
+                                                            }
+                                                        %>
                                                     </select>
                                                 </div>
                                             </div>
@@ -368,37 +398,6 @@
                                                     </button>
                                                 </div>
                                             </div>
-                                            <%
-                                            } else if (order.getOrderWagon().getDriversChange() == 2) {
-                                            %>
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="checkboxes">Select two
-                                                    drivers</label>
-                                                <div class="col-md-4">
-                                                    <%
-                                                        for (Driver driver : driversList) {
-                                                    %>
-                                                    <div class="checkbox">
-                                                        <label for="checkboxes<%=driver.getDriverId()%>">
-                                                            <input name="orderDriver"
-                                                                   id="checkboxes<%=driver.getDriverId()%>"
-                                                                   value="<%=driver.getDriverId()%>" type="checkbox">
-                                                            <%=driver.getFirstName()%> <%=driver.getLastName()%>
-                                                        </label>
-                                                    </div>
-                                                    <%}%>
-                                                </div>
-                                            </div>
-                                            <!-- Button -->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="submit">Save changes</label>
-                                                <div class="col-md-4">
-                                                    <button id="submit-driver" type="submit" class="btn btn-primary">
-                                                        Save
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <%}%>
                                         </fieldset>
                                     </form>
 
@@ -412,9 +411,12 @@
                     </td>
                     <%--waypoints--%>
                     <td>
-                        <%=order.getWaypointList()%>
-                        <%--SHOW ALL WAYPOINTS--%>
-
+                        <%
+                            List<Waypoint> waypointList = order.getWaypointList();
+                            for (Waypoint waypoint : waypointList) {
+                        %>
+                        <%=waypoint.getWaypointCity()%> - <%=waypoint.getWaypointType().getWaypointStatusName()%><br>
+                        <%}%>
                     </td>
                     <%--weight--%>
                     <td>
@@ -424,109 +426,21 @@
                     <%--volume--%>
                     <td>
                         <%=order.getMaxVolume()%>
-
                     </td>
-                    <%--main edit--%>
+                    <%--distance--%>
                     <td>
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal<%=id%>">
-                            Edit
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal<%=id%>" role="dialog">
-                            <div class="modal-dialog">
-                                <!-- Modal content-->
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">Edit user</h4>
-                                    </div>
-                                    <br>
-                                    <form class="form-horizontal" method="post">
-                                        <fieldset>
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="idmodal">Order ID</label>
-                                                <div class="col-md-4">
-                                                    <input id="idmodal" value="<%=order.getOrderId()%>" name="id"
-                                                           class="form-control input-md" type="text"
-                                                           readonly="readonly">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="orderStatusModal">Order
-                                                    status</label>
-                                                <div class="col-md-4">
-                                                    <select id="orderStatusModal" name="orderStatusId"
-                                                            class="form-control">
-                                                        <option selected disabled>Choose order status</option>
-                                                        <option value="1">Not done</option>
-                                                        <option value="2">Done</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-                                            <!-- Text input-->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="orderWagonId">Order wagon
-                                                    ID</label>
-                                                <div class="col-md-4">
-                                                    <input id="orderWagonId" name="orderWagonId"
-                                                           value="<%=order.getOrderWagon()%>"
-                                                           class="form-control input-md" type="text">
-                                                </div>
-                                            </div>
-
-                                            <!-- Text input-->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="waypointList">Order waypoint
-                                                    list</label>
-                                                <div class="col-md-4">
-                                                    <input id="waypointList" value="<%=order.getWaypointList()%>"
-                                                           name="waypointList" class="form-control input-md" type="text"
-                                                           disabled>
-                                                </div>
-                                            </div>
-
-                                            <!-- Text input-->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="driverSet">Order driver
-                                                    set</label>
-                                                <div class="col-md-4">
-                                                    <input id="driverSet" value="<%=order.getDriverSet()%>"
-                                                           name="driverSet" class="form-control input-md" type="text"
-                                                           disabled>
-                                                </div>
-                                            </div>
-
-                                            <!-- Button -->
-                                            <div class="form-group">
-                                                <label class="col-md-4 control-label" for="submit">Save changes</label>
-                                                <div class="col-md-4">
-                                                    <button id="submit-modalMain" type="submit" class="btn btn-primary">
-                                                        Save
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                        </fieldset>
-                                    </form>
-
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close
-                                        </button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
+                        <%=order.getRouteDistance()%>
                     </td>
-                    <%--delete--%>
+                    <%--duration--%>
                     <td>
-                        <form action="/Order" method="post">
+                        <%=order.getRouteDuration()%>
+                    </td>
+                    <%--refresh--%>
+                    <td>
+                        <form action="/UpdateRoute" method="post">
                             <div class="form-group">
-                                <button type="submit" id="delete" name="delete" value="<%=id%>"
-                                        class="btn btn-danger">Delete
+                                <button type="submit" id="id" name="id" value="<%=id%>"
+                                        class="btn btn-primary">Update
                                 </button>
                             </div>
                         </form>

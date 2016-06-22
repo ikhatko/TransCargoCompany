@@ -49,11 +49,14 @@ public class Wagon {
      * @param maxVolume     the max volume
      * @param driversChange the drivers change
      */
-    public Wagon(String licensePlate,float maxWeight, float maxVolume, int driversChange) {
+    public Wagon(String licensePlate, float maxWeight, float maxVolume, int driversChange) {
         this.licensePlate = licensePlate;
         this.driversChange = driversChange;
         this.maxWeight = maxWeight;
         this.maxVolume = maxVolume;
+        WagonStatus newStatus = new WagonStatus();
+        newStatus.setWagonStatusId(1);
+        wagonStatus = newStatus;
     }
 
     /**

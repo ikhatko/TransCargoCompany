@@ -30,7 +30,7 @@ public class Cargo {
     @Cascade(CascadeType.PERSIST)
     private CargoStatus cargoStatus;
 
-    @OneToMany(mappedBy = "waypointCargo", cascade = javax.persistence.CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "waypointCargo", cascade = javax.persistence.CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     private Set<Waypoint> waypoints;
 
@@ -50,10 +50,20 @@ public class Cargo {
         return "" + name;
     }
 
+    /**
+     * Gets waypoints.
+     *
+     * @return the waypoints
+     */
     public Set<Waypoint> getWaypoints() {
         return waypoints;
     }
 
+    /**
+     * Sets waypoints.
+     *
+     * @param waypoints the waypoints
+     */
     public void setWaypoints(Set<Waypoint> waypoints) {
         this.waypoints = waypoints;
     }
@@ -178,10 +188,20 @@ public class Cargo {
         this.cargoStatus = cargoStatus;
     }
 
+    /**
+     * Gets cargo order.
+     *
+     * @return the cargo order
+     */
     public Order getCargoOrder() {
         return cargoOrder;
     }
 
+    /**
+     * Sets cargo order.
+     *
+     * @param cargoOrder the cargo order
+     */
     public void setCargoOrder(Order cargoOrder) {
         this.cargoOrder = cargoOrder;
     }

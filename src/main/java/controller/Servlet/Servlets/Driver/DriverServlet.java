@@ -1,8 +1,10 @@
 package controller.Servlet.Servlets.Driver;
 
+import model.Entities.City;
 import model.Entities.Driver;
 import model.Entities.User;
 import org.hibernate.SessionFactory;
+import services.City.GetAllCities;
 import services.Driver.GetAllDrivers;
 import services.Driver.RemoveDriver;
 import services.Driver.UpdateDriver;
@@ -27,7 +29,11 @@ public class DriverServlet extends HttpServlet {
         SessionFactory sessionFactory = (SessionFactory)
                 req.getServletContext().getAttribute("SessionFactory");
         List<Driver> allDrivers = GetAllDrivers.getAllDrivers(sessionFactory);
+        List<City> allCities = GetAllCities.getAllCities(sessionFactory);
+
+        req.setAttribute("cityList", allCities);
         req.setAttribute("resultList", allDrivers);
+
         User user = (User) req.getSession().getAttribute("user");
         String userRole = CheckUserRole.getUserRole(user);
         if (!userRole.equals("public")) {

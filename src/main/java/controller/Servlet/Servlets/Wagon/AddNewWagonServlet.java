@@ -26,9 +26,10 @@ public class AddNewWagonServlet extends HttpServlet {
         String driversChange = req.getParameter("driversChange");
         String maxWeight = req.getParameter("maxWeight");
         String maxVolume = req.getParameter("maxVolume");
+        String currentCity = req.getParameter("city");
 
         if (AddNewWagon.addNewWagon(licensePlate, driversChange,
-                maxWeight, maxVolume, sessionFactory)) {
+                maxWeight, maxVolume, currentCity, sessionFactory)) {
             req.getSession().setAttribute("errorMsg",
                     "<div class=\"alert alert-success\">\n"
                             + "  <a href=\"#\" class=\"close\" "

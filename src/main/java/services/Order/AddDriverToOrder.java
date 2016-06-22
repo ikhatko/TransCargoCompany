@@ -5,6 +5,7 @@ import model.DAO.Impl.OrderDAOImpl;
 import model.Entities.Driver;
 import model.Entities.DriverStatus;
 import model.Entities.Order;
+import model.Entities.Wagon;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -15,61 +16,92 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The type Add driver to order.
+ */
 public class AddDriverToOrder {
+    /**
+     * The constant SINGLE.
+     */
+    public static final int SINGLE = 1;
+    /**
+     * The constant DOUBLE.
+     */
+    public static final int DOUBLE = 2;
+    /**
+     * The constant DRIVER_STATUS_REST.
+     */
+    public static final int DRIVER_STATUS_REST = 1;
+    /**
+     * The constant DRIVER_STATUS_RELAY.
+     */
+    public static final int DRIVER_STATUS_RELAY = 3;
+
     private static Logger logger = Logger.getLogger(AddDriverToOrder.class);
 
-    public static void addDriverToOrder(String[] drivers, String orderId,
+    /**
+     * Add driver to order boolean.
+     *
+     * @param driver         the driver
+     * @param orderId        the order id
+     * @param sessionFactory the session factory
+     * @return the boolean
+     */
+    public static boolean addDriverToOrder(String driver, String orderId,
                                         SessionFactory sessionFactory) {
+
         logger.info("Trying to add drivers to order id:" + orderId);
+
+        boolean result = false;
         Session session = null;
+
         try {
             session = sessionFactory.openSession();
             OrderDAOImpl orderDAO = new OrderDAOImpl(session);
-            DriverDAOImpl wagonDAO = new DriverDAOImpl(session);
+            DriverDAOImpl driverDAO = new DriverDAOImpl(session);
 
             Transaction transaction = session.beginTransaction();
 
             Order order = (Order) orderDAO.read(Integer.parseInt(orderId));
 
-            if (order.getOrderWagon().getDriversChange() == 1) {
-                Driver orderDriver = (Driver) wagonDAO.read(Integer.parseInt(drivers[0]));
-                List<Driver> driverList = order.getDriverSet();
-                for (Driver driver : driverList) {
-                    driver.setCurrentOrder(null);
+            Wagon orderWagon = order.getOrderWagon();
+
+            if (orderWagon != null) {
+                if (orderWagon.getDriversChange() == SINGLE) {
+                    Driver orderDriver = (Driver) driverDAO.read(Integer.parseInt(driver));
+                    List<Driver> driverList = order.getDriverSet();
+                    for (Driver drivers : driverList) {
+                        drivers.setCurrentOrder(null);
+                        DriverStatus driverStatus = new DriverStatus();
+                        driverStatus.setDriverStatusId(DRIVER_STATUS_REST);
+                        drivers.setDriverStatus(driverStatus);
+                    }
                     DriverStatus driverStatus = new DriverStatus();
-                    driverStatus.setDriverStatusId(1);
-                    driver.setDriverStatus(driverStatus);
-                }
-                DriverStatus driverStatus = new DriverStatus();
-                driverStatus.setDriverStatusId(3);
-                orderDriver.setDriverStatus(driverStatus);
-                orderDriver.setCurrentOrder(order);
-            } else if (order.getOrderWagon().getDriversChange() == 2) {
-                List<Driver> driverList = order.getDriverSet();
-                while (driverList.size() > 0) {
-                    driverList.get(0).setCurrentOrder(null);
-                    DriverStatus driverStatus = new DriverStatus();
-                    driverStatus.setDriverStatusId(1);
-                    driverList.get(0).setDriverStatus(driverStatus);
-                    driverList.remove(0);
-                }
-                for (String driver : drivers) {
-                    Driver orderDriver = (Driver) wagonDAO.read(Integer.parseInt(driver));
-                    DriverStatus driverStatus = new DriverStatus();
-                    driverStatus.setDriverStatusId(3);
+                    driverStatus.setDriverStatusId(DRIVER_STATUS_RELAY);
                     orderDriver.setDriverStatus(driverStatus);
                     orderDriver.setCurrentOrder(order);
+                } else if (orderWagon.getDriversChange() == DOUBLE) {
+                    if (order.getDriverSet().size() < DOUBLE) {
+                        Driver orderDriver = (Driver) driverDAO.read(Integer.parseInt(driver));
+                        DriverStatus driverStatus = new DriverStatus();
+                        driverStatus.setDriverStatusId(DRIVER_STATUS_RELAY);
+                        orderDriver.setDriverStatus(driverStatus);
+                        orderDriver.setCurrentOrder(order);
+                    }
                 }
+                result = true;
             }
+
             transaction.commit();
 
             logger.info("Drivers added successfully");
 
         } catch (HibernateException e) {
-            logger.info("Error during adding drivers to order id:" + orderId);
+            logger.error("Error during adding drivers to order id:" + orderId);
             e.printStackTrace();
         } finally {
             session.close();
         }
+        return result;
     }
 }

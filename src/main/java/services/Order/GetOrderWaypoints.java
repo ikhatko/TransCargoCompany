@@ -8,9 +8,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import java.util.List;
 
+/**
+ * The type Get order waypoints.
+ */
 public class GetOrderWaypoints {
     private static Logger logger = Logger.getLogger(GetOrderWaypoints.class);
 
+    /**
+     * Gets order waypoints.
+     *
+     * @param orderId        the order id
+     * @param sessionFactory the session factory
+     * @return the order waypoints
+     */
     public static List<Waypoint> getOrderWaypoints(String orderId, SessionFactory sessionFactory) {
         logger.info("Trying to get all order waypoints");
         Session session = null;

@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 /**
- * The type Get all cargoes.
+ * The type Get free cargoes.
  */
 public final class GetFreeCargoes {
 
@@ -20,10 +20,10 @@ public final class GetFreeCargoes {
     }
 
     /**
-     * Gets all cargoes.
+     * Gets free cargoes.
      *
      * @param sessionFactory the session factory
-     * @return the all cargoes
+     * @return the free cargoes
      */
     public static List getFreeCargoes(SessionFactory sessionFactory) {
         logger.info("Trying to get all free cargoes.");

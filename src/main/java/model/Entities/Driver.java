@@ -21,7 +21,7 @@ public class Driver {
     @Column(nullable = false)
     private String lastName;
 
-    private double thisMonthHours;
+    private float thisMonthHours;
 
     @ManyToOne
     @Cascade(CascadeType.PERSIST)
@@ -38,21 +38,23 @@ public class Driver {
     @ManyToOne
     @JoinColumn(name = "orderId")
     @Cascade(CascadeType.PERSIST)
-    @Fetch (FetchMode.SELECT)
+    @Fetch(FetchMode.SELECT)
     private Order currentOrder;
 
     /**
      * Instantiates a new Driver.
      *
-     * @param firstName the first name
-     * @param lastName  the last name
+     * @param firstName   the first name
+     * @param lastName    the last name
+     * @param currentCity the current city
      */
-    public Driver(String firstName, String lastName) {
+    public Driver(String firstName, String lastName, City currentCity) {
         this.firstName = firstName;
         this.lastName = lastName;
         thisMonthHours = 0;
         driverStatus = new DriverStatus();
         driverStatus.setDriverStatusId(1);
+        this.currentCity = currentCity;
     }
 
 
@@ -67,7 +69,7 @@ public class Driver {
      * @param currentWagon   the current wagon
      * @param currentOrder   the current order
      */
-    public Driver(String firstName, String lastName, double thisMonthHours, DriverStatus driverStatus, City currentCity, Wagon currentWagon, Order currentOrder) {
+    public Driver(String firstName, String lastName, float thisMonthHours, DriverStatus driverStatus, City currentCity, Wagon currentWagon, Order currentOrder) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.thisMonthHours = thisMonthHours;
@@ -147,7 +149,7 @@ public class Driver {
      *
      * @return the this month hours
      */
-    public double getThisMonthHours() {
+    public float getThisMonthHours() {
         return thisMonthHours;
     }
 
@@ -156,7 +158,7 @@ public class Driver {
      *
      * @param thisMonthHours the this month hours
      */
-    public void setThisMonthHours(double thisMonthHours) {
+    public void setThisMonthHours(float thisMonthHours) {
         this.thisMonthHours = thisMonthHours;
     }
 

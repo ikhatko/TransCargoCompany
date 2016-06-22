@@ -25,28 +25,29 @@ public class UpdateOrder {
      * @param orderWagonId   the order wagon id
      * @param sessionFactory the session factory
      */
-    public static void updateOrder(int id, String orderStatusId, String orderWagonId , SessionFactory sessionFactory) {
+    public static void updateOrder(int id, String orderStatusId, String orderWagonId, SessionFactory sessionFactory) {
         logger.info("Trying to update Order with id:" + id);
         Session session = null;
 
         try {
             session = sessionFactory.openSession();
             OrderDAOImpl orderDAO = new OrderDAOImpl(session);
+
+            Transaction transaction = session.beginTransaction();
+
             Order order = (Order) orderDAO.read(id);
             if (orderStatusId != null) {
                 OrderStatus orderStatus = new OrderStatus();
                 orderStatus.setOrderStatusId(Integer.parseInt(orderStatusId));
                 order.setOrderStatus(orderStatus);
             }
+
             if (orderWagonId != null && !orderWagonId.equals("") && !orderWagonId.equals("null")) {
                 Wagon wagon = new Wagon();
                 wagon.setWagonId(Integer.parseInt(orderWagonId));
                 order.setOrderWagon(wagon);
-            }else {
-                order.setOrderWagon(null);
             }
 
-            Transaction transaction = session.beginTransaction();
             transaction.commit();
 
             logger.info("Order with id:" + id + " updated successfully");

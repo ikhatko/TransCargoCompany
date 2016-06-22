@@ -41,36 +41,36 @@ public class UpdateDriver {
             driver.setFirstName(firstName);
             driver.setLastName(lastName);
 
-            if (driverStatusId != null && !driverStatusId.equals("null") && !driverStatusId.equals("")) {
+            if (checkData(driverStatusId)) {
                 DriverStatus driverStatus = new DriverStatus();
                 driverStatus.setDriverStatusId(Integer.parseInt(driverStatusId));
                 driver.setDriverStatus(driverStatus);
             }
 
-            if (hours != null && !hours.equals("null") && !hours.equals("")) {
-                driver.setThisMonthHours(Double.parseDouble(hours));
+            if (checkData(hours)) {
+                driver.setThisMonthHours(Float.parseFloat(hours));
             }
-            if (cityId != null && !cityId.equals("null") && !cityId.equals("")) {
+
+            if (checkData(cityId)) {
                 City city = new City();
                 city.setCityId(Integer.parseInt(cityId));
                 driver.setCurrentCity(city);
-            } else {
-                driver.setCurrentCity(null);
             }
-            if (wagonId != null && !wagonId.equals("null") && !wagonId.equals("")) {
+
+            if (checkData(wagonId)) {
                 Wagon wagon = new Wagon();
                 wagon.setWagonId(Integer.parseInt(wagonId));
                 driver.setCurrentWagon(wagon);
-            } else {
-                driver.setCurrentWagon(null);
             }
-            if (orderId != null && !orderId.equals("null") && !orderId.equals("")) {
+
+            if (checkData(orderId)) {
                 Order order = new Order();
                 order.setOrderId(Integer.parseInt(orderId));
                 driver.setCurrentOrder(order);
             } else {
                 driver.setCurrentOrder(null);
             }
+
             Transaction transaction = session.beginTransaction();
             transaction.commit();
 
@@ -83,6 +83,9 @@ public class UpdateDriver {
             session.close();
         }
 
+    }
 
+    private static boolean checkData(String data) {
+        return data != null && !data.equals("null") && !data.equals("");
     }
 }

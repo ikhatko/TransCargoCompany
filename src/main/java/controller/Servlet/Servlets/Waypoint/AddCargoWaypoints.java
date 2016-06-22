@@ -1,11 +1,7 @@
 package controller.Servlet.Servlets.Waypoint;
 
 import org.hibernate.SessionFactory;
-import services.Cargo.AddNewCargo;
 import services.Cargo.AddTwoCargoWaypoints;
-import services.Waypoint.AddNewWaypoint;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * The type Add new waypoint servlet.
+ * The type Add cargo waypoints.
  */
 @WebServlet("/AddCargoWaypoints")
 public class AddCargoWaypoints extends HttpServlet {
