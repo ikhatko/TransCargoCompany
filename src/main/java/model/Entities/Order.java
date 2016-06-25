@@ -47,7 +47,6 @@ public class Order {
     private Set<Cargo> cargoSet = new HashSet<Cargo>();
 
 
-
     /**
      * Instantiates a new Order.
      */

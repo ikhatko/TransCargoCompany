@@ -13,7 +13,7 @@ public class UserDAOImpl extends GenericDAOImpl implements UserDAO {
     /**
      * Instantiates a new User dao.
      *
-     * @param session the session
+     * @param session hibernate session
      */
     public UserDAOImpl(Session session) {
         super(User.class, session);

@@ -17,7 +17,7 @@ public class WagonDAOImpl extends GenericDAOImpl implements WagonDAO {
     /**
      * Instantiates a new Wagon dao.
      *
-     * @param session the session
+     * @param session hibernate session
      */
     public WagonDAOImpl(Session session) {
         super(Wagon.class, session);

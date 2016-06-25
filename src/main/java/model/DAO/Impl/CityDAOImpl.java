@@ -12,7 +12,7 @@ public class CityDAOImpl extends GenericDAOImpl  implements CityDAO {
     /**
      * Instantiates a new City dao.
      *
-     * @param session the session
+     * @param session hibernate session
      */
     public CityDAOImpl(Session session) {
         super(City.class, session);

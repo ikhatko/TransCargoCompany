@@ -12,7 +12,7 @@ public class WaypointDAOImpl extends GenericDAOImpl  implements WaypointDAO {
     /**
      * Instantiates a new Waypoint dao.
      *
-     * @param session the session
+     * @param session hibernate session
      */
     public WaypointDAOImpl(Session session) {
         super(Waypoint.class, session);

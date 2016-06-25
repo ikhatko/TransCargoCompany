@@ -18,7 +18,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
      * Instantiates a new Generic dao.
      *
      * @param entityType the entity type
-     * @param session    the session
+     * @param session    hibernate session
      */
     public GenericDAOImpl(Class<T> entityType, Session session) {
         this.entityType = entityType;

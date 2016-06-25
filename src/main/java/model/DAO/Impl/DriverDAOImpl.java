@@ -18,7 +18,7 @@ public class DriverDAOImpl extends GenericDAOImpl implements DriverDAO {
     /**
      * Instantiates a new Driver dao.
      *
-     * @param session the session
+     * @param session hibernate session
      */
     public DriverDAOImpl(Session session) {
         super(Driver.class, session);

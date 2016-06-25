@@ -18,7 +18,7 @@ public class OrderDAOImpl extends GenericDAOImpl implements OrderDAO {
     /**
      * Instantiates a new Order dao.
      *
-     * @param session the session
+     * @param session hibernate session
      */
     public OrderDAOImpl(Session session) {
         super(Order.class, session);

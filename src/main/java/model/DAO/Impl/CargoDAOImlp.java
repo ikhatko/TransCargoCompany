@@ -20,7 +20,7 @@ public class CargoDAOImlp extends GenericDAOImpl implements CargoDAO {
     /**
      * Instantiates a new Cargo dao imlp.
      *
-     * @param session the session
+     * @param session hibernate session
      */
     public CargoDAOImlp(final Session session) {
         super(Cargo.class, session);
