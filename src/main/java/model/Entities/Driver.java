@@ -48,13 +48,15 @@ public class Driver {
      * @param lastName    the last name
      * @param currentCity the current city
      */
-    public Driver(String firstName, String lastName, City currentCity) {
+    public Driver(String firstName, String lastName, int currentCity) {
         this.firstName = firstName;
         this.lastName = lastName;
         thisMonthHours = 0;
         driverStatus = new DriverStatus();
         driverStatus.setDriverStatusId(1);
-        this.currentCity = currentCity;
+        City city = new City();
+        city.setCityId(currentCity);
+        this.currentCity = city;
     }
 
 

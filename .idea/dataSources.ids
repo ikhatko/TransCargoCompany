@@ -38,10 +38,10 @@
         <mandatory>1</mandatory>
         <data-type>float</data-type>
       </column>
-      <column id="19" parent="2" name="cargo_status">
+      <column id="19" parent="2" name="order_id">
         <data-type>int(11)</data-type>
       </column>
-      <column id="20" parent="2" name="order_id">
+      <column id="20" parent="2" name="cargo_status">
         <data-type>int(11)</data-type>
       </column>
       <index id="21" parent="2" name="FK_4ycwk32mgx51pv5j316k7h6r9">
@@ -197,19 +197,19 @@
         <data-type>int(11)</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="56" parent="8" name="order_status">
-        <data-type>int(11)</data-type>
-      </column>
-      <column id="57" parent="8" name="order_wagon">
-        <data-type>int(11)</data-type>
-      </column>
-      <column id="58" parent="8" name="max_volume">
+      <column id="56" parent="8" name="max_volume">
         <mandatory>1</mandatory>
         <data-type>float</data-type>
       </column>
-      <column id="59" parent="8" name="max_weight">
+      <column id="57" parent="8" name="max_weight">
         <mandatory>1</mandatory>
         <data-type>float</data-type>
+      </column>
+      <column id="58" parent="8" name="order_status">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="59" parent="8" name="order_wagon">
+        <data-type>int(11)</data-type>
       </column>
       <column id="60" parent="8" name="route_distance">
         <mandatory>1</mandatory>
@@ -380,7 +380,7 @@
         <data-type>int(11)</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="99" parent="13" name="waypoint_cargo">
+      <column id="99" parent="13" name="cargo_id">
         <data-type>int(11)</data-type>
       </column>
       <column id="100" parent="13" name="waypoint_city">
@@ -392,73 +392,60 @@
       <column id="102" parent="13" name="waypoint_type">
         <data-type>int(11)</data-type>
       </column>
-      <column id="103" parent="13" name="cargo_id">
-        <data-type>int(11)</data-type>
-      </column>
-      <index id="104" parent="13" name="FK_8aw3dalddj3fqfw4yinbh8rfx">
+      <index id="103" parent="13" name="FK_8aw3dalddj3fqfw4yinbh8rfx">
         <columns>waypoint_type</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="105" parent="13" name="FK_98rx81hhvkfe9sbr0s6ah0a43">
+      <index id="104" parent="13" name="FK_98rx81hhvkfe9sbr0s6ah0a43">
         <columns>order_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="106" parent="13" name="FK_9lwwgdk5aw9dehoxcnen32q0t">
+      <index id="105" parent="13" name="FK_9lwwgdk5aw9dehoxcnen32q0t">
         <columns>waypoint_city</columns>
         <desc-columns></desc-columns>
       </index>
-      <index id="107" parent="13" name="FK_dn6dyw90qmpng7sjj3tkw12ws">
-        <columns>waypoint_cargo</columns>
-        <desc-columns></desc-columns>
-      </index>
-      <index id="108" parent="13" name="FK_h4yvwwc73vqppphn8c4fqmtea">
+      <index id="106" parent="13" name="FK_h4yvwwc73vqppphn8c4fqmtea">
         <columns>cargo_id</columns>
         <desc-columns></desc-columns>
       </index>
-      <key id="109" parent="13" name="PRIMARY">
+      <key id="107" parent="13" name="PRIMARY">
         <columns>waypoint_id</columns>
         <primary>1</primary>
       </key>
-      <foreign-key id="110" parent="13" name="FK_8aw3dalddj3fqfw4yinbh8rfx">
+      <foreign-key id="108" parent="13" name="FK_8aw3dalddj3fqfw4yinbh8rfx">
         <columns>waypoint_type</columns>
         <ref-key>~.waypoint_type.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="111" parent="13" name="FK_98rx81hhvkfe9sbr0s6ah0a43">
+      <foreign-key id="109" parent="13" name="FK_98rx81hhvkfe9sbr0s6ah0a43">
         <columns>order_id</columns>
         <ref-key>~.orders.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="112" parent="13" name="FK_9lwwgdk5aw9dehoxcnen32q0t">
+      <foreign-key id="110" parent="13" name="FK_9lwwgdk5aw9dehoxcnen32q0t">
         <columns>waypoint_city</columns>
         <ref-key>~.city.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="113" parent="13" name="FK_dn6dyw90qmpng7sjj3tkw12ws">
-        <columns>waypoint_cargo</columns>
-        <ref-key>~.cargo.PRIMARY</ref-key>
-        <cascade-update-rule>restrict</cascade-update-rule>
-        <cascade-delete-rule>restrict</cascade-delete-rule>
-      </foreign-key>
-      <foreign-key id="114" parent="13" name="FK_h4yvwwc73vqppphn8c4fqmtea">
+      <foreign-key id="111" parent="13" name="FK_h4yvwwc73vqppphn8c4fqmtea">
         <columns>cargo_id</columns>
         <ref-key>~.cargo.PRIMARY</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="115" parent="14" name="waypoint_type_id">
+      <column id="112" parent="14" name="waypoint_type_id">
         <mandatory>1</mandatory>
         <data-type>int(11)</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="116" parent="14" name="waypoint_type">
+      <column id="113" parent="14" name="waypoint_type">
         <mandatory>1</mandatory>
-        <data-type>varchar(33)</data-type>
+        <data-type>varchar(255)</data-type>
       </column>
-      <key id="117" parent="14" name="PRIMARY">
+      <key id="114" parent="14" name="PRIMARY">
         <columns>waypoint_type_id</columns>
         <primary>1</primary>
       </key>

@@ -16,9 +16,9 @@ public class CheckUserRole {
      * @return the user role
      */
     public static String getUserRole(User user) {
-        logger.info("Checking user role:" + user.getEmail());
         String role = "public";
         if (user != null) {
+            logger.info("Checking user role:" + user.getEmail());
             int userRoleId = user.getUserRole().getUserRoleId();
             if (userRoleId == 1) {
                 role = "admin";

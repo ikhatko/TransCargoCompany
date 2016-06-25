@@ -1,7 +1,6 @@
 package services.Driver;
 
 import model.DAO.Impl.DriverDAOImpl;
-import model.Entities.City;
 import model.Entities.Driver;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
@@ -32,9 +31,8 @@ public class AddNewDriver {
         try {
             session = sessionFactory.openSession();
             DriverDAOImpl driverDAO = new DriverDAOImpl(session);
-            City city = new City();
-            city.setCityId(Integer.parseInt(currentCity));
-            driver = new Driver(firstName, lastName, city);
+
+            driver = new Driver(firstName, lastName, Integer.parseInt(currentCity));
 
             Transaction transaction = session.beginTransaction();
             driverDAO.create(driver);

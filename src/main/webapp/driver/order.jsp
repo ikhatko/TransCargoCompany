@@ -37,9 +37,6 @@
                     <thead>
                     <tr>
                         <th>
-                            Your id
-                        </th>
-                        <th>
                             Drivers
                         </th>
                         <th>
@@ -55,9 +52,6 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td>
-                            <%=request.getParameter("id")%>
-                        </td>
                         <td>
                             <%=order.getDriverSet()%>
                         </td>
